@@ -63,6 +63,8 @@
             lblCrearUnidad = new Label();
             lblCrearSubunidad = new Label();
             lblSubUnidad = new Label();
+            btnAceptarCambios = new Button();
+            btnCancelar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             gbOpcionCorrecta.SuspendLayout();
             SuspendLayout();
@@ -433,11 +435,37 @@
             lblSubUnidad.Text = "Elija la Sub Unidad";
             lblSubUnidad.Visible = false;
             // 
+            // btnAceptarCambios
+            // 
+            btnAceptarCambios.Cursor = Cursors.Hand;
+            btnAceptarCambios.Location = new Point(88, 650);
+            btnAceptarCambios.Name = "btnAceptarCambios";
+            btnAceptarCambios.Size = new Size(130, 31);
+            btnAceptarCambios.TabIndex = 33;
+            btnAceptarCambios.Text = "Aceptar Cambios";
+            btnAceptarCambios.UseVisualStyleBackColor = true;
+            btnAceptarCambios.Visible = false;
+            btnAceptarCambios.Click += btnAceptarCambios_Click;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.Cursor = Cursors.Hand;
+            btnCancelar.Location = new Point(224, 650);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(130, 31);
+            btnCancelar.TabIndex = 34;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Visible = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1409, 695);
+            Controls.Add(btnCancelar);
+            Controls.Add(btnAceptarCambios);
             Controls.Add(lblSubUnidad);
             Controls.Add(lblCrearSubunidad);
             Controls.Add(lblCrearUnidad);
@@ -514,5 +542,7 @@
         private Label lblCrearUnidad;
         private Label lblCrearSubunidad;
         private Label lblSubUnidad;
+        private Button btnAceptarCambios;
+        private Button btnCancelar;
     }
 }

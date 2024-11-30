@@ -16,6 +16,7 @@ namespace SistemaDeGestionDeExamenes
     {
         public string Nombre {  set; get; }
         public List<SubUnidad> SubUnidades { get; set; } = new List<SubUnidad>();
+
     }
 
     public class SubUnidad

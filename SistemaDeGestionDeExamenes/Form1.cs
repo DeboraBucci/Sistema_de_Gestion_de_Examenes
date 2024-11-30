@@ -17,6 +17,8 @@ namespace SistemaDeGestionDeExamenes
         private string archivoCorreciones = "correcciones.json";
         private string archivoPreguntas = "preguntas.json";
 
+        private Pregunta? preguntaAEditar = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -139,7 +141,7 @@ namespace SistemaDeGestionDeExamenes
                 return new List<Asignatura>();
             }
         }
-        
+
         private void LeerAsignaturas()
         {
             asignaturas = LeerJsonDesdeArchivo("asignaturas.txt");
@@ -163,7 +165,7 @@ namespace SistemaDeGestionDeExamenes
 
         private void CambiarUnidades()
         {
-            if (asignaturas.Count > 0)
+            if (asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0)
             {
                 Asignatura? asignaturaSeleccionada = asignaturas?[cbAsignaturas.SelectedIndex];
 
@@ -181,7 +183,7 @@ namespace SistemaDeGestionDeExamenes
 
         private void CambiarSubUnidades()
         {
-            if (asignaturas.Count > 0)
+            if (asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0 && cbUnidades.SelectedIndex >= 0)
             {
                 Unidad? unidadSeleccionada = null;
 
@@ -199,7 +201,7 @@ namespace SistemaDeGestionDeExamenes
                 }
             }
         }
-       
+
         private void cbAsignaturas_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbSubUnidades.Text = "";
@@ -210,7 +212,7 @@ namespace SistemaDeGestionDeExamenes
 
             CambiarUnidades();
         }
-        
+
         private void cbUnidades_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbSubUnidades.Text = "";
@@ -264,6 +266,7 @@ namespace SistemaDeGestionDeExamenes
 
             GuardarPreguntasEnArchivo();
             LeerPreguntas();
+            VaciarFormulario();
         }
 
         private void GuardarPreguntasEnArchivo()
@@ -271,7 +274,7 @@ namespace SistemaDeGestionDeExamenes
             try
             {
                 // Serializar la lista de preguntas a JSON
-                string json = 
+                string json =
                     JsonSerializer.Serialize(preguntas, new JsonSerializerOptions { WriteIndented = true });
 
                 // Usar StreamWriter para escribir el JSON al archivo
@@ -288,22 +291,91 @@ namespace SistemaDeGestionDeExamenes
 
         private void btnEditarPreg_Click(object sender, EventArgs e)
         {
+            string preguntaId = IdPreguntaSeleccionada();
 
+            LlenarFormularioConPreguntaSeleccionada(preguntaId);
+
+            VisibilidadBotonesEditar(true);
+        }
+
+        private void VisibilidadBotonesEditar(bool visible)
+        {
+            btnAceptarCambios.Visible = visible;
+            btnCancelar.Visible = visible;
+
+            btnAgregarPreg.Visible = !visible;
+            btnEditarPreg.Visible = !visible;
+            btnEliminarPreg.Visible = !visible;
+        }
+
+        private void LlenarFormularioConPreguntaSeleccionada(string preguntaId)
+        {
+            preguntaAEditar = preguntas.Find(pregunta => pregunta.PreguntaId == preguntaId);
+
+            int indexAsignatura =
+                asignaturas?
+                .FindIndex(asig => asig.Nombre.Equals(preguntaAEditar?.Asignatura))
+                ?? 0;
+
+            cbAsignaturas.SelectedIndex = indexAsignatura;
+
+
+            Asignatura? asignaturaSeleccionada = asignaturas?[cbAsignaturas.SelectedIndex];
+
+            int indexUnidad = asignaturaSeleccionada?
+                .Unidades
+                .FindIndex(unid => unid.Nombre.Equals(preguntaAEditar?.Unidad))
+                ?? 0;
+
+            cbUnidades.SelectedIndex = indexUnidad;
+
+            Unidad? unidadSeleccionada = asignaturaSeleccionada?.Unidades?[cbUnidades.SelectedIndex];
+
+            int indexSubUnidad =
+                unidadSeleccionada?
+                .SubUnidades
+                .FindIndex(subUni => subUni.Nombre.Equals(preguntaAEditar?.SubUnidad))
+                ?? 0;
+
+            cbSubUnidades.SelectedIndex = indexSubUnidad;
+
+            txtPregunta.Text = preguntaAEditar?.TxtPregunta;
+            txtOpc1.Text = preguntaAEditar?.Opciones[0];
+            txtOpc2.Text = preguntaAEditar?.Opciones[1];
+            txtOpc3.Text = preguntaAEditar?.Opciones[2];
+            txtOpc4.Text = preguntaAEditar?.Opciones[3];
+
+            if (preguntaAEditar?.OpcionCorrecta == 1)
+                rbOpc1.Checked = true;
+
+            else if (preguntaAEditar?.OpcionCorrecta == 2)
+                rbOpc2.Checked = true;
+
+            else if (preguntaAEditar?.OpcionCorrecta == 3)
+                rbOpc3.Checked = true;
         }
 
         private void btnEliminarPreg_Click(object sender, EventArgs e)
         {
             if (dgvPreguntas.SelectedRows.Count > 0)
             {
-                DataGridViewRow row = dgvPreguntas.SelectedRows[0]; // Accedemos a la primera fila seleccionada
+                string preguntaId = IdPreguntaSeleccionada();
 
-                string preguntaId = row.Cells["PreguntaId"].Value.ToString() + "";
-
-                preguntas = preguntas.Where(pregunta => pregunta.PreguntaId != preguntaId).ToList(); // Removemos la ID de la lista
+                preguntas =
+                    preguntas
+                    .Where(pregunta => pregunta.PreguntaId != preguntaId)
+                    .ToList(); // Removemos la ID de la lista
 
                 GuardarPreguntasEnArchivo();
                 LeerPreguntas();
             }
+        }
+
+        private string IdPreguntaSeleccionada()
+        {
+            DataGridViewRow row = dgvPreguntas.SelectedRows[0]; // Accedemos a la primera fila seleccionada
+
+            return row.Cells["PreguntaId"].Value.ToString() + "";
         }
 
 
@@ -378,6 +450,76 @@ namespace SistemaDeGestionDeExamenes
             dgvPreguntas.Columns.Add("Opcion4", "Opción 4");
 
             dgvPreguntas.Columns["PreguntaId"].Visible = false;
+        }
+
+        private void VaciarFormulario()
+        {
+            cbAsignaturas.SelectedIndex = -1;
+            cbUnidades.SelectedIndex = -1;
+            cbSubUnidades.SelectedIndex = -1;
+
+            txtPregunta.Text = "";
+
+            txtOpc1.Text = "";
+            txtOpc2.Text = "";
+            txtOpc3.Text = "";
+            txtOpc4.Text = "";
+
+            rbOpc1.Checked = true;
+            rbOpc2.Checked = false;
+            rbOpc3.Checked = false;
+            rbOpc4.Checked = false;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            VaciarFormulario();
+            VisibilidadBotonesEditar(false);
+        }
+
+        private void btnAceptarCambios_Click(object sender, EventArgs e)
+        {
+            string asignatura = cbAsignaturas?.SelectedItem?.ToString() + "";
+            string unidad = cbUnidades?.SelectedItem?.ToString() + "";
+            string subunidad = cbSubUnidades?.SelectedItem?.ToString() + "";
+
+            string textPregunta = txtPregunta.Text.Trim();
+            string textOpc1 = txtOpc1.Text.Trim();
+            string textOpc2 = txtOpc2.Text.Trim();
+            string textOpc3 = txtOpc3.Text.Trim();
+            string textOpc4 = txtOpc4.Text.Trim();
+
+            int opcionCorrecta = 1;
+
+            if (rbOpc1.Checked)
+                opcionCorrecta = 1;
+
+            else if (rbOpc2.Checked)
+                opcionCorrecta = 2;
+
+            else if (rbOpc3.Checked)
+                opcionCorrecta = 3;
+
+            else if (rbOpc4.Checked)
+                opcionCorrecta = 4;
+
+            if(preguntaAEditar != null)
+            {
+                preguntaAEditar.Asignatura = asignatura;
+                preguntaAEditar.Unidad = unidad;
+                preguntaAEditar.SubUnidad = subunidad;
+                preguntaAEditar.TxtPregunta = textPregunta;
+                preguntaAEditar.Opciones[0] = textOpc1;
+                preguntaAEditar.Opciones[1] = textOpc2;
+                preguntaAEditar.Opciones[2] = textOpc3;
+                preguntaAEditar.Opciones[3] = textOpc4;
+                preguntaAEditar.OpcionCorrecta = opcionCorrecta;
+
+                GuardarPreguntasEnArchivo();
+                LeerPreguntas();
+                VaciarFormulario();
+                VisibilidadBotonesEditar(false);
+            }
         }
     }
 }
