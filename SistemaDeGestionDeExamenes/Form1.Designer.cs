@@ -154,9 +154,11 @@
             // 
             // dgvPreguntas
             // 
+            dgvPreguntas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPreguntas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPreguntas.Location = new Point(468, 114);
             dgvPreguntas.Name = "dgvPreguntas";
+            dgvPreguntas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPreguntas.Size = new Size(929, 569);
             dgvPreguntas.TabIndex = 7;
             dgvPreguntas.Visible = false;

@@ -11,7 +11,7 @@ namespace SistemaDeGestionDeExamenes
         public string Asignatura { get; set; }
         public string Unidad { get; set; }
         public string SubUnidad { get; set; }
-        public int PreguntaId {  get; set; }
+        public string PreguntaId {  get; set; }
         public string TxtPregunta { get; set; }
         public string[] Opciones { get; set; } = new string[4];
         public int OpcionCorrecta { get; set; }
@@ -22,7 +22,7 @@ namespace SistemaDeGestionDeExamenes
             string asignatura,
             string unidad,
             string subUnidad,
-            int preguntaId,
+            string preguntaId,
             string txtPregunta,
             string[] opciones,
             int opcionCorrecta

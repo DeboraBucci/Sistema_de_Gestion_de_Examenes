@@ -232,6 +232,8 @@ namespace SistemaDeGestionDeExamenes
             string textOpc3 = txtOpc3.Text.Trim();
             string textOpc4 = txtOpc4.Text.Trim();
 
+            string preguntaId = Guid.NewGuid().ToString();
+
             int opcionCorrecta = 1;
 
             if (rbOpc1.Checked)
@@ -255,6 +257,8 @@ namespace SistemaDeGestionDeExamenes
             pregunta.TxtPregunta = textPregunta;
             pregunta.Opciones = [textOpc1, textOpc2, textOpc3, textOpc4];
             pregunta.OpcionCorrecta = opcionCorrecta;
+
+            pregunta.PreguntaId = preguntaId;
 
             preguntas.Add(pregunta);
 
@@ -289,7 +293,17 @@ namespace SistemaDeGestionDeExamenes
 
         private void btnEliminarPreg_Click(object sender, EventArgs e)
         {
+            if (dgvPreguntas.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dgvPreguntas.SelectedRows[0]; // Accedemos a la primera fila seleccionada
 
+                string preguntaId = row.Cells["PreguntaId"].Value.ToString() + "";
+
+                preguntas = preguntas.Where(pregunta => pregunta.PreguntaId != preguntaId).ToList(); // Removemos la ID de la lista
+
+                GuardarPreguntasEnArchivo();
+                LeerPreguntas();
+            }
         }
 
 
@@ -328,18 +342,19 @@ namespace SistemaDeGestionDeExamenes
 
             foreach (var pregunta in preguntas)
             {
-                // Crea una fila para la pregunta
-                var fila = new object[9];
+                // Crea una fila para las columnas
+                var fila = new object[10];
                 fila[0] = pregunta.Asignatura;
                 fila[1] = pregunta.Unidad;
                 fila[2] = pregunta.SubUnidad;
                 fila[3] = pregunta.TxtPregunta;
                 fila[4] = pregunta.OpcionCorrecta;
+                fila[5] = pregunta.PreguntaId;
 
-                // Llena las columnas de opciones (asegúrate de que siempre haya 4 espacios)
+                // Llena las columnas de opciones
                 for (int i = 0; i < 4; i++)
                 {
-                    fila[5 + i] = (i < pregunta.Opciones.Length) ? pregunta.Opciones[i] : "";
+                    fila[6 + i] = (i < pregunta.Opciones.Length) ? pregunta.Opciones[i] : "";
                 }
 
                 dgvPreguntas.Rows.Add(fila);
@@ -355,12 +370,14 @@ namespace SistemaDeGestionDeExamenes
             dgvPreguntas.Columns.Add("SubUnidad", "SubUnidad");
             dgvPreguntas.Columns.Add("TxtPregunta", "Pregunta");
             dgvPreguntas.Columns.Add("OpcionCorrecta", "Opción Correcta");
+            dgvPreguntas.Columns.Add("PreguntaId", "PreguntaId");
 
             dgvPreguntas.Columns.Add("Opcion1", "Opción 1");
             dgvPreguntas.Columns.Add("Opcion2", "Opción 2");
             dgvPreguntas.Columns.Add("Opcion3", "Opción 3");
             dgvPreguntas.Columns.Add("Opcion4", "Opción 4");
-        }
 
+            dgvPreguntas.Columns["PreguntaId"].Visible = false;
+        }
     }
 }
