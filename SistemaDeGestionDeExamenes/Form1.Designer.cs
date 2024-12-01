@@ -65,6 +65,10 @@
             lblSubUnidad = new Label();
             btnAceptarCambios = new Button();
             btnCancelar = new Button();
+            cbFiltroAsignatura = new ComboBox();
+            lblFiltroAsignatura = new Label();
+            lblFiltroUnidad = new Label();
+            cbFiltroUnidad = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             gbOpcionCorrecta.SuspendLayout();
             SuspendLayout();
@@ -168,9 +172,10 @@
             // lblPreguntas
             // 
             lblPreguntas.AutoSize = true;
-            lblPreguntas.Location = new Point(468, 94);
+            lblPreguntas.Font = new Font("Segoe UI", 16F);
+            lblPreguntas.Location = new Point(468, 70);
             lblPreguntas.Name = "lblPreguntas";
-            lblPreguntas.Size = new Size(60, 15);
+            lblPreguntas.Size = new Size(109, 30);
             lblPreguntas.TabIndex = 8;
             lblPreguntas.Text = "Preguntas";
             lblPreguntas.Visible = false;
@@ -459,11 +464,55 @@
             btnCancelar.Visible = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // cbFiltroAsignatura
+            // 
+            cbFiltroAsignatura.FormattingEnabled = true;
+            cbFiltroAsignatura.Location = new Point(992, 74);
+            cbFiltroAsignatura.Name = "cbFiltroAsignatura";
+            cbFiltroAsignatura.Size = new Size(147, 23);
+            cbFiltroAsignatura.TabIndex = 35;
+            cbFiltroAsignatura.Visible = false;
+            cbFiltroAsignatura.SelectedIndexChanged += cbFiltroAsignatura_SelectedIndexChanged;
+            // 
+            // lblFiltroAsignatura
+            // 
+            lblFiltroAsignatura.AutoSize = true;
+            lblFiltroAsignatura.Location = new Point(868, 77);
+            lblFiltroAsignatura.Name = "lblFiltroAsignatura";
+            lblFiltroAsignatura.Size = new Size(118, 15);
+            lblFiltroAsignatura.TabIndex = 36;
+            lblFiltroAsignatura.Text = "Filtrar por Asignatura";
+            lblFiltroAsignatura.Visible = false;
+            // 
+            // lblFiltroUnidad
+            // 
+            lblFiltroUnidad.AutoSize = true;
+            lblFiltroUnidad.Location = new Point(1145, 77);
+            lblFiltroUnidad.Name = "lblFiltroUnidad";
+            lblFiltroUnidad.Size = new Size(99, 15);
+            lblFiltroUnidad.TabIndex = 38;
+            lblFiltroUnidad.Text = "Filtrar por Unidad";
+            lblFiltroUnidad.Visible = false;
+            // 
+            // cbFiltroUnidad
+            // 
+            cbFiltroUnidad.FormattingEnabled = true;
+            cbFiltroUnidad.Location = new Point(1250, 74);
+            cbFiltroUnidad.Name = "cbFiltroUnidad";
+            cbFiltroUnidad.Size = new Size(147, 23);
+            cbFiltroUnidad.TabIndex = 37;
+            cbFiltroUnidad.Visible = false;
+            cbFiltroUnidad.SelectedIndexChanged += cbFiltroUnidad_SelectedIndexChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1409, 695);
+            Controls.Add(lblFiltroUnidad);
+            Controls.Add(cbFiltroUnidad);
+            Controls.Add(lblFiltroAsignatura);
+            Controls.Add(cbFiltroAsignatura);
             Controls.Add(btnCancelar);
             Controls.Add(btnAceptarCambios);
             Controls.Add(lblSubUnidad);
@@ -544,5 +593,9 @@
         private Label lblSubUnidad;
         private Button btnAceptarCambios;
         private Button btnCancelar;
+        private ComboBox cbFiltroAsignatura;
+        private Label lblFiltroAsignatura;
+        private Label lblFiltroUnidad;
+        private ComboBox cbFiltroUnidad;
     }
 }

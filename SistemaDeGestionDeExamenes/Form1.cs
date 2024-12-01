@@ -1,10 +1,16 @@
 
+using System.Collections.Generic;
+
 namespace SistemaDeGestionDeExamenes
 {
     public partial class Form1 : Form
     {
         private List<Asignatura> asignaturas = new List<Asignatura>();
         private List<Pregunta> preguntas = new List<Pregunta>();
+        private List<Pregunta> preguntasFiltradas = new List<Pregunta>();
+
+        private List<string> filtroAsignaturas = new List<string>();
+        private List<string> filtroUnidades = new List<string>();
 
         private string archivoExamen = "examen.json";
         private string archivoCorreciones = "correcciones.json";
@@ -20,7 +26,8 @@ namespace SistemaDeGestionDeExamenes
 
             ConfigurarColumnasDataGridView();
             EscribirAsignaturas();
-            MostrarPreguntas();
+            MostrarPreguntas(preguntas);
+            InicializarFiltroAsignaturas();
         }
 
         // MENU
@@ -54,7 +61,7 @@ namespace SistemaDeGestionDeExamenes
 
             btnVolverMenu.Visible = false;
         }
-        
+
         private void MostrarEsconderMenu(bool visible)
         {
             btnAdministrarBancoPreguntas.Visible = visible;
@@ -62,7 +69,7 @@ namespace SistemaDeGestionDeExamenes
             btnCorregirExamenes.Visible = visible;
             btnImprimirExamenes.Visible = visible;
         }
-        
+
         private void MostrarEsconderAdministracionPreguntas(bool visible)
         {
             lblAsignatura.Visible = visible;
@@ -100,6 +107,12 @@ namespace SistemaDeGestionDeExamenes
             btnAgregarPreg.Visible = visible;
             btnEditarPreg.Visible = visible;
             btnEliminarPreg.Visible = visible;
+
+            lblFiltroAsignatura.Visible = visible;
+            cbFiltroAsignatura.Visible = visible;
+
+            lblFiltroUnidad.Visible = visible;
+            cbFiltroUnidad.Visible = visible;
         }
 
         // ADMINISTRADOR DE PREGUNTAS
@@ -131,7 +144,7 @@ namespace SistemaDeGestionDeExamenes
             }
 
             catch (Exception ex)
-            { 
+            {
                 MetodosGenericos.MostrarError(ex.Message);
             }
         }
@@ -208,7 +221,7 @@ namespace SistemaDeGestionDeExamenes
 
             JsonHelper.GuardarEnArchivo(preguntas, archivoPreguntas);
 
-            MostrarPreguntas();
+            MostrarPreguntas(preguntas);
             VaciarFormulario();
         }
 
@@ -246,7 +259,7 @@ namespace SistemaDeGestionDeExamenes
 
                 JsonHelper.GuardarEnArchivo(preguntas, archivoPreguntas);
 
-                MostrarPreguntas();
+                MostrarPreguntas(preguntas);
                 VisibilidadBotonesEditar(false);
                 VaciarFormulario();
             }
@@ -322,7 +335,108 @@ namespace SistemaDeGestionDeExamenes
 
                 JsonHelper.GuardarEnArchivo(preguntas, archivoPreguntas);
 
-                MostrarPreguntas();
+                MostrarPreguntas(preguntas);
+            }
+        }
+
+        // FILTRAR PREGUNTAS
+        private void cbFiltroAsignatura_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LlenarFiltroUnidades();
+            
+            List<Pregunta> preguntasFiltradas =
+                preguntas.Where(preg =>
+                {
+                    if (cbFiltroAsignatura.SelectedIndex != 0)
+                    {
+                        return preg.Asignatura == cbFiltroAsignatura?.SelectedItem?.ToString();
+                    }
+
+                    return true;
+                  
+
+                }).ToList();
+
+            MostrarPreguntas(preguntasFiltradas);
+        }
+
+        private void cbFiltroUnidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Pregunta> preguntasFiltradas =
+                preguntas.Where(preg =>
+                {
+                    if (cbFiltroUnidad.SelectedIndex != 0)
+                    {
+                        return preg.Unidad == cbFiltroUnidad?.SelectedItem?.ToString();
+                    }
+
+                    return true;
+
+                }).ToList();
+
+            MostrarPreguntas(preguntasFiltradas);
+        }
+
+        private void InicializarFiltroAsignaturas()
+        {
+            cbFiltroAsignatura.Items.Clear();
+
+            filtroAsignaturas = 
+                asignaturas?.Select(a => a.Nombre).ToList() 
+                ?? new List<string>();
+
+            cbFiltroAsignatura.Items.Add("Todas las Asignaturas");
+
+            if (filtroAsignaturas?.Count > 0)
+            {
+                foreach (var asignatura in filtroAsignaturas)
+                {
+                    cbFiltroAsignatura.Items.Add(asignatura);
+                }
+            }
+
+            cbFiltroAsignatura.SelectedIndex = 0;
+        }
+
+        private void LlenarFiltroUnidades()
+        {
+            cbFiltroUnidad.Items.Clear();
+            cbFiltroUnidad.Text = "";
+
+            if (cbFiltroAsignatura.SelectedIndex == 0)
+            {
+                cbFiltroUnidad?.Items.Add("Todas las Unidades");
+
+                foreach (var asignatura in asignaturas)
+                {
+                    foreach (var unidad in asignatura.Unidades)
+                    {
+                        cbFiltroUnidad?.Items.Add(unidad.Nombre);
+                    }
+                }
+            }
+
+            if (cbFiltroAsignatura.SelectedIndex != 0)
+            {
+                string asignaturaSelec = cbFiltroAsignatura?.SelectedItem?.ToString() + "";
+                Asignatura? asignatura = asignaturas.FirstOrDefault(a => a?.Nombre == asignaturaSelec);
+
+                filtroUnidades =
+                    asignatura?.Unidades?.Select(u => u?.Nombre ?? "")?.ToList()
+                    ?? new List<string>();
+
+                cbFiltroUnidad?.Items.Add("Todas las Unidades");
+
+                if (filtroAsignaturas?.Count > 0)
+                {
+                    foreach (var unidad in filtroUnidades)
+                    {
+                        cbFiltroUnidad?.Items.Add(unidad);
+                    }
+                }
+
+                if (cbFiltroUnidad?.Items?.Count > 0)
+                    cbFiltroUnidad.SelectedIndex = 0;
             }
         }
 
@@ -357,12 +471,12 @@ namespace SistemaDeGestionDeExamenes
                 opcionCorrecta = 4;
 
             Pregunta pregunta = new Pregunta(
-                asignatura, 
-                unidad, 
-                subunidad, 
-                preguntaId, 
-                textPregunta, 
-                [textOpc1, textOpc2, textOpc3, textOpc4], 
+                asignatura,
+                unidad,
+                subunidad,
+                preguntaId,
+                textPregunta,
+                [textOpc1, textOpc2, textOpc3, textOpc4],
                 opcionCorrecta
                 );
 
@@ -394,7 +508,7 @@ namespace SistemaDeGestionDeExamenes
 
             dgvPreguntas.Columns["PreguntaId"].Visible = false;
         }
-        
+
         private void VaciarFormulario()
         {
             cbAsignaturas.SelectedIndex = -1;
@@ -414,11 +528,11 @@ namespace SistemaDeGestionDeExamenes
             rbOpc4.Checked = false;
         }
 
-        private void MostrarPreguntas()
+        private void MostrarPreguntas(List<Pregunta> pregs)
         {
             dgvPreguntas.Rows.Clear(); // Limpia las filas existentes
 
-            foreach (var pregunta in preguntas)
+            foreach (var pregunta in pregs)
             {
                 // Crea una fila para las columnas
                 // ASIGNATURA | UNIDAD | SUBUNIDAD | PREGUNTA | OPC CORRECTA | OPC 1 | OPC 2 | OPC 3 | OPC 4
@@ -440,5 +554,6 @@ namespace SistemaDeGestionDeExamenes
                 dgvPreguntas.Rows.Add(fila);
             }
         }
+
     }
 }
