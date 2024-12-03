@@ -15,6 +15,7 @@ namespace SistemaDeGestionDeExamenes
         private string archivoExamen = "examen.json";
         private string archivoCorreciones = "correcciones.json";
         private string archivoPreguntas = "preguntas.json";
+        private string archivoAsignaturas = "asignaturas.json";
 
         private Pregunta? preguntaAEditar = null;
 
@@ -22,10 +23,10 @@ namespace SistemaDeGestionDeExamenes
         {
             InitializeComponent();
 
-            preguntas = JsonHelper.LeerPreguntas("preguntas.json");
+            preguntas = JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
 
             ConfigurarColumnasDataGridView();
-            EscribirAsignaturas();
+            AgreagarAsignaturasALista();
             MostrarPreguntas(preguntas);
             InicializarFiltroAsignaturas();
         }
@@ -128,11 +129,11 @@ namespace SistemaDeGestionDeExamenes
             CambiarSubUnidades();
         }
 
-        private void EscribirAsignaturas()
+        private void AgreagarAsignaturasALista()
         {
             try
             {
-                asignaturas = JsonHelper.LeerAsignaturas("asignaturas.txt");
+                asignaturas = JsonHelper.LeerDesdeArchivo<Asignatura>(archivoAsignaturas);
 
                 if (asignaturas != null && asignaturas.Count > 0)
                 {
@@ -343,7 +344,7 @@ namespace SistemaDeGestionDeExamenes
         private void cbFiltroAsignatura_SelectedIndexChanged(object sender, EventArgs e)
         {
             LlenarFiltroUnidades();
-            
+
             List<Pregunta> preguntasFiltradas =
                 preguntas.Where(preg =>
                 {
@@ -353,7 +354,7 @@ namespace SistemaDeGestionDeExamenes
                     }
 
                     return true;
-                  
+
 
                 }).ToList();
 
@@ -381,8 +382,8 @@ namespace SistemaDeGestionDeExamenes
         {
             cbFiltroAsignatura.Items.Clear();
 
-            filtroAsignaturas = 
-                asignaturas?.Select(a => a.Nombre).ToList() 
+            filtroAsignaturas =
+                asignaturas?.Select(a => a.Nombre).ToList()
                 ?? new List<string>();
 
             cbFiltroAsignatura.Items.Add("Todas las Asignaturas");
@@ -555,5 +556,123 @@ namespace SistemaDeGestionDeExamenes
             }
         }
 
+        // CREAR ASIGNATURAS
+        private void lblCrearAsignatura_Click(object sender, EventArgs e)
+        {
+            pnlNuevaAsignatura.Visible = true;
+        }
+
+        private void btnCrearNuevaAsignatura_Click(object sender, EventArgs e)
+        {
+            Asignatura asignatura = new Asignatura();
+            asignatura.Nombre = txtNombreNuevaAsignatura.Text.Trim();
+
+            asignaturas.Add(asignatura);
+
+            JsonHelper.GuardarEnArchivo(asignaturas, archivoAsignaturas);
+            AgreagarAsignaturasALista();
+
+            pnlNuevaAsignatura.Visible = false;
+
+            JsonHelper.GuardarEnArchivo(asignaturas, archivoAsignaturas);
+        }
+
+        private void btnCancelarNuevaAsignatura_Click(object sender, EventArgs e)
+        {
+            pnlNuevaAsignatura.Visible = false;
+
+        }
+
+        // CREAR UNIDADES
+        private void lblCrearUnidad_Click(object sender, EventArgs e)
+        {
+            pnlNuevaUnidad.Visible = true;
+
+            if (asignaturas != null && asignaturas.Count > 0)
+            {
+                foreach (var asignatura in asignaturas)
+                {
+                    cbAsignaturasCrearUnidad.Items.Add(asignatura.Nombre);
+                }
+            }
+
+        }
+
+        private void btnCrearNuevaUnidad_Click(object sender, EventArgs e)
+        {
+            string? asignaturaTxt = cbAsignaturasCrearUnidad?.SelectedItem?.ToString();
+
+            Unidad nuevaUnidad = new Unidad();
+            nuevaUnidad.Nombre = txtNuevaUnidad.Text;
+
+            foreach (Asignatura asig in asignaturas)
+            {
+                if (asig.Nombre == asignaturaTxt)
+                    asig.Unidades.Add(nuevaUnidad);
+            }
+
+            pnlNuevaUnidad.Visible = false;
+            JsonHelper.GuardarEnArchivo(asignaturas, archivoAsignaturas);
+
+        }
+
+        private void btnCancelarNuevaUnidad_Click(object sender, EventArgs e)
+        {
+            pnlNuevaUnidad.Visible = false;
+        }
+
+        // CREAR SUBUNIDADES
+        private void lblCrearSubUnidad_Click(object sender, EventArgs e)
+        {
+            pnlCrearNuevaSubUnidad.Visible = true;
+
+            if (asignaturas != null && asignaturas.Count > 0)
+            {
+                foreach (var asignatura in asignaturas)
+                {
+                    cbAsignaturaNuevaSubUnidad.Items.Add(asignatura.Nombre);
+                }
+            }
+        }
+
+        private void cbAsignaturaNuevaSubUnidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string? asignTxt = cbAsignaturaNuevaSubUnidad?.SelectedItem?.ToString();
+
+            Asignatura? asignatraElegida = asignaturas.FirstOrDefault(asig => asig.Nombre == asignTxt);
+
+                foreach (Unidad unidad in asignatraElegida?.Unidades)
+                {
+                    cbUnidadesNuevaSubunidad?.Items.Add(unidad.Nombre);
+                }
+        }
+
+        private void btnCrearNuevaSubUnidad_Click(object sender, EventArgs e)
+        {
+            string? asignaturaTxt = cbAsignaturaNuevaSubUnidad?.SelectedItem?.ToString();
+            string? unidadTxt = cbUnidadesNuevaSubunidad?.SelectedItem?.ToString();
+
+            SubUnidad nuevaSubUnidad = new SubUnidad();
+            nuevaSubUnidad.Nombre = txtNuevaSubUnidad.Text;
+
+            foreach (Asignatura asig in asignaturas)
+            {
+                foreach (Unidad unid in asig.Unidades)
+                {
+                    lblAsignatura.Text = asig.Nombre + " " + unid.Nombre;
+                    if (asig.Nombre == asignaturaTxt && unid.Nombre == unidadTxt)
+                        unid.SubUnidades.Add(nuevaSubUnidad);
+                }
+            }
+
+            pnlCrearNuevaSubUnidad.Visible = false;
+            JsonHelper.GuardarEnArchivo(asignaturas, archivoAsignaturas);
+
+        }
+
+        private void btnCancelarNuevaSubUnidad_Click(object sender, EventArgs e)
+        {
+            pnlCrearNuevaSubUnidad.Visible = false;
+        }
     }
 }

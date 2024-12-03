@@ -4,7 +4,7 @@ namespace SistemaDeGestionDeExamenes
 {
     public class JsonHelper
     {
-        public static List<Asignatura> LeerAsignaturas(string filePath)
+        public static List<T> LeerDesdeArchivo<T>(string filePath)
         {
             try
             {
@@ -15,53 +15,24 @@ namespace SistemaDeGestionDeExamenes
                         string json = reader.ReadToEnd();
 
                         // Deserializar el JSON a una lista de asignaturas
-                        return JsonSerializer.Deserialize<List<Asignatura>>(json, new JsonSerializerOptions
+                        return JsonSerializer.Deserialize<List<T>>(json, new JsonSerializerOptions
                         {
                             PropertyNameCaseInsensitive = true
-                        }) ?? new List<Asignatura>();
+                        }) ?? new List<T>();
                     }
                 }
 
-                return new List<Asignatura>();
+                return new List<T>();
             }
 
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al leer el archivo JSON: {ex.Message}");
-                return new List<Asignatura>();
+                return new List<T>();
             }
         }
 
-        public static List<Pregunta> LeerPreguntas(string path)
-        {
-            try
-            {
-                if (File.Exists(path))
-                {
-                    using (StreamReader reader = new StreamReader(path))
-                    {
-                        string json = reader.ReadToEnd();
-
-                        return JsonSerializer
-                            .Deserialize<List<Pregunta>>
-                            (json,
-                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
-                            )
-                            ?? new List<Pregunta>(); // caso de que sea null
-                    }
-                }
-
-                return new List<Pregunta>();
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al leer las preguntas desde el archivo: {ex.Message}");
-                return new List<Pregunta>();
-            }
-        }
-
-        public static void GuardarEnArchivo(List<Pregunta> lista, string path)
+        public static void GuardarEnArchivo<T>(List<T> lista, string path)
         {
             try
             {
@@ -79,5 +50,6 @@ namespace SistemaDeGestionDeExamenes
                 Console.WriteLine($"Error al guardar: {ex.Message}");
             }
         }
+
     }
 }

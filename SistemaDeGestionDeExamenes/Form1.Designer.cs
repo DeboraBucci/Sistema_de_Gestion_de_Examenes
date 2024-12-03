@@ -61,7 +61,6 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             lblCrearAsignatura = new Label();
             lblCrearUnidad = new Label();
-            lblCrearSubunidad = new Label();
             lblSubUnidad = new Label();
             btnAceptarCambios = new Button();
             btnCancelar = new Button();
@@ -69,8 +68,33 @@
             lblFiltroAsignatura = new Label();
             lblFiltroUnidad = new Label();
             cbFiltroUnidad = new ComboBox();
+            pnlNuevaAsignatura = new Panel();
+            txtNombreNuevaAsignatura = new TextBox();
+            lblNombreNuevaAsignatura = new Label();
+            btnCancelarNuevaAsignatura = new Button();
+            btnCrearNuevaAsignatura = new Button();
+            pnlNuevaUnidad = new Panel();
+            cbAsignaturasCrearUnidad = new ComboBox();
+            label2 = new Label();
+            txtNuevaUnidad = new TextBox();
+            lblNuevaUnidad = new Label();
+            btnCancelarNuevaUnidad = new Button();
+            btnCrearNuevaUnidad = new Button();
+            cbAsignaturaNuevaSubUnidad = new ComboBox();
+            label1 = new Label();
+            pnlCrearNuevaSubUnidad = new Panel();
+            cbUnidadesNuevaSubunidad = new ComboBox();
+            label4 = new Label();
+            txtNuevaSubUnidad = new TextBox();
+            label3 = new Label();
+            btnCancelarNuevaSubUnidad = new Button();
+            btnCrearNuevaSubUnidad = new Button();
+            lblCrearSubunidad = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             gbOpcionCorrecta.SuspendLayout();
+            pnlNuevaAsignatura.SuspendLayout();
+            pnlNuevaUnidad.SuspendLayout();
+            pnlCrearNuevaSubUnidad.SuspendLayout();
             SuspendLayout();
             // 
             // btnAdministrarBancoPreguntas
@@ -403,6 +427,7 @@
             lblCrearAsignatura.TabIndex = 29;
             lblCrearAsignatura.Text = "Crear nueva asignatura";
             lblCrearAsignatura.Visible = false;
+            lblCrearAsignatura.Click += lblCrearAsignatura_Click;
             // 
             // lblCrearUnidad
             // 
@@ -416,19 +441,7 @@
             lblCrearUnidad.TabIndex = 30;
             lblCrearUnidad.Text = "Crear nueva unidad";
             lblCrearUnidad.Visible = false;
-            // 
-            // lblCrearSubunidad
-            // 
-            lblCrearSubunidad.AutoSize = true;
-            lblCrearSubunidad.Cursor = Cursors.Hand;
-            lblCrearSubunidad.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
-            lblCrearSubunidad.ForeColor = Color.DodgerBlue;
-            lblCrearSubunidad.Location = new Point(38, 272);
-            lblCrearSubunidad.Name = "lblCrearSubunidad";
-            lblCrearSubunidad.Size = new Size(129, 15);
-            lblCrearSubunidad.TabIndex = 31;
-            lblCrearSubunidad.Text = "Crear nueva subunidad";
-            lblCrearSubunidad.Visible = false;
+            lblCrearUnidad.Click += lblCrearUnidad_Click;
             // 
             // lblSubUnidad
             // 
@@ -504,11 +517,238 @@
             cbFiltroUnidad.Visible = false;
             cbFiltroUnidad.SelectedIndexChanged += cbFiltroUnidad_SelectedIndexChanged;
             // 
+            // pnlNuevaAsignatura
+            // 
+            pnlNuevaAsignatura.Controls.Add(txtNombreNuevaAsignatura);
+            pnlNuevaAsignatura.Controls.Add(lblNombreNuevaAsignatura);
+            pnlNuevaAsignatura.Controls.Add(btnCancelarNuevaAsignatura);
+            pnlNuevaAsignatura.Controls.Add(btnCrearNuevaAsignatura);
+            pnlNuevaAsignatura.Location = new Point(548, 178);
+            pnlNuevaAsignatura.Name = "pnlNuevaAsignatura";
+            pnlNuevaAsignatura.Size = new Size(410, 205);
+            pnlNuevaAsignatura.TabIndex = 40;
+            pnlNuevaAsignatura.Visible = false;
+            // 
+            // txtNombreNuevaAsignatura
+            // 
+            txtNombreNuevaAsignatura.Location = new Point(31, 85);
+            txtNombreNuevaAsignatura.Name = "txtNombreNuevaAsignatura";
+            txtNombreNuevaAsignatura.Size = new Size(346, 23);
+            txtNombreNuevaAsignatura.TabIndex = 41;
+            // 
+            // lblNombreNuevaAsignatura
+            // 
+            lblNombreNuevaAsignatura.AutoSize = true;
+            lblNombreNuevaAsignatura.Location = new Point(31, 46);
+            lblNombreNuevaAsignatura.Name = "lblNombreNuevaAsignatura";
+            lblNombreNuevaAsignatura.Size = new Size(179, 15);
+            lblNombreNuevaAsignatura.TabIndex = 41;
+            lblNombreNuevaAsignatura.Text = "Nombre de la Nueva Asignatura:";
+            // 
+            // btnCancelarNuevaAsignatura
+            // 
+            btnCancelarNuevaAsignatura.Cursor = Cursors.Hand;
+            btnCancelarNuevaAsignatura.Location = new Point(202, 138);
+            btnCancelarNuevaAsignatura.Name = "btnCancelarNuevaAsignatura";
+            btnCancelarNuevaAsignatura.Size = new Size(130, 31);
+            btnCancelarNuevaAsignatura.TabIndex = 42;
+            btnCancelarNuevaAsignatura.Text = "Cancelar";
+            btnCancelarNuevaAsignatura.UseVisualStyleBackColor = true;
+            btnCancelarNuevaAsignatura.Click += btnCancelarNuevaAsignatura_Click;
+            // 
+            // btnCrearNuevaAsignatura
+            // 
+            btnCrearNuevaAsignatura.Cursor = Cursors.Hand;
+            btnCrearNuevaAsignatura.Location = new Point(66, 138);
+            btnCrearNuevaAsignatura.Name = "btnCrearNuevaAsignatura";
+            btnCrearNuevaAsignatura.Size = new Size(130, 31);
+            btnCrearNuevaAsignatura.TabIndex = 41;
+            btnCrearNuevaAsignatura.Text = "Crear";
+            btnCrearNuevaAsignatura.UseVisualStyleBackColor = true;
+            btnCrearNuevaAsignatura.Click += btnCrearNuevaAsignatura_Click;
+            // 
+            // pnlNuevaUnidad
+            // 
+            pnlNuevaUnidad.Controls.Add(cbAsignaturasCrearUnidad);
+            pnlNuevaUnidad.Controls.Add(label2);
+            pnlNuevaUnidad.Controls.Add(txtNuevaUnidad);
+            pnlNuevaUnidad.Controls.Add(lblNuevaUnidad);
+            pnlNuevaUnidad.Controls.Add(btnCancelarNuevaUnidad);
+            pnlNuevaUnidad.Controls.Add(btnCrearNuevaUnidad);
+            pnlNuevaUnidad.Location = new Point(548, 133);
+            pnlNuevaUnidad.Name = "pnlNuevaUnidad";
+            pnlNuevaUnidad.Size = new Size(410, 250);
+            pnlNuevaUnidad.TabIndex = 43;
+            pnlNuevaUnidad.Visible = false;
+            // 
+            // cbAsignaturasCrearUnidad
+            // 
+            cbAsignaturasCrearUnidad.FormattingEnabled = true;
+            cbAsignaturasCrearUnidad.Location = new Point(31, 48);
+            cbAsignaturasCrearUnidad.Name = "cbAsignaturasCrearUnidad";
+            cbAsignaturasCrearUnidad.Size = new Size(346, 23);
+            cbAsignaturasCrearUnidad.TabIndex = 45;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(31, 28);
+            label2.Name = "label2";
+            label2.Size = new Size(100, 15);
+            label2.TabIndex = 44;
+            label2.Text = "Elija la Asignatura";
+            // 
+            // txtNuevaUnidad
+            // 
+            txtNuevaUnidad.Location = new Point(31, 129);
+            txtNuevaUnidad.Name = "txtNuevaUnidad";
+            txtNuevaUnidad.Size = new Size(346, 23);
+            txtNuevaUnidad.TabIndex = 41;
+            // 
+            // lblNuevaUnidad
+            // 
+            lblNuevaUnidad.AutoSize = true;
+            lblNuevaUnidad.Location = new Point(31, 106);
+            lblNuevaUnidad.Name = "lblNuevaUnidad";
+            lblNuevaUnidad.Size = new Size(157, 15);
+            lblNuevaUnidad.TabIndex = 41;
+            lblNuevaUnidad.Text = "Nombre de la Nueva Unidad";
+            // 
+            // btnCancelarNuevaUnidad
+            // 
+            btnCancelarNuevaUnidad.Cursor = Cursors.Hand;
+            btnCancelarNuevaUnidad.Location = new Point(202, 182);
+            btnCancelarNuevaUnidad.Name = "btnCancelarNuevaUnidad";
+            btnCancelarNuevaUnidad.Size = new Size(130, 31);
+            btnCancelarNuevaUnidad.TabIndex = 42;
+            btnCancelarNuevaUnidad.Text = "Cancelar";
+            btnCancelarNuevaUnidad.UseVisualStyleBackColor = true;
+            btnCancelarNuevaUnidad.Click += btnCancelarNuevaUnidad_Click;
+            // 
+            // btnCrearNuevaUnidad
+            // 
+            btnCrearNuevaUnidad.Cursor = Cursors.Hand;
+            btnCrearNuevaUnidad.Location = new Point(66, 182);
+            btnCrearNuevaUnidad.Name = "btnCrearNuevaUnidad";
+            btnCrearNuevaUnidad.Size = new Size(130, 31);
+            btnCrearNuevaUnidad.TabIndex = 41;
+            btnCrearNuevaUnidad.Text = "Crear";
+            btnCrearNuevaUnidad.UseVisualStyleBackColor = true;
+            btnCrearNuevaUnidad.Click += btnCrearNuevaUnidad_Click;
+            // 
+            // cbAsignaturaNuevaSubUnidad
+            // 
+            cbAsignaturaNuevaSubUnidad.FormattingEnabled = true;
+            cbAsignaturaNuevaSubUnidad.Location = new Point(31, 52);
+            cbAsignaturaNuevaSubUnidad.Name = "cbAsignaturaNuevaSubUnidad";
+            cbAsignaturaNuevaSubUnidad.Size = new Size(346, 23);
+            cbAsignaturaNuevaSubUnidad.TabIndex = 45;
+            cbAsignaturaNuevaSubUnidad.SelectedIndexChanged += cbAsignaturaNuevaSubUnidad_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(31, 32);
+            label1.Name = "label1";
+            label1.Size = new Size(100, 15);
+            label1.TabIndex = 44;
+            label1.Text = "Elija la Asignatura";
+            // 
+            // pnlCrearNuevaSubUnidad
+            // 
+            pnlCrearNuevaSubUnidad.Controls.Add(cbUnidadesNuevaSubunidad);
+            pnlCrearNuevaSubUnidad.Controls.Add(label4);
+            pnlCrearNuevaSubUnidad.Controls.Add(cbAsignaturaNuevaSubUnidad);
+            pnlCrearNuevaSubUnidad.Controls.Add(label1);
+            pnlCrearNuevaSubUnidad.Controls.Add(txtNuevaSubUnidad);
+            pnlCrearNuevaSubUnidad.Controls.Add(label3);
+            pnlCrearNuevaSubUnidad.Controls.Add(btnCancelarNuevaSubUnidad);
+            pnlCrearNuevaSubUnidad.Controls.Add(btnCrearNuevaSubUnidad);
+            pnlCrearNuevaSubUnidad.Location = new Point(548, 133);
+            pnlCrearNuevaSubUnidad.Name = "pnlCrearNuevaSubUnidad";
+            pnlCrearNuevaSubUnidad.Size = new Size(410, 288);
+            pnlCrearNuevaSubUnidad.TabIndex = 46;
+            pnlCrearNuevaSubUnidad.Visible = false;
+            // 
+            // cbUnidadesNuevaSubunidad
+            // 
+            cbUnidadesNuevaSubunidad.FormattingEnabled = true;
+            cbUnidadesNuevaSubunidad.Location = new Point(31, 111);
+            cbUnidadesNuevaSubunidad.Name = "cbUnidadesNuevaSubunidad";
+            cbUnidadesNuevaSubunidad.Size = new Size(346, 23);
+            cbUnidadesNuevaSubunidad.TabIndex = 47;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(31, 91);
+            label4.Name = "label4";
+            label4.Size = new Size(81, 15);
+            label4.TabIndex = 46;
+            label4.Text = "Elija la Unidad";
+            // 
+            // txtNuevaSubUnidad
+            // 
+            txtNuevaSubUnidad.Location = new Point(31, 187);
+            txtNuevaSubUnidad.Name = "txtNuevaSubUnidad";
+            txtNuevaSubUnidad.Size = new Size(346, 23);
+            txtNuevaSubUnidad.TabIndex = 41;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(31, 164);
+            label3.Name = "label3";
+            label3.Size = new Size(180, 15);
+            label3.TabIndex = 41;
+            label3.Text = "Nombre de la Nueva Sub Unidad";
+            // 
+            // btnCancelarNuevaSubUnidad
+            // 
+            btnCancelarNuevaSubUnidad.Cursor = Cursors.Hand;
+            btnCancelarNuevaSubUnidad.Location = new Point(202, 234);
+            btnCancelarNuevaSubUnidad.Name = "btnCancelarNuevaSubUnidad";
+            btnCancelarNuevaSubUnidad.Size = new Size(130, 31);
+            btnCancelarNuevaSubUnidad.TabIndex = 42;
+            btnCancelarNuevaSubUnidad.Text = "Cancelar";
+            btnCancelarNuevaSubUnidad.UseVisualStyleBackColor = true;
+            btnCancelarNuevaSubUnidad.Click += btnCancelarNuevaSubUnidad_Click;
+            // 
+            // btnCrearNuevaSubUnidad
+            // 
+            btnCrearNuevaSubUnidad.Cursor = Cursors.Hand;
+            btnCrearNuevaSubUnidad.Location = new Point(66, 234);
+            btnCrearNuevaSubUnidad.Name = "btnCrearNuevaSubUnidad";
+            btnCrearNuevaSubUnidad.Size = new Size(130, 31);
+            btnCrearNuevaSubUnidad.TabIndex = 41;
+            btnCrearNuevaSubUnidad.Text = "Crear";
+            btnCrearNuevaSubUnidad.UseVisualStyleBackColor = true;
+            btnCrearNuevaSubUnidad.Click += btnCrearNuevaSubUnidad_Click;
+            // 
+            // lblCrearSubunidad
+            // 
+            lblCrearSubunidad.AutoSize = true;
+            lblCrearSubunidad.Cursor = Cursors.Hand;
+            lblCrearSubunidad.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
+            lblCrearSubunidad.ForeColor = Color.DodgerBlue;
+            lblCrearSubunidad.ImageAlign = ContentAlignment.TopLeft;
+            lblCrearSubunidad.Location = new Point(38, 272);
+            lblCrearSubunidad.Name = "lblCrearSubunidad";
+            lblCrearSubunidad.Size = new Size(132, 15);
+            lblCrearSubunidad.TabIndex = 47;
+            lblCrearSubunidad.Text = "Crear nueva sub unidad";
+            lblCrearSubunidad.Visible = false;
+            lblCrearSubunidad.Click += lblCrearSubUnidad_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1409, 695);
+            Controls.Add(lblCrearSubunidad);
+            Controls.Add(pnlCrearNuevaSubUnidad);
+            Controls.Add(pnlNuevaUnidad);
+            Controls.Add(pnlNuevaAsignatura);
             Controls.Add(lblFiltroUnidad);
             Controls.Add(cbFiltroUnidad);
             Controls.Add(lblFiltroAsignatura);
@@ -516,7 +756,6 @@
             Controls.Add(btnCancelar);
             Controls.Add(btnAceptarCambios);
             Controls.Add(lblSubUnidad);
-            Controls.Add(lblCrearSubunidad);
             Controls.Add(lblCrearUnidad);
             Controls.Add(lblCrearAsignatura);
             Controls.Add(cbSubUnidades);
@@ -537,7 +776,6 @@
             Controls.Add(cbUnidades);
             Controls.Add(lblUnidad);
             Controls.Add(lblPreguntas);
-            Controls.Add(dgvPreguntas);
             Controls.Add(cbAsignaturas);
             Controls.Add(lblAsignatura);
             Controls.Add(btnVolverMenu);
@@ -545,11 +783,18 @@
             Controls.Add(btnCorregirExamenes);
             Controls.Add(btnGenerarExamenes);
             Controls.Add(btnAdministrarBancoPreguntas);
+            Controls.Add(dgvPreguntas);
             Name = "Form1";
             Text = "Sistema de Gestion de Examenes";
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
             gbOpcionCorrecta.ResumeLayout(false);
             gbOpcionCorrecta.PerformLayout();
+            pnlNuevaAsignatura.ResumeLayout(false);
+            pnlNuevaAsignatura.PerformLayout();
+            pnlNuevaUnidad.ResumeLayout(false);
+            pnlNuevaUnidad.PerformLayout();
+            pnlCrearNuevaSubUnidad.ResumeLayout(false);
+            pnlCrearNuevaSubUnidad.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -589,7 +834,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private Label lblCrearAsignatura;
         private Label lblCrearUnidad;
-        private Label lblCrearSubunidad;
         private Label lblSubUnidad;
         private Button btnAceptarCambios;
         private Button btnCancelar;
@@ -597,5 +841,27 @@
         private Label lblFiltroAsignatura;
         private Label lblFiltroUnidad;
         private ComboBox cbFiltroUnidad;
+        private Panel pnlNuevaAsignatura;
+        private Button btnCancelarNuevaAsignatura;
+        private Button btnCrearNuevaAsignatura;
+        private TextBox txtNombreNuevaAsignatura;
+        private Label lblNombreNuevaAsignatura;
+        private Panel pnlNuevaUnidad;
+        private TextBox txtNuevaUnidad;
+        private Label lblNuevaUnidad;
+        private Button btnCancelarNuevaUnidad;
+        private Button btnCrearNuevaUnidad;
+        private ComboBox cbAsignaturasCrearUnidad;
+        private Label label2;
+        private ComboBox cbAsignaturaNuevaSubUnidad;
+        private Label label1;
+        private Panel pnlCrearNuevaSubUnidad;
+        private ComboBox cbUnidadesNuevaSubunidad;
+        private Label label4;
+        private TextBox txtNuevaSubUnidad;
+        private Label label3;
+        private Button btnCancelarNuevaSubUnidad;
+        private Button btnCrearNuevaSubUnidad;
+        private Label lblCrearSubunidad;
     }
 }
