@@ -115,7 +115,7 @@ namespace SistemaDeGestionDeExamenes
                 MostrarPreguntas(preguntas);
             }
         }
-        
+
         // FILTRO
         private void cbFiltroAsignatura_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -154,8 +154,15 @@ namespace SistemaDeGestionDeExamenes
             MostrarPreguntas(preguntasFiltradas);
         }
 
+        // CREAR ASIGNATURAS, UNIDADES, SUBUNIDADES
+        private void lblCrearAsignatura_Click(object sender, EventArgs e)
+        {
+        }
 
-        // CREAR ASIGNATURA, UNIDADES, SUBUNIDAD
+        private void lblCrearUnidad_Click(object sender, EventArgs e)
+        {
+        }
+
         private void lblCrearSubunidad_Click(object sender, EventArgs e)
         {
             pnlCrearNuevaSubUnidad.Visible = true;
@@ -167,6 +174,10 @@ namespace SistemaDeGestionDeExamenes
                     cbAsignaturaNuevaSubUnidad.Items.Add(asignatura.Nombre);
                 }
             }
+        }
+        private void btnCancelarNuevaSubUnidad_Click(object sender, EventArgs e)
+        {
+            pnlCrearNuevaSubUnidad.Visible = false;
         }
 
         private void btnCrearNuevaSubUnidad_Click(object sender, EventArgs e)
@@ -206,7 +217,6 @@ namespace SistemaDeGestionDeExamenes
         {
 
         }
-
 
         // METODOS GENERALES
         private Pregunta CrearPregunta(string? preguntaId = null)
@@ -380,7 +390,7 @@ namespace SistemaDeGestionDeExamenes
             btnEditarPreg.Visible = !visible;
             btnEliminarPreg.Visible = !visible;
         }
-   
+
         private void CambiarUnidades()
         {
             try
