@@ -59,7 +59,7 @@
             btnImprimirExamenes.FlatStyle = FlatStyle.Flat;
             btnImprimirExamenes.Font = new Font("Segoe UI", 14F);
             btnImprimirExamenes.ForeColor = Color.Black;
-            btnImprimirExamenes.Location = new Point(368, 12);
+            btnImprimirExamenes.Location = new Point(709, 12);
             btnImprimirExamenes.Name = "btnImprimirExamenes";
             btnImprimirExamenes.Size = new Size(335, 45);
             btnImprimirExamenes.TabIndex = 7;
@@ -74,12 +74,13 @@
             btnGenerarExamenes.FlatStyle = FlatStyle.Flat;
             btnGenerarExamenes.Font = new Font("Segoe UI", 14F);
             btnGenerarExamenes.ForeColor = Color.Black;
-            btnGenerarExamenes.Location = new Point(709, 12);
+            btnGenerarExamenes.Location = new Point(368, 12);
             btnGenerarExamenes.Name = "btnGenerarExamenes";
             btnGenerarExamenes.Size = new Size(335, 45);
             btnGenerarExamenes.TabIndex = 5;
             btnGenerarExamenes.Text = "Generar Examenes";
             btnGenerarExamenes.UseVisualStyleBackColor = false;
+            btnGenerarExamenes.Click += btnGenerarExamenes_Click;
             // 
             // btnCorregirExamenes
             // 
@@ -107,7 +108,6 @@
             Controls.Add(btnCorregirExamenes);
             Name = "Form1";
             Text = "Sistema de Gestion de Examenes";
-            Load += Form1_Load;
             ResumeLayout(false);
         }
 

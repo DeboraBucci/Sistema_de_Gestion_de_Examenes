@@ -548,6 +548,7 @@
             Controls.Add(lblAsignatura);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AdministradorPreguntas";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AdministradorPreguntas";
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
             gbOpcionCorrecta.ResumeLayout(false);

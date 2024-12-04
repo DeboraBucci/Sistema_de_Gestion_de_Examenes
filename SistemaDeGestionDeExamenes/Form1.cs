@@ -10,26 +10,68 @@ namespace SistemaDeGestionDeExamenes
         public static string archivoPreguntas = "preguntas.json";
         public static string archivoAsignaturas = "asignaturas.json";
 
+        const string ADMINISTRADOR_PREG = "ADMINISTRADOR_PREGUNTAS";
+        const string GENERADOR_EXAM = "GENERADOR_EXAMENES";
+
+        public Form? currOpenedForm = null;
+
         public Form1()
         {
             InitializeComponent();
             this.IsMdiContainer = true;
 
-            AdministradorPreguntas administradorPreguntas = new AdministradorPreguntas();
-            administradorPreguntas.MdiParent = this;
-            administradorPreguntas.Show();
+            AbrirFormBancoPreguntas();
         }
+
+        AdministradorPreguntas administradorPreguntas = new AdministradorPreguntas
+        {
+                StartPosition = FormStartPosition.Manual,
+                Location = new Point(0, 0),
+        };
+
+        GeneradorExamenes generadorExamenes = new GeneradorExamenes
+        {
+            StartPosition = FormStartPosition.Manual,
+            Location = new Point(0, 0),
+        };
 
         // MENU
         private void btnAdministrarBancoPreguntas_Click(object sender, EventArgs e)
         {
-            AdministradorPreguntas administradorPreguntas = new AdministradorPreguntas();
+            AbrirFormBancoPreguntas();
+        }
+
+        private void AbrirFormBancoPreguntas()
+        {
+            ResetearDefaultBtnsUI();
+
+            btnAdministrarBancoPreguntas.BackColor = SystemColors.HotTrack;
+            btnAdministrarBancoPreguntas.ForeColor = Color.White;
+
+            CerrarFormularios();
+            currOpenedForm = administradorPreguntas;
+
             administradorPreguntas.MdiParent = this;
             administradorPreguntas.Show();
         }
 
         private void btnGenerarExamenes_Click(object sender, EventArgs e)
         {
+            AbrirFormGenerarExamenes();
+        }
+
+        private void AbrirFormGenerarExamenes()
+        {
+            ResetearDefaultBtnsUI();
+
+            btnGenerarExamenes.BackColor = SystemColors.HotTrack;
+            btnGenerarExamenes.ForeColor = Color.White;
+
+            CerrarFormularios();
+            currOpenedForm = generadorExamenes;
+
+            generadorExamenes.MdiParent = this;
+            generadorExamenes.Show();
         }
 
         private void btnCorregirExamenes_Click(object sender, EventArgs e)
@@ -42,29 +84,28 @@ namespace SistemaDeGestionDeExamenes
 
         }
 
-
-        // GENERADOR DE PREGUNTAS
-        /*private void btnElegirUnidades_Click(object sender, EventArgs e)
+        private void ResetearDefaultBtnsUI()
         {
-            List<string> unidadesSeleccionadas = new List<string>();
+            btnAdministrarBancoPreguntas.BackColor = Color.White;
+            btnAdministrarBancoPreguntas.ForeColor = Color.Black;
 
-            foreach (var item in lstUnidades.SelectedItems)
-            {
-                if (item != null)
-                    unidadesSeleccionadas.Add(item.ToString() + "");
-            }
+            btnImprimirExamenes.BackColor = Color.White;
+            btnImprimirExamenes.ForeColor = Color.Black;
 
-            if (unidadesSeleccionadas.Count > 1)
-            {
-                MessageBox.Show(unidadesSeleccionadas[0] + " " + unidadesSeleccionadas[1]);
-            }
-        }*/
+            btnGenerarExamenes.BackColor = Color.White;
+            btnGenerarExamenes.ForeColor = Color.Black;
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            btnCorregirExamenes.BackColor = Color.White;
+            btnCorregirExamenes.ForeColor = Color.Black;
         }
-
-     
+  
+        private void CerrarFormularios()
+        {
+            if (currOpenedForm != null)
+            {
+                currOpenedForm.Hide();
+                currOpenedForm = null;
+            }
+        }
     }
 }
