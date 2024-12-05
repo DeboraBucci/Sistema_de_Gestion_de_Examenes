@@ -12,8 +12,6 @@ namespace SistemaDeGestionDeExamenes
 {
     public partial class AdministradorPreguntas : Form
     {
-        private List<Pregunta> preguntas = new List<Pregunta>();
-        private List<Asignatura> asignaturas = new List<Asignatura>();
         private List<Pregunta> preguntasFiltradas = new List<Pregunta>();
 
         private List<string> filtroAsignaturas = new List<string>();
@@ -30,11 +28,9 @@ namespace SistemaDeGestionDeExamenes
 
         private void InitUI()
         {
-            preguntas = JsonHelper.LeerDesdeArchivo<Pregunta>(Form1.archivoPreguntas);
-
             ConfigurarColumnasDataGridView();
             AgregarAsignaturasALista();
-            MostrarPreguntas(preguntas);
+            MostrarPreguntas(Form1.Preguntas);
             InicializarFiltroAsignaturas();
         }
 
@@ -43,11 +39,9 @@ namespace SistemaDeGestionDeExamenes
         // AGREGAR PREGUNTAS
         private void btnAgregarPreg_Click(object sender, EventArgs e)
         {
-            preguntas.Add(CrearPregunta());
+            Form1.AgregarPregunta(CrearPregunta());
 
-            JsonHelper.GuardarEnArchivo(preguntas, Form1.archivoPreguntas);
-
-            MostrarPreguntas(preguntas);
+            MostrarPreguntas(Form1.Preguntas);
             VaciarFormulario();
         }
         private void cbAsignaturas_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,9 +80,9 @@ namespace SistemaDeGestionDeExamenes
                 preguntaAEditar.Opciones[3] = pregunta.Opciones[3];
                 preguntaAEditar.OpcionCorrecta = pregunta.OpcionCorrecta;
 
-                JsonHelper.GuardarEnArchivo(preguntas, Form1.archivoPreguntas);
+                Form1.GuardarPreguntasArchivo();
+                MostrarPreguntas(Form1.Preguntas);
 
-                MostrarPreguntas(preguntas);
                 VisibilidadBotonesEditar(false);
                 VaciarFormulario();
             }
@@ -105,14 +99,8 @@ namespace SistemaDeGestionDeExamenes
             {
                 string preguntaId = IdPreguntaSeleccionada();
 
-                preguntas =
-                    preguntas
-                    .Where(pregunta => pregunta.PreguntaId != preguntaId)
-                    .ToList(); // Removemos la ID de la lista
-
-                JsonHelper.GuardarEnArchivo(preguntas, Form1.archivoPreguntas);
-
-                MostrarPreguntas(preguntas);
+                Form1.EliminarPregunta(preguntaId);
+                MostrarPreguntas( Form1.Preguntas);
             }
         }
 
@@ -122,15 +110,14 @@ namespace SistemaDeGestionDeExamenes
             LlenarFiltroUnidades();
 
             List<Pregunta> preguntasFiltradas =
-                preguntas.Where(preg =>
+                Form1
+                .Preguntas
+                .Where(preg =>
                 {
                     if (cbFiltroAsignatura.SelectedIndex != 0)
-                    {
                         return preg.Asignatura == cbFiltroAsignatura?.SelectedItem?.ToString();
-                    }
 
-                    return true;
-
+                    return true; // devuelve todo si se selecciona el index 0 en el combobox
 
                 }).ToList();
 
@@ -140,14 +127,14 @@ namespace SistemaDeGestionDeExamenes
         private void cbFiltroUnidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Pregunta> preguntasFiltradas =
-                preguntas.Where(preg =>
+                Form1
+                .Preguntas
+                .Where(preg =>
                 {
                     if (cbFiltroUnidad.SelectedIndex != 0)
-                    {
                         return preg.Unidad == cbFiltroUnidad?.SelectedItem?.ToString();
-                    }
 
-                    return true;
+                    return true; // devuelve todo en index 0
 
                 }).ToList();
 
@@ -167,14 +154,15 @@ namespace SistemaDeGestionDeExamenes
         {
             pnlCrearNuevaSubUnidad.Visible = true;
 
-            if (asignaturas != null && asignaturas.Count > 0)
+            if (Form1.Preguntas != null && Form1.Preguntas.Count > 0)
             {
-                foreach (var asignatura in asignaturas)
+                foreach (Asignatura asignatura in Form1.Asignaturas)
                 {
                     cbAsignaturaNuevaSubUnidad.Items.Add(asignatura.Nombre);
                 }
             }
         }
+
         private void btnCancelarNuevaSubUnidad_Click(object sender, EventArgs e)
         {
             pnlCrearNuevaSubUnidad.Visible = false;
@@ -188,7 +176,7 @@ namespace SistemaDeGestionDeExamenes
             SubUnidad nuevaSubUnidad = new SubUnidad();
             nuevaSubUnidad.Nombre = txtNuevaSubUnidad.Text;
 
-            foreach (Asignatura asig in asignaturas)
+            foreach (Asignatura asig in Form1.Asignaturas)
             {
                 foreach (Unidad unid in asig.Unidades)
                 {
@@ -199,20 +187,23 @@ namespace SistemaDeGestionDeExamenes
             }
 
             pnlCrearNuevaSubUnidad.Visible = false;
-            JsonHelper.GuardarEnArchivo(asignaturas, Form1.archivoAsignaturas);
+            Form1.GuardarAsignaturasArchivo();
         }
 
         private void cbAsignaturaNuevaSubUnidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             string? asignTxt = cbAsignaturaNuevaSubUnidad?.SelectedItem?.ToString();
 
-            Asignatura? asignatraElegida = asignaturas.FirstOrDefault(asig => asig.Nombre == asignTxt);
+            Asignatura? asignatraElegida = 
+                Form1.Asignaturas
+                     .FirstOrDefault(asig => asig.Nombre == asignTxt);
 
-            foreach (Unidad unidad in asignatraElegida?.Unidades)
+            foreach (Unidad unidad in asignatraElegida?.Unidades ?? [])
             {
                 cbUnidadesNuevaSubunidad?.Items.Add(unidad.Nombre);
             }
         }
+        
         private void cbUnidadesNuevaSubunidad_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -297,16 +288,16 @@ namespace SistemaDeGestionDeExamenes
 
         private void LlenarFormularioConPreguntaSeleccionada(string preguntaId)
         {
-            preguntaAEditar = preguntas.Find(pregunta => pregunta.PreguntaId == preguntaId);
+            preguntaAEditar = Form1.EncontrarPregunta(preguntaId);
 
             int indexAsignatura =
-                asignaturas?
+                Form1.Asignaturas?
                 .FindIndex(asig => asig.Nombre.Equals(preguntaAEditar?.Asignatura))
                 ?? 0;
 
             cbAsignaturas.SelectedIndex = indexAsignatura;
 
-            Asignatura? asignaturaSeleccionada = asignaturas?[cbAsignaturas.SelectedIndex];
+            Asignatura? asignaturaSeleccionada = Form1.Asignaturas?[cbAsignaturas.SelectedIndex];
 
             int indexUnidad = asignaturaSeleccionada?
                 .Unidades
@@ -345,11 +336,9 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
-                asignaturas = JsonHelper.LeerDesdeArchivo<Asignatura>(Form1.archivoAsignaturas);
-
-                if (asignaturas != null && asignaturas.Count > 0)
+                if (Form1.Asignaturas != null && Form1.Asignaturas.Count > 0)
                 {
-                    foreach (var asignatura in asignaturas)
+                    foreach (var asignatura in Form1.Asignaturas)
                     {
                         cbAsignaturas.Items.Add(asignatura.Nombre); // llena dropdown de asignaturas
                     }
@@ -395,9 +384,9 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
-                if (asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0)
+                if (Form1.Asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0)
                 {
-                    Asignatura? asignaturaSeleccionada = asignaturas?[cbAsignaturas.SelectedIndex];
+                    Asignatura? asignaturaSeleccionada = Form1.Asignaturas?[cbAsignaturas.SelectedIndex];
 
                     if (asignaturaSeleccionada != null)
                     {
@@ -425,11 +414,11 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
-                if (asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0 && cbUnidades.SelectedIndex >= 0)
+                if (Form1.Asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0 && cbUnidades.SelectedIndex >= 0)
                 {
                     Unidad? unidadSeleccionada = null;
 
-                    unidadSeleccionada = asignaturas?[cbAsignaturas.SelectedIndex].
+                    unidadSeleccionada = Form1.Asignaturas?[cbAsignaturas.SelectedIndex].
                                          Unidades[cbUnidades.SelectedIndex];
 
                     if (unidadSeleccionada != null)
@@ -456,7 +445,7 @@ namespace SistemaDeGestionDeExamenes
             cbFiltroAsignatura.Items.Clear();
 
             filtroAsignaturas =
-                asignaturas?.Select(a => a.Nombre).ToList()
+                Form1.Asignaturas?.Select(a => a.Nombre).ToList()
                 ?? new List<string>();
 
             cbFiltroAsignatura.Items.Add("Todas las Asignaturas");
@@ -481,7 +470,7 @@ namespace SistemaDeGestionDeExamenes
             {
                 cbFiltroUnidad?.Items.Add("Todas las Unidades");
 
-                foreach (var asignatura in asignaturas)
+                foreach (var asignatura in Form1.Asignaturas)
                 {
                     foreach (var unidad in asignatura.Unidades)
                     {
@@ -493,7 +482,7 @@ namespace SistemaDeGestionDeExamenes
             if (cbFiltroAsignatura.SelectedIndex != 0)
             {
                 string asignaturaSelec = cbFiltroAsignatura?.SelectedItem?.ToString() + "";
-                Asignatura? asignatura = asignaturas.FirstOrDefault(a => a?.Nombre == asignaturaSelec);
+                Asignatura? asignatura = Form1.Asignaturas.FirstOrDefault(a => a?.Nombre == asignaturaSelec);
 
                 filtroUnidades =
                     asignatura?.Unidades?.Select(u => u?.Nombre ?? "")?.ToList()

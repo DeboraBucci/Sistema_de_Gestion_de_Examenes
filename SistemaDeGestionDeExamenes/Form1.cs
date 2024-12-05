@@ -10,6 +10,10 @@ namespace SistemaDeGestionDeExamenes
         public static string archivoPreguntas = "preguntas.json";
         public static string archivoAsignaturas = "asignaturas.json";
 
+        public static List<Pregunta> Preguntas { get; private set; } = JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
+        public static List<Asignatura> Asignaturas { get; private set; } = JsonHelper.LeerDesdeArchivo<Asignatura>(archivoAsignaturas);
+
+
         const string ADMINISTRADOR_PREG = "ADMINISTRADOR_PREGUNTAS";
         const string GENERADOR_EXAM = "GENERADOR_EXAMENES";
 
@@ -34,6 +38,7 @@ namespace SistemaDeGestionDeExamenes
             StartPosition = FormStartPosition.Manual,
             Location = new Point(0, 0),
         };
+
 
         // MENU
         private void btnAdministrarBancoPreguntas_Click(object sender, EventArgs e)
@@ -106,6 +111,49 @@ namespace SistemaDeGestionDeExamenes
                 currOpenedForm.Hide();
                 currOpenedForm = null;
             }
+        }
+
+        // FUNCIONES DE PREGUNTAS
+        public static List<Pregunta> BuscarPreguntas()
+        {
+            return JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
+        }
+
+        public static void AgregarPregunta(Pregunta pregunta)
+        {
+            Preguntas.Add(pregunta);
+            GuardarPreguntasArchivo();
+        }
+
+        public static void EliminarPregunta(string id)
+        {
+            Preguntas = Preguntas
+                .Where(pregunta => pregunta.PreguntaId != id)
+                .ToList();
+
+            GuardarPreguntasArchivo();
+        }
+
+        public static Pregunta? EncontrarPregunta(string id)
+        {
+            return Preguntas.Find(pregunta => pregunta.PreguntaId == id);
+        }
+
+        public static void GuardarPreguntasArchivo()
+        {
+            JsonHelper.GuardarEnArchivo(Preguntas, archivoPreguntas);
+        }
+
+        // FUNCIONES DE ASIGNATURAS
+        public static List<Asignatura> BuscarAsignaturas()
+        {
+            return JsonHelper.LeerDesdeArchivo<Asignatura>(archivoAsignaturas);
+        }
+
+        public static void GuardarAsignaturasArchivo()
+        {
+            JsonHelper.GuardarEnArchivo(Asignaturas, archivoAsignaturas);
+
         }
     }
 }

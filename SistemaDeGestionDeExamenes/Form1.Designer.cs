@@ -39,7 +39,7 @@
             // 
             btnAdministrarBancoPreguntas.BackColor = SystemColors.HotTrack;
             btnAdministrarBancoPreguntas.Cursor = Cursors.Hand;
-            btnAdministrarBancoPreguntas.FlatAppearance.BorderSize = 0;
+            btnAdministrarBancoPreguntas.FlatAppearance.BorderColor = SystemColors.ControlLight;
             btnAdministrarBancoPreguntas.FlatStyle = FlatStyle.Flat;
             btnAdministrarBancoPreguntas.Font = new Font("Segoe UI", 14F);
             btnAdministrarBancoPreguntas.ForeColor = SystemColors.ButtonFace;
@@ -55,7 +55,7 @@
             // 
             btnImprimirExamenes.BackColor = Color.White;
             btnImprimirExamenes.Cursor = Cursors.Hand;
-            btnImprimirExamenes.FlatAppearance.BorderColor = SystemColors.ControlDark;
+            btnImprimirExamenes.FlatAppearance.BorderColor = SystemColors.ControlLight;
             btnImprimirExamenes.FlatStyle = FlatStyle.Flat;
             btnImprimirExamenes.Font = new Font("Segoe UI", 14F);
             btnImprimirExamenes.ForeColor = Color.Black;
@@ -70,7 +70,7 @@
             // 
             btnGenerarExamenes.BackColor = Color.White;
             btnGenerarExamenes.Cursor = Cursors.Hand;
-            btnGenerarExamenes.FlatAppearance.BorderColor = SystemColors.ControlDark;
+            btnGenerarExamenes.FlatAppearance.BorderColor = SystemColors.ControlLight;
             btnGenerarExamenes.FlatStyle = FlatStyle.Flat;
             btnGenerarExamenes.Font = new Font("Segoe UI", 14F);
             btnGenerarExamenes.ForeColor = Color.Black;
@@ -86,7 +86,7 @@
             // 
             btnCorregirExamenes.BackColor = Color.White;
             btnCorregirExamenes.Cursor = Cursors.Hand;
-            btnCorregirExamenes.FlatAppearance.BorderColor = SystemColors.ControlDark;
+            btnCorregirExamenes.FlatAppearance.BorderColor = SystemColors.ControlLight;
             btnCorregirExamenes.FlatStyle = FlatStyle.Flat;
             btnCorregirExamenes.Font = new Font("Segoe UI", 14F);
             btnCorregirExamenes.ForeColor = Color.Black;
