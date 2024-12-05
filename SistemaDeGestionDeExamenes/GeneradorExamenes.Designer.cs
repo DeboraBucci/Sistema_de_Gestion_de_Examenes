@@ -28,20 +28,113 @@
         /// </summary>
         private void InitializeComponent()
         {
+            cbAsignaturas = new ComboBox();
+            lblAsignatura = new Label();
+            lstUnidades = new ListBox();
+            btnGenerarExamen = new Button();
+            label1 = new Label();
+            dgvPreguntas = new DataGridView();
+            label2 = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             SuspendLayout();
+            // 
+            // cbAsignaturas
+            // 
+            cbAsignaturas.FormattingEnabled = true;
+            cbAsignaturas.Location = new Point(24, 169);
+            cbAsignaturas.Name = "cbAsignaturas";
+            cbAsignaturas.Size = new Size(402, 23);
+            cbAsignaturas.TabIndex = 10;
+            cbAsignaturas.SelectedIndexChanged += cbAsignaturas_SelectedIndexChanged;
+            // 
+            // lblAsignatura
+            // 
+            lblAsignatura.AutoSize = true;
+            lblAsignatura.Location = new Point(24, 149);
+            lblAsignatura.Name = "lblAsignatura";
+            lblAsignatura.Size = new Size(100, 15);
+            lblAsignatura.TabIndex = 9;
+            lblAsignatura.Text = "Elija la Asignatura";
+            // 
+            // lstUnidades
+            // 
+            lstUnidades.FormattingEnabled = true;
+            lstUnidades.ItemHeight = 15;
+            lstUnidades.Location = new Point(24, 230);
+            lstUnidades.Name = "lstUnidades";
+            lstUnidades.SelectionMode = SelectionMode.MultiSimple;
+            lstUnidades.Size = new Size(402, 154);
+            lstUnidades.TabIndex = 11;
+            // 
+            // btnGenerarExamen
+            // 
+            btnGenerarExamen.Location = new Point(24, 405);
+            btnGenerarExamen.Name = "btnGenerarExamen";
+            btnGenerarExamen.Size = new Size(402, 33);
+            btnGenerarExamen.TabIndex = 12;
+            btnGenerarExamen.Text = "Generar Examen";
+            btnGenerarExamen.UseVisualStyleBackColor = true;
+            btnGenerarExamen.Click += btnGenerarExamen_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(24, 212);
+            label1.Name = "label1";
+            label1.Size = new Size(132, 15);
+            label1.TabIndex = 13;
+            label1.Text = "Seleccione las Unidades";
+            // 
+            // dgvPreguntas
+            // 
+            dgvPreguntas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvPreguntas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvPreguntas.Location = new Point(458, 149);
+            dgvPreguntas.Name = "dgvPreguntas";
+            dgvPreguntas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvPreguntas.Size = new Size(929, 569);
+            dgvPreguntas.TabIndex = 56;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 16F);
+            label2.Location = new Point(458, 116);
+            label2.Name = "label2";
+            label2.Size = new Size(190, 30);
+            label2.TabIndex = 57;
+            label2.Text = "Examen Generado";
             // 
             // GeneradorExamenes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(1409, 741);
+            Controls.Add(label2);
+            Controls.Add(dgvPreguntas);
+            Controls.Add(label1);
+            Controls.Add(btnGenerarExamen);
+            Controls.Add(lstUnidades);
+            Controls.Add(cbAsignaturas);
+            Controls.Add(lblAsignatura);
             FormBorderStyle = FormBorderStyle.None;
             Name = "GeneradorExamenes";
             StartPosition = FormStartPosition.CenterParent;
             Text = "GeneradorExamenes";
+            ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private ComboBox cbAsignaturas;
+        private Label lblAsignatura;
+        private ListBox lstUnidades;
+        private Button btnGenerarExamen;
+        private Label label1;
+        private DataGridView dgvPreguntas;
+        private Label label2;
     }
 }

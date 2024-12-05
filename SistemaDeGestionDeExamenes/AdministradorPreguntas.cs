@@ -28,9 +28,9 @@ namespace SistemaDeGestionDeExamenes
 
         private void InitUI()
         {
-            ConfigurarColumnasDataGridView();
-            AgregarAsignaturasALista();
-            MostrarPreguntas(Form1.Preguntas);
+            Form1.ConfigurarColumnasDataGridView(dgvPreguntas);
+            AgregarAsignaturasADropdown();
+            Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
             InicializarFiltroAsignaturas();
         }
 
@@ -41,17 +41,17 @@ namespace SistemaDeGestionDeExamenes
         {
             Form1.AgregarPregunta(CrearPregunta());
 
-            MostrarPreguntas(Form1.Preguntas);
+            Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
             VaciarFormulario();
         }
         private void cbAsignaturas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CambiarUnidades();
+            CambiarUnidadesDropdown();
         }
 
         private void cbUnidades_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CambiarSubUnidades();
+            CambiarSubUnidadesDropdown();
         }
 
 
@@ -81,7 +81,7 @@ namespace SistemaDeGestionDeExamenes
                 preguntaAEditar.OpcionCorrecta = pregunta.OpcionCorrecta;
 
                 Form1.GuardarPreguntasArchivo();
-                MostrarPreguntas(Form1.Preguntas);
+                Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
 
                 VisibilidadBotonesEditar(false);
                 VaciarFormulario();
@@ -100,7 +100,7 @@ namespace SistemaDeGestionDeExamenes
                 string preguntaId = IdPreguntaSeleccionada();
 
                 Form1.EliminarPregunta(preguntaId);
-                MostrarPreguntas( Form1.Preguntas);
+                Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
             }
         }
 
@@ -121,7 +121,7 @@ namespace SistemaDeGestionDeExamenes
 
                 }).ToList();
 
-            MostrarPreguntas(preguntasFiltradas);
+            Form1.MostrarPreguntasDGV(preguntasFiltradas, dgvPreguntas);
         }
 
         private void cbFiltroUnidad_SelectedIndexChanged(object sender, EventArgs e)
@@ -138,7 +138,7 @@ namespace SistemaDeGestionDeExamenes
 
                 }).ToList();
 
-            MostrarPreguntas(preguntasFiltradas);
+            Form1.MostrarPreguntasDGV(preguntasFiltradas, dgvPreguntas);
         }
 
         // CREAR ASIGNATURAS, UNIDADES, SUBUNIDADES
@@ -252,32 +252,7 @@ namespace SistemaDeGestionDeExamenes
             return pregunta;
         }
 
-        private void MostrarPreguntas(List<Pregunta> pregs)
-        {
-            dgvPreguntas.Rows.Clear(); // Limpia las filas existentes
-
-            foreach (var pregunta in pregs)
-            {
-                // Crea una fila para las columnas
-                // ASIGNATURA | UNIDAD | SUBUNIDAD | PREGUNTA | OPC CORRECTA | OPC 1 | OPC 2 | OPC 3 | OPC 4
-                string[] fila = new string[10];
-
-                fila[0] = pregunta.Asignatura;
-                fila[1] = pregunta.Unidad;
-                fila[2] = pregunta.SubUnidad;
-                fila[3] = pregunta.TxtPregunta;
-                fila[4] = pregunta.OpcionCorrecta.ToString();
-                fila[5] = pregunta.PreguntaId;
-
-                // Llena las columnas de opciones
-                for (int i = 0; i < 4; i++)
-                {
-                    fila[6 + i] = (i < pregunta.Opciones.Length) ? pregunta.Opciones[i] : "";
-                }
-
-                dgvPreguntas.Rows.Add(fila);
-            }
-        }
+  
 
         private string IdPreguntaSeleccionada()
         {
@@ -332,7 +307,7 @@ namespace SistemaDeGestionDeExamenes
                 rbOpc3.Checked = true;
         }
 
-        private void AgregarAsignaturasALista()
+        private void AgregarAsignaturasADropdown()
         {
             try
             {
@@ -380,7 +355,7 @@ namespace SistemaDeGestionDeExamenes
             btnEliminarPreg.Visible = !visible;
         }
 
-        private void CambiarUnidades()
+        private void CambiarUnidadesDropdown()
         {
             try
             {
@@ -410,7 +385,7 @@ namespace SistemaDeGestionDeExamenes
             }
         }
 
-        private void CambiarSubUnidades()
+        private void CambiarSubUnidadesDropdown()
         {
             try
             {
@@ -502,24 +477,6 @@ namespace SistemaDeGestionDeExamenes
                     cbFiltroUnidad.SelectedIndex = 0;
             }
         }
-
-        private void ConfigurarColumnasDataGridView()
-        {
-            dgvPreguntas.Columns.Clear(); // Limpia las columnas existentes
-
-            dgvPreguntas.Columns.Add("Asignatura", "Asignatura");
-            dgvPreguntas.Columns.Add("Unidad", "Unidad");
-            dgvPreguntas.Columns.Add("SubUnidad", "SubUnidad");
-            dgvPreguntas.Columns.Add("TxtPregunta", "Pregunta");
-            dgvPreguntas.Columns.Add("OpcionCorrecta", "Opción Correcta");
-            dgvPreguntas.Columns.Add("PreguntaId", "PreguntaId");
-
-            dgvPreguntas.Columns.Add("Opcion1", "Opción 1");
-            dgvPreguntas.Columns.Add("Opcion2", "Opción 2");
-            dgvPreguntas.Columns.Add("Opcion3", "Opción 3");
-            dgvPreguntas.Columns.Add("Opcion4", "Opción 4");
-
-            dgvPreguntas.Columns["PreguntaId"].Visible = false;
-        }
+ 
     }
 }
