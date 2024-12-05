@@ -88,7 +88,7 @@ namespace SistemaDeGestionDeExamenes
             }
 
             Form1.AgregarExamen(examen);
-            Form1.MostrarPreguntasDGV(Form1.ObtenerPreguntasDeExamen(examen.Id), dgvPreguntas);
+            Form1.MostrarPreguntasDGV(Form1.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
         }
     }
 }

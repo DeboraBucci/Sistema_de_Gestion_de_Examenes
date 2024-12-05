@@ -18,7 +18,7 @@ namespace SistemaDeGestionDeExamenes
         const string GENERADOR_EXAM = "GENERADOR_EXAMENES";
 
         public Form? currOpenedForm = null;
-                         
+
         public Form1()
         {
             InitializeComponent();
@@ -29,11 +29,17 @@ namespace SistemaDeGestionDeExamenes
 
         AdministradorPreguntas administradorPreguntas = new AdministradorPreguntas
         {
-                StartPosition = FormStartPosition.Manual,
-                Location = new Point(0, 0),
+            StartPosition = FormStartPosition.Manual,
+            Location = new Point(0, 0),
         };
 
         GeneradorExamenes generadorExamenes = new GeneradorExamenes
+        {
+            StartPosition = FormStartPosition.Manual,
+            Location = new Point(0, 0),
+        };
+
+        ImprimirExamenes imprimirExamenes = new ImprimirExamenes
         {
             StartPosition = FormStartPosition.Manual,
             Location = new Point(0, 0),
@@ -79,12 +85,26 @@ namespace SistemaDeGestionDeExamenes
             generadorExamenes.Show();
         }
 
-        private void btnCorregirExamenes_Click(object sender, EventArgs e)
+        private void btnImprimirExamenes_Click(object sender, EventArgs e)
         {
-
+            AbrirFormImprimirExamen();
         }
 
-        private void btnImprimirExamenes_Click(object sender, EventArgs e)
+        private void AbrirFormImprimirExamen()
+        {
+            ResetearDefaultBtnsUI();
+
+            btnImprimirExamenes.BackColor = SystemColors.HotTrack;
+            btnImprimirExamenes.ForeColor = Color.White;
+
+            CerrarFormularios();
+            currOpenedForm = imprimirExamenes;
+
+            imprimirExamenes.MdiParent = this;
+            imprimirExamenes.Show();
+        }
+
+        private void btnCorregirExamenes_Click(object sender, EventArgs e)
         {
 
         }
@@ -103,7 +123,7 @@ namespace SistemaDeGestionDeExamenes
             btnCorregirExamenes.BackColor = Color.White;
             btnCorregirExamenes.ForeColor = Color.Black;
         }
-  
+
         private void CerrarFormularios()
         {
             if (currOpenedForm != null)
@@ -210,14 +230,13 @@ namespace SistemaDeGestionDeExamenes
             JsonHelper.GuardarEnArchivo(Examenes, archivoExamen);
         }
 
-        public static List<Pregunta> ObtenerPreguntasDeExamen(string examenId)
+        public static List<Pregunta> ObtenerPreguntasDeExamen(Examen examen)
         {
             List<Pregunta> preguntasExamen = new List<Pregunta>();
-            Examen? examen = Examenes?.Find(e => e.Id == examenId);
-            
+
             if (examen != null)
             {
-                preguntasExamen = 
+                preguntasExamen =
                     Preguntas
                     .FindAll(p =>
                         examen.PreguntasId

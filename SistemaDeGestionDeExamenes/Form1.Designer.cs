@@ -65,6 +65,7 @@
             btnImprimirExamenes.TabIndex = 7;
             btnImprimirExamenes.Text = "Imprimir Examenes";
             btnImprimirExamenes.UseVisualStyleBackColor = false;
+            btnImprimirExamenes.Click += btnImprimirExamenes_Click;
             // 
             // btnGenerarExamenes
             // 
