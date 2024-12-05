@@ -14,7 +14,7 @@ namespace SistemaDeGestionDeExamenes
     {
         private Asignatura? asignaturaElegida;
 
-        List<Pregunta> preguntasFiltradas = new List<Pregunta>();
+        Examen examen;
 
         public GeneradorExamenes()
         {
@@ -54,35 +54,41 @@ namespace SistemaDeGestionDeExamenes
         private void btnGenerarExamen_Click(object sender, EventArgs e)
         {
             int randomNum = 0;
-
             Random random = new Random();
-            List<Pregunta> preguntas;
 
-            string[] unidadesStr = lstUnidades.SelectedItems.Cast<String>().ToArray();
+            List<Pregunta> preguntasSubunid;
 
-            preguntasFiltradas.Clear();
+            examen = new Examen();
+            examen.Asignatura = asignaturaElegida?.Nombre ?? "";
+
+            // Crea array con nombres de las unidades seleccionadas
+            string[] unidadesStr = lstUnidades.SelectedItems.Cast<string>().ToArray();
 
             if (asignaturaElegida != null)
             {
-                foreach (Unidad unidad in asignaturaElegida?.Unidades)
+                foreach (Unidad unidad in asignaturaElegida.Unidades)
                 {
-                    foreach (SubUnidad subUnidad in unidad.SubUnidades)
+                    if (unidadesStr.Contains(unidad.Nombre))
                     {
-                        preguntas = Form1.Preguntas.Where(p =>
-                                   p.Asignatura == asignaturaElegida.Nombre
-                                   && p.Unidad == unidad.Nombre
-                                   && p.SubUnidad == subUnidad.Nombre
-                                   ).ToList();
+                        foreach (SubUnidad subUnidad in unidad.SubUnidades)
+                        {
+                            preguntasSubunid = Form1.Preguntas.Where(p =>
+                                       p.Asignatura == asignaturaElegida.Nombre
+                                       && p.Unidad == unidad.Nombre
+                                       && p.SubUnidad == subUnidad.Nombre
+                                       ).ToList();
 
-                        int max = preguntas.Count();
+                            int max = preguntasSubunid.Count();
+                            randomNum = random.Next(0, max);
 
-                        randomNum = random.Next(0, max);
-                        preguntasFiltradas.Add(preguntas[randomNum]);
+                            examen.AgregarPreguntaId(preguntasSubunid[randomNum].PreguntaId);
+                        }
                     }
                 }
             }
-                
-            Form1.MostrarPreguntasDGV(preguntasFiltradas, dgvPreguntas);
+
+            Form1.AgregarExamen(examen);
+            Form1.MostrarPreguntasDGV(Form1.ObtenerPreguntasDeExamen(examen.Id), dgvPreguntas);
         }
     }
 }

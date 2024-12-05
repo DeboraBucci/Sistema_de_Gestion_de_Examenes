@@ -1,48 +1,40 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SistemaDeGestionDeExamenes
 {
     public class Examen
     {
-        public string Id { get; set; }
+        public string Id { get; private set; } = Guid.NewGuid().ToString();
         public string Fecha { get; set; }
         public string Asignatura { get; set; }
 
-        public List<PreguntaId> IdPreguntas { get; set; }
+        public List<PreguntaId> PreguntasId { get; set; } = new List<PreguntaId>();
 
-        private List<Pregunta> Preguntas = new List<Pregunta>();
-
-        public Examen() { }
-
-        public Examen(
-            string fecha,
-            string asignatura
-            )
+        public void AgregarPreguntaId(string id)
         {
-            Asignatura = asignatura;
-            Fecha = fecha;
-            Id = Guid.NewGuid().ToString();
+            PreguntasId.Add(new PreguntaId(id));
         }
 
-        public void addPregunta(Pregunta pregunta)
+        public List<PreguntaId> ObtenerPreguntasId()
         {
-            Preguntas.Add(pregunta);
+            return PreguntasId;
         }
-
-        public List<Pregunta> getPreguntas()
-        {
-            return Preguntas;
-        }
-
     }
-
 
     public class PreguntaId
     {
         public string Id { get; set; }
+
+        public PreguntaId(string id)
+        {
+            Id = id; 
+        }
     }
 }

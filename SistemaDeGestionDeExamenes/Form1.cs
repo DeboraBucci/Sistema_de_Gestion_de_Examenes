@@ -12,13 +12,13 @@ namespace SistemaDeGestionDeExamenes
 
         public static List<Pregunta> Preguntas { get; private set; } = JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
         public static List<Asignatura> Asignaturas { get; private set; } = JsonHelper.LeerDesdeArchivo<Asignatura>(archivoAsignaturas);
-
+        public static List<Examen> Examenes { get; private set; } = JsonHelper.LeerDesdeArchivo<Examen>(archivoExamen);
 
         const string ADMINISTRADOR_PREG = "ADMINISTRADOR_PREGUNTAS";
         const string GENERADOR_EXAM = "GENERADOR_EXAMENES";
 
         public Form? currOpenedForm = null;
-
+                         
         public Form1()
         {
             InitializeComponent();
@@ -201,6 +201,30 @@ namespace SistemaDeGestionDeExamenes
 
                 dgv.Rows.Add(fila);
             }
+        }
+
+        public static void AgregarExamen(Examen examen)
+        {
+            Examenes.Add(examen);
+
+            JsonHelper.GuardarEnArchivo(Examenes, archivoExamen);
+        }
+
+        public static List<Pregunta> ObtenerPreguntasDeExamen(string examenId)
+        {
+            List<Pregunta> preguntasExamen = new List<Pregunta>();
+            Examen? examen = Examenes?.Find(e => e.Id == examenId);
+            
+            if (examen != null)
+            {
+                preguntasExamen = 
+                    Preguntas
+                    .FindAll(p =>
+                        examen.PreguntasId
+                        .Any(pId => pId.Id == p.PreguntaId));
+            }
+
+            return preguntasExamen;
         }
     }
 }
