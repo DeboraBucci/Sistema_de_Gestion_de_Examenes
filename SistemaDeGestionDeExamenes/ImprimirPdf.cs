@@ -17,9 +17,9 @@ using System.Windows.Forms.VisualStyles;
 
 namespace SistemaDeGestionDeExamenes
 {
-    public static class ImprimirPdf
+    public class ImprimirPdf
     {
-        public static void GenerarPdf(Examen examen)
+        public void GenerarPdf(Examen examen)
         {
             string outputPath = "examen_"+ examen.Asignatura + "_" + examen.Id + ".pdf";
             string projectDirectory = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin"));
@@ -37,7 +37,7 @@ namespace SistemaDeGestionDeExamenes
                     .SetMarginBottom(20);
 
                 headerTable.AddCell(new Cell(1, 4) // 1 fila, 2 columnas
-                    .Add(new Paragraph("Examen").SetFontSize(16)/*.SetBold()*/)
+                    .Add(new Paragraph("Examen").SetFontSize(16).SetBold())
                     .SetTextAlignment(TextAlignment.CENTER)
                     .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
                     .SetPadding(5));
@@ -92,15 +92,12 @@ namespace SistemaDeGestionDeExamenes
 
                 List<Pregunta> listaPreguntas = Form1.ObtenerPreguntasDeExamen(examen);
 
-                string str = "";
                 foreach (Pregunta pregunta in listaPreguntas)
                 {
-                    str += pregunta.TxtPregunta + "\n";
-
                     // Agrega la pregunta
                     document.Add(new Paragraph($"{numeroPregunta}. {pregunta.TxtPregunta}")
                         .SetFontSize(12)
-                        /*.SetBold()*/
+                        .SetBold()
                         .SetMarginBottom(5));
 
                     for (int j = 0; j < pregunta.Opciones.Length; j++)
@@ -114,8 +111,6 @@ namespace SistemaDeGestionDeExamenes
 
                     numeroPregunta++;
                 }
-
-                MessageBox.Show(str);
 
                 // Cerrar el documento
                 document.Close();

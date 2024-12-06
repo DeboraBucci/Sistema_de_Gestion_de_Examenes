@@ -31,6 +31,7 @@
             label1 = new Label();
             btnImprimirExamen = new Button();
             tvExamenes = new TreeView();
+            btnEliminarExamen = new Button();
             SuspendLayout();
             // 
             // label1
@@ -45,7 +46,7 @@
             // 
             // btnImprimirExamen
             // 
-            btnImprimirExamen.Location = new Point(564, 672);
+            btnImprimirExamen.Location = new Point(424, 672);
             btnImprimirExamen.Name = "btnImprimirExamen";
             btnImprimirExamen.Size = new Size(261, 37);
             btnImprimirExamen.TabIndex = 2;
@@ -60,11 +61,22 @@
             tvExamenes.Size = new Size(893, 558);
             tvExamenes.TabIndex = 3;
             // 
+            // btnEliminarExamen
+            // 
+            btnEliminarExamen.Location = new Point(691, 672);
+            btnEliminarExamen.Name = "btnEliminarExamen";
+            btnEliminarExamen.Size = new Size(261, 37);
+            btnEliminarExamen.TabIndex = 4;
+            btnEliminarExamen.Text = "Eliminar Seleccionado";
+            btnEliminarExamen.UseVisualStyleBackColor = true;
+            btnEliminarExamen.Click += btnEliminarExamen_Click;
+            // 
             // ImprimirExamenes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1409, 741);
+            Controls.Add(btnEliminarExamen);
             Controls.Add(tvExamenes);
             Controls.Add(btnImprimirExamen);
             Controls.Add(label1);
@@ -79,5 +91,6 @@
         private Label label1;
         private Button btnImprimirExamen;
         private TreeView tvExamenes;
+        private Button btnEliminarExamen;
     }
 }

@@ -97,6 +97,7 @@
             btnCorregirExamenes.TabIndex = 6;
             btnCorregirExamenes.Text = "Corregir Examenes";
             btnCorregirExamenes.UseVisualStyleBackColor = false;
+            btnCorregirExamenes.Click += btnCorregirExamenes_Click;
             // 
             // Form1
             // 

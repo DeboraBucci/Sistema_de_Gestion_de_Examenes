@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ namespace SistemaDeGestionDeExamenes
                 tvExamenes.Nodes.Add(nodoExamen); // Añadir el examen al TreeView
             }
 
-            tvExamenes.ExpandAll(); 
+            tvExamenes.ExpandAll();
         }
 
 
@@ -58,7 +59,7 @@ namespace SistemaDeGestionDeExamenes
             }
 
             // Verificar si el nodo seleccionado es un examen (no una pregunta)
-            if (tvExamenes.SelectedNode.Parent == null) 
+            if (tvExamenes.SelectedNode.Parent == null)
             {
                 // Extraer el ID del examen desde el texto del nodo
                 string examenInfo = tvExamenes.SelectedNode.Text;
@@ -69,7 +70,8 @@ namespace SistemaDeGestionDeExamenes
                 if (examen != null)
                 {
                     // Llamar al método de impresión
-                    ImprimirPdf.GenerarPdf(examen);
+                    ImprimirPdf generadorPdf = new ImprimirPdf();
+                    generadorPdf.GenerarPdf(examen);
                 }
                 else
                 {
@@ -80,6 +82,29 @@ namespace SistemaDeGestionDeExamenes
             {
                 MetodosGenericos.MostrarError("Por favor, seleccione un examen (no una pregunta) para imprimir.");
             }
+        }
+
+        private void btnEliminarExamen_Click(object sender, EventArgs e)
+        {
+            DialogResult result = 
+                MessageBox.Show("¿Estás seguro de que deseas eliminar este examen?",
+                                "Confirmar eliminación",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                EliminarExamen(); 
+            }
+
+        }
+
+        private void EliminarExamen()
+        {
+            string examenInfo = tvExamenes.SelectedNode.Text;
+            string examenId = examenInfo.Split(" - ")[1].Trim();
+
+            Form1.EliminarExamen(examenId);
         }
     }
 }
