@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iText.Layout.Element;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,7 @@ namespace SistemaDeGestionDeExamenes
             InitializeComponent();
 
             Form1.ConfigurarColumnasDataGridView(dgvPreguntas);
+            dgvPreguntas.Columns["Asignatura"].Visible = false;
 
             try
             {
@@ -60,6 +62,7 @@ namespace SistemaDeGestionDeExamenes
 
             examen = new Examen();
             examen.Asignatura = asignaturaElegida?.Nombre ?? "";
+            lblAsignExamen.Text = asignaturaElegida?.Nombre ?? "";
 
             // Crea array con nombres de las unidades seleccionadas
             string[] unidadesStr = lstUnidades.SelectedItems.Cast<string>().ToArray();
@@ -89,6 +92,12 @@ namespace SistemaDeGestionDeExamenes
 
             Form1.AgregarExamen(examen);
             Form1.MostrarPreguntasDGV(Form1.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
+
+        }
+
+        private void GeneradorExamenes_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -35,6 +35,8 @@
             label1 = new Label();
             dgvPreguntas = new DataGridView();
             label2 = new Label();
+            label3 = new Label();
+            lblAsignExamen = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             SuspendLayout();
             // 
@@ -89,21 +91,41 @@
             // 
             dgvPreguntas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPreguntas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPreguntas.Location = new Point(458, 149);
+            dgvPreguntas.Location = new Point(458, 186);
             dgvPreguntas.Name = "dgvPreguntas";
             dgvPreguntas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvPreguntas.Size = new Size(929, 569);
+            dgvPreguntas.Size = new Size(929, 532);
             dgvPreguntas.TabIndex = 56;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16F);
-            label2.Location = new Point(458, 116);
+            label2.Location = new Point(458, 95);
             label2.Name = "label2";
             label2.Size = new Size(190, 30);
             label2.TabIndex = 57;
             label2.Text = "Examen Generado";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 12F);
+            label3.Location = new Point(467, 149);
+            label3.Name = "label3";
+            label3.Size = new Size(88, 21);
+            label3.TabIndex = 58;
+            label3.Text = "Asignatura:";
+            // 
+            // lblAsignExamen
+            // 
+            lblAsignExamen.AutoSize = true;
+            lblAsignExamen.Font = new Font("Segoe UI", 12F);
+            lblAsignExamen.Location = new Point(559, 149);
+            lblAsignExamen.Name = "lblAsignExamen";
+            lblAsignExamen.Size = new Size(16, 21);
+            lblAsignExamen.TabIndex = 59;
+            lblAsignExamen.Text = "-";
             // 
             // GeneradorExamenes
             // 
@@ -111,6 +133,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1409, 741);
+            Controls.Add(lblAsignExamen);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(dgvPreguntas);
             Controls.Add(label1);
@@ -136,5 +160,7 @@
         private Label label1;
         private DataGridView dgvPreguntas;
         private Label label2;
+        private Label label3;
+        private Label lblAsignExamen;
     }
 }
