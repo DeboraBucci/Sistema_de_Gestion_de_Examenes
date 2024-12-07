@@ -52,6 +52,7 @@
             EstadoRespuesta = new DataGridViewTextBoxColumn();
             lblRespuestasCorrectas = new Label();
             label7 = new Label();
+            btnGuardarCorreccion = new Button();
             gbRespuestas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRespuestas).BeginInit();
             SuspendLayout();
@@ -63,6 +64,7 @@
             cbExamenesId.Name = "cbExamenesId";
             cbExamenesId.Size = new Size(421, 23);
             cbExamenesId.TabIndex = 0;
+            cbExamenesId.SelectedIndexChanged += cbExamenesId_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -270,11 +272,23 @@
             label7.TabIndex = 20;
             label7.Text = "Respuestas Correctas:";
             // 
+            // btnGuardarCorreccion
+            // 
+            btnGuardarCorreccion.Location = new Point(46, 557);
+            btnGuardarCorreccion.Name = "btnGuardarCorreccion";
+            btnGuardarCorreccion.Size = new Size(421, 38);
+            btnGuardarCorreccion.TabIndex = 17;
+            btnGuardarCorreccion.Text = "Guardar Correcion";
+            btnGuardarCorreccion.UseVisualStyleBackColor = true;
+            btnGuardarCorreccion.Visible = false;
+            btnGuardarCorreccion.Click += btnGuardarCorreccion_Click;
+            // 
             // CorreccionExamenes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1409, 741);
+            Controls.Add(btnGuardarCorreccion);
             Controls.Add(lblRespuestasCorrectas);
             Controls.Add(label7);
             Controls.Add(dgvRespuestas);
@@ -326,5 +340,6 @@
         private DataGridViewTextBoxColumn RespuestaCorrecta;
         private DataGridViewTextBoxColumn RespuestaAlumno;
         private DataGridViewTextBoxColumn EstadoRespuesta;
+        private Button btnGuardarCorreccion;
     }
 }

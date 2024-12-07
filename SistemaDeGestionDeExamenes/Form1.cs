@@ -9,10 +9,13 @@ namespace SistemaDeGestionDeExamenes
         public static string archivoCorreciones = "correcciones.json";
         public static string archivoPreguntas = "preguntas.json";
         public static string archivoAsignaturas = "asignaturas.json";
+        public static string archivoCorrecciones = "correcciones.json";
 
         public static List<Pregunta> Preguntas { get; private set; } = JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
         public static List<Asignatura> Asignaturas { get; private set; } = JsonHelper.LeerDesdeArchivo<Asignatura>(archivoAsignaturas);
         public static List<Examen> Examenes { get; private set; } = JsonHelper.LeerDesdeArchivo<Examen>(archivoExamen);
+
+        public static List<Correccion> Correcciones { get; private set; } = JsonHelper.LeerDesdeArchivo<Correccion>(archivoCorrecciones);
 
         public Form? currOpenedForm = null;
 
@@ -149,6 +152,7 @@ namespace SistemaDeGestionDeExamenes
             JsonHelper.GuardarEnArchivo(Asignaturas, archivoAsignaturas);
 
         }
+
 
         // CONFIGURAR DATA GRID VIEW
         public static void ConfigurarColumnasDataGridView(DataGridView dgv)
