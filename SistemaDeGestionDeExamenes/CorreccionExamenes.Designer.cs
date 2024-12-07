@@ -60,7 +60,7 @@
             // cbExamenesId
             // 
             cbExamenesId.FormattingEnabled = true;
-            cbExamenesId.Location = new Point(46, 138);
+            cbExamenesId.Location = new Point(42, 134);
             cbExamenesId.Name = "cbExamenesId";
             cbExamenesId.Size = new Size(421, 23);
             cbExamenesId.TabIndex = 0;
@@ -69,7 +69,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(46, 120);
+            label1.Location = new Point(42, 116);
             label1.Name = "label1";
             label1.Size = new Size(153, 15);
             label1.TabIndex = 1;
@@ -78,7 +78,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(46, 186);
+            label2.Location = new Point(42, 182);
             label2.Name = "label2";
             label2.Size = new Size(116, 15);
             label2.TabIndex = 2;
@@ -86,14 +86,14 @@
             // 
             // txtNombreAlumno
             // 
-            txtNombreAlumno.Location = new Point(46, 204);
+            txtNombreAlumno.Location = new Point(42, 200);
             txtNombreAlumno.Name = "txtNombreAlumno";
             txtNombreAlumno.Size = new Size(197, 23);
             txtNombreAlumno.TabIndex = 3;
             // 
             // txtApellidoAlumno
             // 
-            txtApellidoAlumno.Location = new Point(270, 204);
+            txtApellidoAlumno.Location = new Point(266, 200);
             txtApellidoAlumno.Name = "txtApellidoAlumno";
             txtApellidoAlumno.Size = new Size(197, 23);
             txtApellidoAlumno.TabIndex = 5;
@@ -101,7 +101,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(270, 186);
+            label3.Location = new Point(266, 182);
             label3.Name = "label3";
             label3.Size = new Size(116, 15);
             label3.TabIndex = 4;
@@ -109,7 +109,7 @@
             // 
             // btnIngresarPreguntas
             // 
-            btnIngresarPreguntas.Location = new Point(46, 252);
+            btnIngresarPreguntas.Location = new Point(42, 248);
             btnIngresarPreguntas.Name = "btnIngresarPreguntas";
             btnIngresarPreguntas.Size = new Size(421, 38);
             btnIngresarPreguntas.TabIndex = 7;
@@ -161,7 +161,7 @@
             gbRespuestas.Controls.Add(cbRespuestaSeleccionada);
             gbRespuestas.Controls.Add(lblPregunta);
             gbRespuestas.Controls.Add(lblPreguntaTxt);
-            gbRespuestas.Location = new Point(46, 334);
+            gbRespuestas.Location = new Point(42, 330);
             gbRespuestas.Name = "gbRespuestas";
             gbRespuestas.Size = new Size(421, 192);
             gbRespuestas.TabIndex = 14;
@@ -192,7 +192,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 16F);
-            label5.Location = new Point(507, 88);
+            label5.Location = new Point(503, 84);
             label5.Name = "label5";
             label5.Size = new Size(119, 30);
             label5.TabIndex = 15;
@@ -202,7 +202,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 16F);
-            label4.Location = new Point(1218, 620);
+            label4.Location = new Point(1214, 616);
             label4.Name = "label4";
             label4.Size = new Size(65, 30);
             label4.TabIndex = 17;
@@ -212,7 +212,7 @@
             // 
             lblNota.AutoSize = true;
             lblNota.Font = new Font("Segoe UI", 16F);
-            lblNota.Location = new Point(1289, 620);
+            lblNota.Location = new Point(1285, 616);
             lblNota.Name = "lblNota";
             lblNota.Size = new Size(22, 30);
             lblNota.TabIndex = 18;
@@ -223,7 +223,7 @@
             dgvRespuestas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRespuestas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRespuestas.Columns.AddRange(new DataGridViewColumn[] { Pregunta, RespuestaCorrecta, RespuestaAlumno, EstadoRespuesta });
-            dgvRespuestas.Location = new Point(507, 138);
+            dgvRespuestas.Location = new Point(503, 134);
             dgvRespuestas.Name = "dgvRespuestas";
             dgvRespuestas.Size = new Size(854, 457);
             dgvRespuestas.TabIndex = 19;
@@ -256,7 +256,7 @@
             // 
             lblRespuestasCorrectas.AutoSize = true;
             lblRespuestasCorrectas.Font = new Font("Segoe UI", 16F);
-            lblRespuestasCorrectas.Location = new Point(1152, 620);
+            lblRespuestasCorrectas.Location = new Point(1148, 616);
             lblRespuestasCorrectas.Name = "lblRespuestasCorrectas";
             lblRespuestasCorrectas.Size = new Size(22, 30);
             lblRespuestasCorrectas.TabIndex = 21;
@@ -266,7 +266,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 16F);
-            label7.Location = new Point(907, 620);
+            label7.Location = new Point(903, 616);
             label7.Name = "label7";
             label7.Size = new Size(222, 30);
             label7.TabIndex = 20;
@@ -274,7 +274,7 @@
             // 
             // btnGuardarCorreccion
             // 
-            btnGuardarCorreccion.Location = new Point(46, 557);
+            btnGuardarCorreccion.Location = new Point(42, 553);
             btnGuardarCorreccion.Name = "btnGuardarCorreccion";
             btnGuardarCorreccion.Size = new Size(421, 38);
             btnGuardarCorreccion.TabIndex = 17;

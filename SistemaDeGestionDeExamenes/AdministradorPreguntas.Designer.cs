@@ -80,7 +80,7 @@
             // cbAsignaturas
             // 
             cbAsignaturas.FormattingEnabled = true;
-            cbAsignaturas.Location = new Point(24, 122);
+            cbAsignaturas.Location = new Point(23, 86);
             cbAsignaturas.Name = "cbAsignaturas";
             cbAsignaturas.Size = new Size(402, 23);
             cbAsignaturas.TabIndex = 8;
@@ -89,7 +89,7 @@
             // lblAsignatura
             // 
             lblAsignatura.AutoSize = true;
-            lblAsignatura.Location = new Point(24, 102);
+            lblAsignatura.Location = new Point(23, 66);
             lblAsignatura.Name = "lblAsignatura";
             lblAsignatura.Size = new Size(100, 15);
             lblAsignatura.TabIndex = 7;
@@ -102,7 +102,7 @@
             lblCrearSubunidad.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
             lblCrearSubunidad.ForeColor = Color.DodgerBlue;
             lblCrearSubunidad.ImageAlign = ContentAlignment.TopLeft;
-            lblCrearSubunidad.Location = new Point(24, 288);
+            lblCrearSubunidad.Location = new Point(23, 252);
             lblCrearSubunidad.Name = "lblCrearSubunidad";
             lblCrearSubunidad.Size = new Size(132, 15);
             lblCrearSubunidad.TabIndex = 54;
@@ -112,7 +112,7 @@
             // lblSubUnidad
             // 
             lblSubUnidad.AutoSize = true;
-            lblSubUnidad.Location = new Point(24, 244);
+            lblSubUnidad.Location = new Point(23, 208);
             lblSubUnidad.Name = "lblSubUnidad";
             lblSubUnidad.Size = new Size(104, 15);
             lblSubUnidad.TabIndex = 53;
@@ -124,7 +124,7 @@
             lblCrearUnidad.Cursor = Cursors.Hand;
             lblCrearUnidad.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
             lblCrearUnidad.ForeColor = Color.DodgerBlue;
-            lblCrearUnidad.Location = new Point(24, 220);
+            lblCrearUnidad.Location = new Point(23, 184);
             lblCrearUnidad.Name = "lblCrearUnidad";
             lblCrearUnidad.Size = new Size(110, 15);
             lblCrearUnidad.TabIndex = 52;
@@ -137,7 +137,7 @@
             lblCrearAsignatura.Cursor = Cursors.Hand;
             lblCrearAsignatura.Font = new Font("Segoe UI", 9F, FontStyle.Underline);
             lblCrearAsignatura.ForeColor = Color.DodgerBlue;
-            lblCrearAsignatura.Location = new Point(24, 149);
+            lblCrearAsignatura.Location = new Point(23, 113);
             lblCrearAsignatura.Name = "lblCrearAsignatura";
             lblCrearAsignatura.Size = new Size(128, 15);
             lblCrearAsignatura.TabIndex = 51;
@@ -147,7 +147,7 @@
             // cbSubUnidades
             // 
             cbSubUnidades.FormattingEnabled = true;
-            cbSubUnidades.Location = new Point(24, 262);
+            cbSubUnidades.Location = new Point(23, 226);
             cbSubUnidades.Name = "cbSubUnidades";
             cbSubUnidades.Size = new Size(402, 23);
             cbSubUnidades.TabIndex = 50;
@@ -155,7 +155,7 @@
             // cbUnidades
             // 
             cbUnidades.FormattingEnabled = true;
-            cbUnidades.Location = new Point(24, 194);
+            cbUnidades.Location = new Point(23, 158);
             cbUnidades.Name = "cbUnidades";
             cbUnidades.Size = new Size(402, 23);
             cbUnidades.TabIndex = 49;
@@ -164,7 +164,7 @@
             // lblUnidad
             // 
             lblUnidad.AutoSize = true;
-            lblUnidad.Location = new Point(24, 174);
+            lblUnidad.Location = new Point(23, 138);
             lblUnidad.Name = "lblUnidad";
             lblUnidad.Size = new Size(81, 15);
             lblUnidad.TabIndex = 48;
@@ -173,7 +173,7 @@
             // lblFiltroUnidad
             // 
             lblFiltroUnidad.AutoSize = true;
-            lblFiltroUnidad.Location = new Point(1130, 100);
+            lblFiltroUnidad.Location = new Point(1129, 64);
             lblFiltroUnidad.Name = "lblFiltroUnidad";
             lblFiltroUnidad.Size = new Size(99, 15);
             lblFiltroUnidad.TabIndex = 60;
@@ -182,7 +182,7 @@
             // cbFiltroUnidad
             // 
             cbFiltroUnidad.FormattingEnabled = true;
-            cbFiltroUnidad.Location = new Point(1235, 97);
+            cbFiltroUnidad.Location = new Point(1234, 61);
             cbFiltroUnidad.Name = "cbFiltroUnidad";
             cbFiltroUnidad.Size = new Size(147, 23);
             cbFiltroUnidad.TabIndex = 59;
@@ -191,7 +191,7 @@
             // lblFiltroAsignatura
             // 
             lblFiltroAsignatura.AutoSize = true;
-            lblFiltroAsignatura.Location = new Point(853, 100);
+            lblFiltroAsignatura.Location = new Point(852, 64);
             lblFiltroAsignatura.Name = "lblFiltroAsignatura";
             lblFiltroAsignatura.Size = new Size(118, 15);
             lblFiltroAsignatura.TabIndex = 58;
@@ -200,7 +200,7 @@
             // cbFiltroAsignatura
             // 
             cbFiltroAsignatura.FormattingEnabled = true;
-            cbFiltroAsignatura.Location = new Point(977, 97);
+            cbFiltroAsignatura.Location = new Point(976, 61);
             cbFiltroAsignatura.Name = "cbFiltroAsignatura";
             cbFiltroAsignatura.Size = new Size(147, 23);
             cbFiltroAsignatura.TabIndex = 57;
@@ -210,7 +210,7 @@
             // 
             lblPreguntas.AutoSize = true;
             lblPreguntas.Font = new Font("Segoe UI", 16F);
-            lblPreguntas.Location = new Point(453, 93);
+            lblPreguntas.Location = new Point(452, 57);
             lblPreguntas.Name = "lblPreguntas";
             lblPreguntas.Size = new Size(109, 30);
             lblPreguntas.TabIndex = 56;
@@ -220,7 +220,7 @@
             // 
             dgvPreguntas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPreguntas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPreguntas.Location = new Point(453, 137);
+            dgvPreguntas.Location = new Point(452, 101);
             dgvPreguntas.Name = "dgvPreguntas";
             dgvPreguntas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPreguntas.Size = new Size(929, 569);
@@ -232,7 +232,7 @@
             gbOpcionCorrecta.Controls.Add(rbOpc3);
             gbOpcionCorrecta.Controls.Add(rbOpc2);
             gbOpcionCorrecta.Controls.Add(rbOpc1);
-            gbOpcionCorrecta.Location = new Point(24, 577);
+            gbOpcionCorrecta.Location = new Point(23, 541);
             gbOpcionCorrecta.Name = "gbOpcionCorrecta";
             gbOpcionCorrecta.Size = new Size(402, 75);
             gbOpcionCorrecta.TabIndex = 71;
@@ -283,7 +283,7 @@
             // 
             // txtOpc4
             // 
-            txtOpc4.Location = new Point(24, 539);
+            txtOpc4.Location = new Point(23, 503);
             txtOpc4.Name = "txtOpc4";
             txtOpc4.Size = new Size(402, 23);
             txtOpc4.TabIndex = 70;
@@ -291,7 +291,7 @@
             // lblOpc4
             // 
             lblOpc4.AutoSize = true;
-            lblOpc4.Location = new Point(24, 521);
+            lblOpc4.Location = new Point(23, 485);
             lblOpc4.Name = "lblOpc4";
             lblOpc4.Size = new Size(55, 15);
             lblOpc4.TabIndex = 69;
@@ -299,7 +299,7 @@
             // 
             // txtOpc3
             // 
-            txtOpc3.Location = new Point(24, 494);
+            txtOpc3.Location = new Point(23, 458);
             txtOpc3.Name = "txtOpc3";
             txtOpc3.Size = new Size(402, 23);
             txtOpc3.TabIndex = 68;
@@ -307,7 +307,7 @@
             // lblOpc3
             // 
             lblOpc3.AutoSize = true;
-            lblOpc3.Location = new Point(24, 476);
+            lblOpc3.Location = new Point(23, 440);
             lblOpc3.Name = "lblOpc3";
             lblOpc3.Size = new Size(55, 15);
             lblOpc3.TabIndex = 67;
@@ -315,7 +315,7 @@
             // 
             // txtOpc2
             // 
-            txtOpc2.Location = new Point(24, 444);
+            txtOpc2.Location = new Point(23, 408);
             txtOpc2.Name = "txtOpc2";
             txtOpc2.Size = new Size(402, 23);
             txtOpc2.TabIndex = 66;
@@ -323,7 +323,7 @@
             // lblOpc2
             // 
             lblOpc2.AutoSize = true;
-            lblOpc2.Location = new Point(24, 426);
+            lblOpc2.Location = new Point(23, 390);
             lblOpc2.Name = "lblOpc2";
             lblOpc2.Size = new Size(55, 15);
             lblOpc2.TabIndex = 65;
@@ -331,7 +331,7 @@
             // 
             // txtOpc1
             // 
-            txtOpc1.Location = new Point(24, 395);
+            txtOpc1.Location = new Point(23, 359);
             txtOpc1.Name = "txtOpc1";
             txtOpc1.Size = new Size(402, 23);
             txtOpc1.TabIndex = 64;
@@ -339,7 +339,7 @@
             // lblOpc1
             // 
             lblOpc1.AutoSize = true;
-            lblOpc1.Location = new Point(24, 377);
+            lblOpc1.Location = new Point(23, 341);
             lblOpc1.Name = "lblOpc1";
             lblOpc1.Size = new Size(55, 15);
             lblOpc1.TabIndex = 63;
@@ -347,7 +347,7 @@
             // 
             // txtPregunta
             // 
-            txtPregunta.Location = new Point(24, 338);
+            txtPregunta.Location = new Point(23, 302);
             txtPregunta.Name = "txtPregunta";
             txtPregunta.Size = new Size(402, 23);
             txtPregunta.TabIndex = 62;
@@ -355,7 +355,7 @@
             // lblPregunta
             // 
             lblPregunta.AutoSize = true;
-            lblPregunta.Location = new Point(24, 320);
+            lblPregunta.Location = new Point(23, 284);
             lblPregunta.Name = "lblPregunta";
             lblPregunta.Size = new Size(114, 15);
             lblPregunta.TabIndex = 61;
@@ -364,7 +364,7 @@
             // btnEliminarPreg
             // 
             btnEliminarPreg.Cursor = Cursors.Hand;
-            btnEliminarPreg.Location = new Point(298, 675);
+            btnEliminarPreg.Location = new Point(297, 639);
             btnEliminarPreg.Name = "btnEliminarPreg";
             btnEliminarPreg.Size = new Size(130, 31);
             btnEliminarPreg.TabIndex = 74;
@@ -375,7 +375,7 @@
             // btnEditarPreg
             // 
             btnEditarPreg.Cursor = Cursors.Hand;
-            btnEditarPreg.Location = new Point(162, 675);
+            btnEditarPreg.Location = new Point(161, 639);
             btnEditarPreg.Name = "btnEditarPreg";
             btnEditarPreg.Size = new Size(130, 31);
             btnEditarPreg.TabIndex = 73;
@@ -386,7 +386,7 @@
             // btnAgregarPreg
             // 
             btnAgregarPreg.Cursor = Cursors.Hand;
-            btnAgregarPreg.Location = new Point(26, 675);
+            btnAgregarPreg.Location = new Point(25, 639);
             btnAgregarPreg.Name = "btnAgregarPreg";
             btnAgregarPreg.Size = new Size(130, 31);
             btnAgregarPreg.TabIndex = 72;
@@ -397,7 +397,7 @@
             // btnCancelar
             // 
             btnCancelar.Cursor = Cursors.Hand;
-            btnCancelar.Location = new Point(238, 675);
+            btnCancelar.Location = new Point(237, 639);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(130, 31);
             btnCancelar.TabIndex = 76;
@@ -409,7 +409,7 @@
             // btnAceptarCambios
             // 
             btnAceptarCambios.Cursor = Cursors.Hand;
-            btnAceptarCambios.Location = new Point(87, 675);
+            btnAceptarCambios.Location = new Point(86, 639);
             btnAceptarCambios.Name = "btnAceptarCambios";
             btnAceptarCambios.Size = new Size(130, 31);
             btnAceptarCambios.TabIndex = 75;
@@ -428,7 +428,7 @@
             pnlCrearNuevaSubUnidad.Controls.Add(label3);
             pnlCrearNuevaSubUnidad.Controls.Add(btnCancelarNuevaSubUnidad);
             pnlCrearNuevaSubUnidad.Controls.Add(btnCrearNuevaSubUnidad);
-            pnlCrearNuevaSubUnidad.Location = new Point(625, 244);
+            pnlCrearNuevaSubUnidad.Location = new Point(624, 208);
             pnlCrearNuevaSubUnidad.Name = "pnlCrearNuevaSubUnidad";
             pnlCrearNuevaSubUnidad.Size = new Size(410, 288);
             pnlCrearNuevaSubUnidad.TabIndex = 79;

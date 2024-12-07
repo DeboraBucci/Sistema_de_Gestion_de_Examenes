@@ -48,60 +48,41 @@ namespace SistemaDeGestionDeExamenes
             InitializeComponent();
             this.IsMdiContainer = true;
 
-            AbrirForm(administradorPreguntas, btnAdministrarBancoPreguntas);
+            AbrirForm(administradorPreguntas);
         }
 
-        // MENU
-        private void btnAdministrarBancoPreguntas_Click(object sender, EventArgs e)
+        // MENU STRIP
+        private void menuAdministrarBancoPreguntas_Click(object sender, EventArgs e)
         {
-            AbrirForm(administradorPreguntas, btnAdministrarBancoPreguntas);
+            AbrirForm(administradorPreguntas);
         }
 
-        private void btnGenerarExamenes_Click(object sender, EventArgs e)
+        private void menuGenerarExamen_Click(object sender, EventArgs e)
         {
-            AbrirForm(generadorExamenes, btnGenerarExamenes);
+            AbrirForm(generadorExamenes);
         }
 
-        private void btnImprimirExamenes_Click(object sender, EventArgs e)
+        private void menuImprimirExamen_Click(object sender, EventArgs e)
         {
-            AbrirForm(imprimirExamenes, btnImprimirExamenes);
+            AbrirForm(imprimirExamenes);
         }
 
-        private void btnCorregirExamenes_Click(object sender, EventArgs e)
+        private void menuCorregirExamen_Click(object sender, EventArgs e)
         {
-            AbrirForm(correccionExamenes, btnCorregirExamenes);
+            AbrirForm(correccionExamenes);
         }
 
-        private void AbrirForm(Form form, Button btn)
+
+        private void AbrirForm(Form form)
         {
-            ResetearDefaultBtnsUI();
-
-            btn.BackColor = SystemColors.HotTrack;
-            btn.ForeColor = Color.White;
-
-            CerrarFormularios();
+            EsconderFormulario();
             currOpenedForm = form;
 
             form.MdiParent = this;
             form.Show();
         }
 
-        private void ResetearDefaultBtnsUI()
-        {
-            btnAdministrarBancoPreguntas.BackColor = Color.White;
-            btnAdministrarBancoPreguntas.ForeColor = Color.Black;
-
-            btnImprimirExamenes.BackColor = Color.White;
-            btnImprimirExamenes.ForeColor = Color.Black;
-
-            btnGenerarExamenes.BackColor = Color.White;
-            btnGenerarExamenes.ForeColor = Color.Black;
-
-            btnCorregirExamenes.BackColor = Color.White;
-            btnCorregirExamenes.ForeColor = Color.Black;
-        }
-
-        private void CerrarFormularios()
+        private void EsconderFormulario()
         {
             if (currOpenedForm != null)
             {
@@ -228,5 +209,7 @@ namespace SistemaDeGestionDeExamenes
         {
             //Form1.Examenes = Form1.Examenes.Where(ex => ex.Id != examenId);
         }
+
+        
     }
 }

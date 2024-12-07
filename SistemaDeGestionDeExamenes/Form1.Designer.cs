@@ -29,95 +29,89 @@
         private void InitializeComponent()
         {
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            btnAdministrarBancoPreguntas = new Button();
-            btnImprimirExamenes = new Button();
-            btnGenerarExamenes = new Button();
-            btnCorregirExamenes = new Button();
+            menuStrip1 = new MenuStrip();
+            menuAdministrarBancoPreguntas = new ToolStripMenuItem();
+            menuExamenes = new ToolStripMenuItem();
+            menuGenerarExamen = new ToolStripMenuItem();
+            menuImprimirExamen = new ToolStripMenuItem();
+            menuCorregirExamen = new ToolStripMenuItem();
+            correccionesToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // btnAdministrarBancoPreguntas
+            // menuStrip1
             // 
-            btnAdministrarBancoPreguntas.BackColor = SystemColors.HotTrack;
-            btnAdministrarBancoPreguntas.Cursor = Cursors.Hand;
-            btnAdministrarBancoPreguntas.FlatAppearance.BorderColor = SystemColors.ControlLight;
-            btnAdministrarBancoPreguntas.FlatStyle = FlatStyle.Flat;
-            btnAdministrarBancoPreguntas.Font = new Font("Segoe UI", 14F);
-            btnAdministrarBancoPreguntas.ForeColor = SystemColors.ButtonFace;
-            btnAdministrarBancoPreguntas.Location = new Point(27, 12);
-            btnAdministrarBancoPreguntas.Name = "btnAdministrarBancoPreguntas";
-            btnAdministrarBancoPreguntas.Size = new Size(335, 45);
-            btnAdministrarBancoPreguntas.TabIndex = 4;
-            btnAdministrarBancoPreguntas.Text = "Administrar Banco de Preguntas";
-            btnAdministrarBancoPreguntas.UseVisualStyleBackColor = false;
-            btnAdministrarBancoPreguntas.Click += btnAdministrarBancoPreguntas_Click;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { menuAdministrarBancoPreguntas, menuExamenes, correccionesToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1409, 24);
+            menuStrip1.TabIndex = 8;
+            menuStrip1.Text = "menuStrip1";
             // 
-            // btnImprimirExamenes
+            // menuAdministrarBancoPreguntas
             // 
-            btnImprimirExamenes.BackColor = Color.White;
-            btnImprimirExamenes.Cursor = Cursors.Hand;
-            btnImprimirExamenes.FlatAppearance.BorderColor = SystemColors.ControlLight;
-            btnImprimirExamenes.FlatStyle = FlatStyle.Flat;
-            btnImprimirExamenes.Font = new Font("Segoe UI", 14F);
-            btnImprimirExamenes.ForeColor = Color.Black;
-            btnImprimirExamenes.Location = new Point(709, 12);
-            btnImprimirExamenes.Name = "btnImprimirExamenes";
-            btnImprimirExamenes.Size = new Size(335, 45);
-            btnImprimirExamenes.TabIndex = 7;
-            btnImprimirExamenes.Text = "Imprimir Examenes";
-            btnImprimirExamenes.UseVisualStyleBackColor = false;
-            btnImprimirExamenes.Click += btnImprimirExamenes_Click;
+            menuAdministrarBancoPreguntas.Name = "menuAdministrarBancoPreguntas";
+            menuAdministrarBancoPreguntas.Size = new Size(189, 20);
+            menuAdministrarBancoPreguntas.Text = "Administrar Banco de Preguntas";
+            menuAdministrarBancoPreguntas.Click += menuAdministrarBancoPreguntas_Click;
             // 
-            // btnGenerarExamenes
+            // menuExamenes
             // 
-            btnGenerarExamenes.BackColor = Color.White;
-            btnGenerarExamenes.Cursor = Cursors.Hand;
-            btnGenerarExamenes.FlatAppearance.BorderColor = SystemColors.ControlLight;
-            btnGenerarExamenes.FlatStyle = FlatStyle.Flat;
-            btnGenerarExamenes.Font = new Font("Segoe UI", 14F);
-            btnGenerarExamenes.ForeColor = Color.Black;
-            btnGenerarExamenes.Location = new Point(368, 12);
-            btnGenerarExamenes.Name = "btnGenerarExamenes";
-            btnGenerarExamenes.Size = new Size(335, 45);
-            btnGenerarExamenes.TabIndex = 5;
-            btnGenerarExamenes.Text = "Generar Examenes";
-            btnGenerarExamenes.UseVisualStyleBackColor = false;
-            btnGenerarExamenes.Click += btnGenerarExamenes_Click;
+            menuExamenes.DropDownItems.AddRange(new ToolStripItem[] { menuGenerarExamen, menuImprimirExamen, menuCorregirExamen });
+            menuExamenes.Name = "menuExamenes";
+            menuExamenes.Size = new Size(72, 20);
+            menuExamenes.Text = "Examenes";
             // 
-            // btnCorregirExamenes
+            // menuGenerarExamen
             // 
-            btnCorregirExamenes.BackColor = Color.White;
-            btnCorregirExamenes.Cursor = Cursors.Hand;
-            btnCorregirExamenes.FlatAppearance.BorderColor = SystemColors.ControlLight;
-            btnCorregirExamenes.FlatStyle = FlatStyle.Flat;
-            btnCorregirExamenes.Font = new Font("Segoe UI", 14F);
-            btnCorregirExamenes.ForeColor = Color.Black;
-            btnCorregirExamenes.Location = new Point(1050, 12);
-            btnCorregirExamenes.Name = "btnCorregirExamenes";
-            btnCorregirExamenes.Size = new Size(335, 45);
-            btnCorregirExamenes.TabIndex = 6;
-            btnCorregirExamenes.Text = "Corregir Examenes";
-            btnCorregirExamenes.UseVisualStyleBackColor = false;
-            btnCorregirExamenes.Click += btnCorregirExamenes_Click;
+            menuGenerarExamen.Name = "menuGenerarExamen";
+            menuGenerarExamen.Size = new Size(180, 22);
+            menuGenerarExamen.Text = "Generar Examen";
+            menuGenerarExamen.Click += menuGenerarExamen_Click;
+            // 
+            // menuImprimirExamen
+            // 
+            menuImprimirExamen.Name = "menuImprimirExamen";
+            menuImprimirExamen.Size = new Size(180, 22);
+            menuImprimirExamen.Text = "Imprimir Examen";
+            menuImprimirExamen.Click += menuImprimirExamen_Click;
+            // 
+            // menuCorregirExamen
+            // 
+            menuCorregirExamen.Name = "menuCorregirExamen";
+            menuCorregirExamen.Size = new Size(180, 22);
+            menuCorregirExamen.Text = "Corregir Examen";
+            menuCorregirExamen.Click += menuCorregirExamen_Click;
+            // 
+            // correccionesToolStripMenuItem
+            // 
+            correccionesToolStripMenuItem.Name = "correccionesToolStripMenuItem";
+            correccionesToolStripMenuItem.Size = new Size(88, 20);
+            correccionesToolStripMenuItem.Text = "Correcciones";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1409, 741);
-            Controls.Add(btnAdministrarBancoPreguntas);
-            Controls.Add(btnImprimirExamenes);
-            Controls.Add(btnGenerarExamenes);
-            Controls.Add(btnCorregirExamenes);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "Form1";
             Text = "Sistema de Gestion de Examenes";
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private Button btnAdministrarBancoPreguntas;
-        private Button btnImprimirExamenes;
-        private Button btnGenerarExamenes;
-        private Button btnCorregirExamenes;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem menuAdministrarBancoPreguntas;
+        private ToolStripMenuItem menuExamenes;
+        private ToolStripMenuItem menuGenerarExamen;
+        private ToolStripMenuItem menuImprimirExamen;
+        private ToolStripMenuItem menuCorregirExamen;
+        private ToolStripMenuItem correccionesToolStripMenuItem;
     }
 }

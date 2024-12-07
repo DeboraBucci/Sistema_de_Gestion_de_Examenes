@@ -43,7 +43,7 @@
             // cbAsignaturas
             // 
             cbAsignaturas.FormattingEnabled = true;
-            cbAsignaturas.Location = new Point(24, 169);
+            cbAsignaturas.Location = new Point(21, 148);
             cbAsignaturas.Name = "cbAsignaturas";
             cbAsignaturas.Size = new Size(402, 23);
             cbAsignaturas.TabIndex = 10;
@@ -62,7 +62,7 @@
             // 
             lstUnidades.FormattingEnabled = true;
             lstUnidades.ItemHeight = 15;
-            lstUnidades.Location = new Point(24, 230);
+            lstUnidades.Location = new Point(21, 209);
             lstUnidades.Name = "lstUnidades";
             lstUnidades.SelectionMode = SelectionMode.MultiSimple;
             lstUnidades.Size = new Size(402, 154);
@@ -70,7 +70,7 @@
             // 
             // btnGenerarExamen
             // 
-            btnGenerarExamen.Location = new Point(24, 405);
+            btnGenerarExamen.Location = new Point(21, 384);
             btnGenerarExamen.Name = "btnGenerarExamen";
             btnGenerarExamen.Size = new Size(402, 33);
             btnGenerarExamen.TabIndex = 12;
@@ -91,7 +91,7 @@
             // 
             dgvPreguntas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPreguntas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPreguntas.Location = new Point(458, 186);
+            dgvPreguntas.Location = new Point(455, 165);
             dgvPreguntas.Name = "dgvPreguntas";
             dgvPreguntas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPreguntas.Size = new Size(929, 532);
@@ -101,7 +101,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 16F);
-            label2.Location = new Point(458, 95);
+            label2.Location = new Point(455, 74);
             label2.Name = "label2";
             label2.Size = new Size(190, 30);
             label2.TabIndex = 57;
@@ -111,7 +111,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F);
-            label3.Location = new Point(467, 149);
+            label3.Location = new Point(464, 128);
             label3.Name = "label3";
             label3.Size = new Size(88, 21);
             label3.TabIndex = 58;
@@ -121,7 +121,7 @@
             // 
             lblAsignExamen.AutoSize = true;
             lblAsignExamen.Font = new Font("Segoe UI", 12F);
-            lblAsignExamen.Location = new Point(559, 149);
+            lblAsignExamen.Location = new Point(556, 128);
             lblAsignExamen.Name = "lblAsignExamen";
             lblAsignExamen.Size = new Size(16, 21);
             lblAsignExamen.TabIndex = 59;

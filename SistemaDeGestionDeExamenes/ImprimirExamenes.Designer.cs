@@ -38,7 +38,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F);
-            label1.Location = new Point(240, 75);
+            label1.Location = new Point(239, 53);
             label1.Name = "label1";
             label1.Size = new Size(109, 30);
             label1.TabIndex = 1;
@@ -46,7 +46,7 @@
             // 
             // btnImprimirExamen
             // 
-            btnImprimirExamen.Location = new Point(424, 672);
+            btnImprimirExamen.Location = new Point(423, 650);
             btnImprimirExamen.Name = "btnImprimirExamen";
             btnImprimirExamen.Size = new Size(261, 37);
             btnImprimirExamen.TabIndex = 2;
@@ -56,14 +56,14 @@
             // 
             // tvExamenes
             // 
-            tvExamenes.Location = new Point(240, 108);
+            tvExamenes.Location = new Point(239, 86);
             tvExamenes.Name = "tvExamenes";
             tvExamenes.Size = new Size(893, 558);
             tvExamenes.TabIndex = 3;
             // 
             // btnEliminarExamen
             // 
-            btnEliminarExamen.Location = new Point(691, 672);
+            btnEliminarExamen.Location = new Point(690, 650);
             btnEliminarExamen.Name = "btnEliminarExamen";
             btnEliminarExamen.Size = new Size(261, 37);
             btnEliminarExamen.TabIndex = 4;
