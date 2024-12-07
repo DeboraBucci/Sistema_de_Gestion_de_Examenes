@@ -64,7 +64,7 @@ namespace SistemaDeGestionDeExamenes
                 if (examen == null)
                     throw new Exception("Por favor ingrese una ID existente!");
 
-                correccion.ExamenId = examenId;
+                correccion.ExamenId = examen.Id;
                 correccion.NombreAlumno = nombreAlumno;
                 correccion.ApellidoAlumno = apellidoAlumno;
 

@@ -35,13 +35,13 @@
             menuGenerarExamen = new ToolStripMenuItem();
             menuImprimirExamen = new ToolStripMenuItem();
             menuCorregirExamen = new ToolStripMenuItem();
-            correccionesToolStripMenuItem = new ToolStripMenuItem();
+            menuCorrecciones = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { menuAdministrarBancoPreguntas, menuExamenes, correccionesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { menuAdministrarBancoPreguntas, menuExamenes, menuCorrecciones });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1409, 24);
@@ -65,29 +65,30 @@
             // menuGenerarExamen
             // 
             menuGenerarExamen.Name = "menuGenerarExamen";
-            menuGenerarExamen.Size = new Size(180, 22);
+            menuGenerarExamen.Size = new Size(165, 22);
             menuGenerarExamen.Text = "Generar Examen";
             menuGenerarExamen.Click += menuGenerarExamen_Click;
             // 
             // menuImprimirExamen
             // 
             menuImprimirExamen.Name = "menuImprimirExamen";
-            menuImprimirExamen.Size = new Size(180, 22);
+            menuImprimirExamen.Size = new Size(165, 22);
             menuImprimirExamen.Text = "Imprimir Examen";
             menuImprimirExamen.Click += menuImprimirExamen_Click;
             // 
             // menuCorregirExamen
             // 
             menuCorregirExamen.Name = "menuCorregirExamen";
-            menuCorregirExamen.Size = new Size(180, 22);
+            menuCorregirExamen.Size = new Size(165, 22);
             menuCorregirExamen.Text = "Corregir Examen";
             menuCorregirExamen.Click += menuCorregirExamen_Click;
             // 
-            // correccionesToolStripMenuItem
+            // menuCorrecciones
             // 
-            correccionesToolStripMenuItem.Name = "correccionesToolStripMenuItem";
-            correccionesToolStripMenuItem.Size = new Size(88, 20);
-            correccionesToolStripMenuItem.Text = "Correcciones";
+            menuCorrecciones.Name = "menuCorrecciones";
+            menuCorrecciones.Size = new Size(88, 20);
+            menuCorrecciones.Text = "Correcciones";
+            menuCorrecciones.Click += menuCorrecciones_Click;
             // 
             // Form1
             // 
@@ -112,6 +113,6 @@
         private ToolStripMenuItem menuGenerarExamen;
         private ToolStripMenuItem menuImprimirExamen;
         private ToolStripMenuItem menuCorregirExamen;
-        private ToolStripMenuItem correccionesToolStripMenuItem;
+        private ToolStripMenuItem menuCorrecciones;
     }
 }

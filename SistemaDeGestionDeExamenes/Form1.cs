@@ -43,6 +43,12 @@ namespace SistemaDeGestionDeExamenes
             Location = new Point(0, 0),
         };
 
+        Correcciones correcciones = new Correcciones
+        {
+            StartPosition = FormStartPosition.Manual,
+            Location = new Point(0, 0),
+        };
+
         public Form1()
         {
             InitializeComponent();
@@ -72,7 +78,10 @@ namespace SistemaDeGestionDeExamenes
             AbrirForm(correccionExamenes);
         }
 
-
+        private void menuCorrecciones_Click(object sender, EventArgs e)
+        {
+            AbrirForm(correcciones);
+        }
         private void AbrirForm(Form form)
         {
             EsconderFormulario();
@@ -210,6 +219,6 @@ namespace SistemaDeGestionDeExamenes
             //Form1.Examenes = Form1.Examenes.Where(ex => ex.Id != examenId);
         }
 
-        
+     
     }
 }
