@@ -72,8 +72,8 @@
             lblNuevaUnidad = new Label();
             txtNuevaAsig = new TextBox();
             lblNuevaAsignatura = new Label();
-            txtNuevaSubUnidad = new TextBox();
-            lblNuevaSubUnidad = new Label();
+            txtNuevasSubUnidades = new TextBox();
+            lblNuevasSubUnidades = new Label();
             btnCancelarNueva = new Button();
             btnCrearNueva = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
@@ -432,8 +432,8 @@
             pnlCrearNuevaSubUnidad.Controls.Add(lblNuevaUnidad);
             pnlCrearNuevaSubUnidad.Controls.Add(txtNuevaAsig);
             pnlCrearNuevaSubUnidad.Controls.Add(lblNuevaAsignatura);
-            pnlCrearNuevaSubUnidad.Controls.Add(txtNuevaSubUnidad);
-            pnlCrearNuevaSubUnidad.Controls.Add(lblNuevaSubUnidad);
+            pnlCrearNuevaSubUnidad.Controls.Add(txtNuevasSubUnidades);
+            pnlCrearNuevaSubUnidad.Controls.Add(lblNuevasSubUnidades);
             pnlCrearNuevaSubUnidad.Controls.Add(btnCancelarNueva);
             pnlCrearNuevaSubUnidad.Controls.Add(btnCrearNueva);
             pnlCrearNuevaSubUnidad.Location = new Point(469, 117);
@@ -513,22 +513,22 @@
             lblNuevaAsignatura.TabIndex = 44;
             lblNuevaAsignatura.Text = "Nombre de la Nueva Asignatura";
             // 
-            // txtNuevaSubUnidad
+            // txtNuevasSubUnidades
             // 
-            txtNuevaSubUnidad.Location = new Point(33, 191);
-            txtNuevaSubUnidad.Name = "txtNuevaSubUnidad";
-            txtNuevaSubUnidad.PlaceholderText = "Ejemplo: Limites,Derivadas,Integrales...";
-            txtNuevaSubUnidad.Size = new Size(346, 23);
-            txtNuevaSubUnidad.TabIndex = 41;
+            txtNuevasSubUnidades.Location = new Point(33, 191);
+            txtNuevasSubUnidades.Name = "txtNuevasSubUnidades";
+            txtNuevasSubUnidades.PlaceholderText = "Ejemplo: Limites, Derivadas, Integrales...";
+            txtNuevasSubUnidades.Size = new Size(346, 23);
+            txtNuevasSubUnidades.TabIndex = 41;
             // 
-            // lblNuevaSubUnidad
+            // lblNuevasSubUnidades
             // 
-            lblNuevaSubUnidad.AutoSize = true;
-            lblNuevaSubUnidad.Location = new Point(33, 168);
-            lblNuevaSubUnidad.Name = "lblNuevaSubUnidad";
-            lblNuevaSubUnidad.Size = new Size(180, 15);
-            lblNuevaSubUnidad.TabIndex = 41;
-            lblNuevaSubUnidad.Text = "Nombre de la Nueva Sub Unidad";
+            lblNuevasSubUnidades.AutoSize = true;
+            lblNuevasSubUnidades.Location = new Point(33, 168);
+            lblNuevasSubUnidades.Name = "lblNuevasSubUnidades";
+            lblNuevasSubUnidades.Size = new Size(201, 15);
+            lblNuevasSubUnidades.TabIndex = 41;
+            lblNuevasSubUnidades.Text = "Nombre de las Nuevas Sub Unidades";
             // 
             // btnCancelarNueva
             // 
@@ -641,8 +641,8 @@
         private Button btnCancelar;
         private Button btnAceptarCambios;
         private Panel pnlCrearNuevaSubUnidad;
-        private TextBox txtNuevaSubUnidad;
-        private Label lblNuevaSubUnidad;
+        private TextBox txtNuevasSubUnidades;
+        private Label lblNuevasSubUnidades;
         private Button btnCancelarNueva;
         private Button btnCrearNueva;
         private TextBox txtNuevaUnidad;

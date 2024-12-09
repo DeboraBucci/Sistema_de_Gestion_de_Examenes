@@ -217,6 +217,7 @@ namespace SistemaDeGestionDeExamenes
 
         private void btnCrearNueva_Click(object sender, EventArgs e)
         {
+            // CREA NUEVA ASIGNATURA
             Asignatura? asignatura = new Asignatura();
 
             if (categoriaAAgregar == NUEVA_ASIGNATURA)
@@ -225,12 +226,14 @@ namespace SistemaDeGestionDeExamenes
                 asignatura.Nombre = nombreAsig;
             }
 
+            // BUSCA ASIGNATURA EXISTENTE
             else
             {
                 string nombreAsig = cbSeleccionAsig?.SelectedItem?.ToString() ?? "";
                 asignatura = ListaAsignaturas.Asignaturas.FirstOrDefault(asig => asig.Nombre == nombreAsig);
             }
 
+            // CREA NUEVA UNIDAD
             Unidad? unidad = new Unidad();
 
             if (categoriaAAgregar == NUEVA_ASIGNATURA || categoriaAAgregar == NUEVA_UNIDAD)
@@ -239,14 +242,15 @@ namespace SistemaDeGestionDeExamenes
                 asignatura?.Unidades.Add(unidad);
             }
 
+            // BUSCA UNIDAD EXISTENTE
             else
             {
                 string nombreUnidad = cbSeleccionUnidad?.SelectedItem?.ToString() ?? "";
                 unidad = asignatura?.Unidades.FirstOrDefault(unid => unid.Nombre == nombreUnidad);
             }
 
-
-            List<string> nombresSubUnidades = txtNuevaSubUnidad.Text.Trim().Split(",").ToList();
+            // CREA NUEVAS SUBUNIDADES
+            List<string> nombresSubUnidades = txtNuevasSubUnidades.Text.Trim().Split(",").ToList();
 
             foreach (string nombreSubUnidad in nombresSubUnidades)
             {
@@ -263,6 +267,7 @@ namespace SistemaDeGestionDeExamenes
 
             VaciarPanelDeCategorias();
             AgregarAsignaturasADropdown(cbAsignaturas);
+            InicializarFiltroAsignaturas();
             pnlCrearNuevaSubUnidad.Visible = false;
         }
 
@@ -277,7 +282,7 @@ namespace SistemaDeGestionDeExamenes
         {
             txtNuevaAsig.Text = "";
             txtNuevaUnidad.Text = "";
-            txtNuevaSubUnidad.Text = "";
+            txtNuevasSubUnidades.Text = "";
         }
 
         // METODOS GENERALES
