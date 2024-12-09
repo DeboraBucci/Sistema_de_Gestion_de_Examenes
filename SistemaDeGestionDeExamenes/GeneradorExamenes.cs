@@ -1,4 +1,5 @@
 ﻿using iText.Layout.Element;
+using SistemaDeGestionDeExamenes.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,14 +22,14 @@ namespace SistemaDeGestionDeExamenes
         {
             InitializeComponent();
 
-            Form1.ConfigurarColumnasDataGridView(dgvPreguntas);
+            Menu.ConfigurarColumnasDataGridView(dgvPreguntas);
             dgvPreguntas.Columns["Asignatura"].Visible = false;
 
             try
             {
-                if (Form1.Asignaturas != null && Form1.Asignaturas.Count > 0)
+                if (ListaAsignaturas.Asignaturas != null && ListaAsignaturas.Asignaturas.Count > 0)
                 {
-                    foreach (var asignatura in Form1.Asignaturas)
+                    foreach (var asignatura in ListaAsignaturas.Asignaturas)
                     {
                         cbAsignaturas.Items.Add(asignatura.Nombre);
                     }
@@ -44,7 +45,7 @@ namespace SistemaDeGestionDeExamenes
 
         private void cbAsignaturas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            asignaturaElegida = Form1.Asignaturas[cbAsignaturas.SelectedIndex];
+            asignaturaElegida = ListaAsignaturas.Asignaturas[cbAsignaturas.SelectedIndex];
 
             lstUnidades.Items.Clear();
 
@@ -75,7 +76,7 @@ namespace SistemaDeGestionDeExamenes
                     {
                         foreach (SubUnidad subUnidad in unidad.SubUnidades)
                         {
-                            preguntasSubunid = Form1.Preguntas.Where(p =>
+                            preguntasSubunid = ListaPreguntas.Preguntas.Where(p =>
                                        p.Asignatura == asignaturaElegida.Nombre
                                        && p.Unidad == unidad.Nombre
                                        && p.SubUnidad == subUnidad.Nombre
@@ -90,8 +91,8 @@ namespace SistemaDeGestionDeExamenes
                 }
             }
 
-            Form1.AgregarExamen(examen);
-            Form1.MostrarPreguntasDGV(Form1.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
+            ListaExamenes.AgregarExamen(examen);
+            Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
 
         }
 

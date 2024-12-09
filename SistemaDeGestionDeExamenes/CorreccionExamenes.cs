@@ -1,4 +1,5 @@
 ﻿using iText.Layout.Element;
+using SistemaDeGestionDeExamenes.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,7 +34,7 @@ namespace SistemaDeGestionDeExamenes
         {
             cbExamenesId.Items.Clear();
 
-            foreach (Examen examen in Form1.Examenes)
+            foreach (Examen examen in ListaExamenes.Examenes)
             {
                 cbExamenesId.Items.Add(examen.Id);
             }
@@ -59,7 +60,7 @@ namespace SistemaDeGestionDeExamenes
                 if (apellidoAlumno.Length <= 0)
                     throw new Exception("Por favor, ingrese un apellido.");
 
-                Examen? examen = Form1.Examenes.FirstOrDefault(ex => ex.Id == examenId);
+                Examen? examen = ListaExamenes.Examenes.FirstOrDefault(ex => ex.Id == examenId);
 
                 if (examen == null)
                     throw new Exception("Por favor ingrese una ID existente!");
@@ -72,7 +73,7 @@ namespace SistemaDeGestionDeExamenes
 
                 foreach (PreguntaId pid in examen.PreguntasId)
                 {
-                    Pregunta? pregunta = Form1.Preguntas.FirstOrDefault(p => p.PreguntaId == pid.Id);
+                    Pregunta? pregunta = ListaPreguntas.Preguntas.FirstOrDefault(p => p.PreguntaId == pid.Id);
 
                     if (pregunta != null)
                     {
@@ -156,8 +157,7 @@ namespace SistemaDeGestionDeExamenes
         }
         private void btnGuardarCorreccion_Click(object sender, EventArgs e)
         {
-            Form1.Correcciones.Add(correccion);
-            JsonHelper.GuardarEnArchivo(Form1.Correcciones, Form1.archivoCorrecciones);
+            ListaCorrecciones.GuardarCorreccion(correccion);
 
             txtApellidoAlumno.Text = "";
             txtNombreAlumno.Text = "";

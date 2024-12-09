@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaDeGestionDeExamenes.Clases;
 
 namespace SistemaDeGestionDeExamenes
 {
@@ -21,14 +22,14 @@ namespace SistemaDeGestionDeExamenes
         {
             dgvCorrecciones.Rows.Clear();
 
-            foreach(Correccion correccion in Form1.Correcciones)
+            foreach(Correccion correccion in ListaCorrecciones.Correcciones)
             {
                 string[] fila = new string[5];
 
                 fila[0] = correccion?.NombreAlumno?.ToString() ?? "";
                 fila[1] = correccion?.ApellidoAlumno?.ToString() ?? "";
 
-                Examen examen = Form1.Examenes?.FirstOrDefault(ex => ex.Id == correccion?.ExamenId) ?? new Examen();
+                Examen examen = ListaExamenes.Examenes?.FirstOrDefault(ex => ex.Id == correccion?.ExamenId) ?? new Examen();
                 string asignatura = examen?.Asignatura ?? "";
                 fila[2] = asignatura;
 

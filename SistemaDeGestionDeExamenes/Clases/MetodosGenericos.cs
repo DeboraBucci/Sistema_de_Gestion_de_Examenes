@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaDeGestionDeExamenes
+namespace SistemaDeGestionDeExamenes.Clases
 {
     public class MetodosGenericos
     {
-        public static void MostrarError(String msg)
+        public static void MostrarError(string msg)
         {
             MessageBox.Show(
                 msg,

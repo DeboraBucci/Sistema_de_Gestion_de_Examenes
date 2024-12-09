@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaDeGestionDeExamenes
+namespace SistemaDeGestionDeExamenes.Clases
 {
     public class Asignatura
     {
@@ -14,7 +14,7 @@ namespace SistemaDeGestionDeExamenes
 
     public class Unidad
     {
-        public string Nombre {  set; get; }
+        public string Nombre { set; get; }
         public List<SubUnidad> SubUnidades { get; set; } = new List<SubUnidad>();
 
     }

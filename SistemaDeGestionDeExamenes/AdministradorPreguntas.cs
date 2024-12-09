@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SistemaDeGestionDeExamenes.Clases;
 
 namespace SistemaDeGestionDeExamenes
 {
@@ -19,6 +20,13 @@ namespace SistemaDeGestionDeExamenes
 
         private Pregunta? preguntaAEditar = null;
 
+        private const string NUEVA_ASIGNATURA = "NUEVA_ASIGNATURA";
+        private const string NUEVA_UNIDAD = "NUEVA_UNIDAD";
+        private const string NUEVA_SUB_UNIDAD = "NUEVA_SUB_UNIDAD";
+
+        private string? categoriaAAgregar;
+
+
         public AdministradorPreguntas()
         {
             InitializeComponent();
@@ -28,9 +36,9 @@ namespace SistemaDeGestionDeExamenes
 
         private void InitUI()
         {
-            Form1.ConfigurarColumnasDataGridView(dgvPreguntas);
-            AgregarAsignaturasADropdown();
-            Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
+            Menu.ConfigurarColumnasDataGridView(dgvPreguntas);
+            AgregarAsignaturasADropdown(cbAsignaturas);
+            Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
             InicializarFiltroAsignaturas();
         }
 
@@ -39,9 +47,9 @@ namespace SistemaDeGestionDeExamenes
         // AGREGAR PREGUNTAS
         private void btnAgregarPreg_Click(object sender, EventArgs e)
         {
-            Form1.AgregarPregunta(CrearPregunta());
+            ListaPreguntas.AgregarPregunta(CrearPregunta());
 
-            Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
+            Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
             VaciarFormulario();
         }
         private void cbAsignaturas_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,8 +88,8 @@ namespace SistemaDeGestionDeExamenes
                 preguntaAEditar.Opciones[3] = pregunta.Opciones[3];
                 preguntaAEditar.OpcionCorrecta = pregunta.OpcionCorrecta;
 
-                Form1.GuardarPreguntasArchivo();
-                Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
+                ListaPreguntas.GuardarEnArchivo();
+                Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
 
                 VisibilidadBotonesEditar(false);
                 VaciarFormulario();
@@ -99,8 +107,8 @@ namespace SistemaDeGestionDeExamenes
             {
                 string preguntaId = IdPreguntaSeleccionada();
 
-                Form1.EliminarPregunta(preguntaId);
-                Form1.MostrarPreguntasDGV(Form1.Preguntas, dgvPreguntas);
+                ListaPreguntas.EliminarPregunta(preguntaId);
+                Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
             }
         }
 
@@ -110,8 +118,7 @@ namespace SistemaDeGestionDeExamenes
             LlenarFiltroUnidades();
 
             List<Pregunta> preguntasFiltradas =
-                Form1
-                .Preguntas
+                ListaPreguntas.Preguntas
                 .Where(preg =>
                 {
                     if (cbFiltroAsignatura.SelectedIndex != 0)
@@ -121,14 +128,13 @@ namespace SistemaDeGestionDeExamenes
 
                 }).ToList();
 
-            Form1.MostrarPreguntasDGV(preguntasFiltradas, dgvPreguntas);
+            Menu.MostrarPreguntasDGV(preguntasFiltradas, dgvPreguntas);
         }
 
         private void cbFiltroUnidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Pregunta> preguntasFiltradas =
-                Form1
-                .Preguntas
+                ListaPreguntas.Preguntas
                 .Where(preg =>
                 {
                     if (cbFiltroUnidad.SelectedIndex != 0)
@@ -138,75 +144,140 @@ namespace SistemaDeGestionDeExamenes
 
                 }).ToList();
 
-            Form1.MostrarPreguntasDGV(preguntasFiltradas, dgvPreguntas);
+            Menu.MostrarPreguntasDGV(preguntasFiltradas, dgvPreguntas);
         }
 
         // CREAR ASIGNATURAS, UNIDADES, SUBUNIDADES
         private void lblCrearAsignatura_Click(object sender, EventArgs e)
         {
+            categoriaAAgregar = NUEVA_ASIGNATURA;
+            pnlCrearNuevaSubUnidad.Visible = true;
+
+            cbSeleccionAsig.Visible = false;
+            lblElijaAsig.Visible = false;
+
+            cbSeleccionUnidad.Visible = false;
+            lblElijaUnid.Visible = false;
+         
         }
 
         private void lblCrearUnidad_Click(object sender, EventArgs e)
         {
+            categoriaAAgregar = NUEVA_UNIDAD;
+            pnlCrearNuevaSubUnidad.Visible = true;
+            AgregarAsignaturasADropdown(cbSeleccionAsig);
+
+            cbSeleccionAsig.Visible = true;
+            lblElijaAsig.Visible = true;
+
+            lblNuevaAsignatura.Visible = false;
+            txtNuevaAsig.Visible = false;
+
+            cbSeleccionUnidad.Visible = false;
+            lblElijaUnid.Visible = false;
+
+            lblNuevaUnidad.Visible = true;
+            txtNuevaUnidad.Visible = true;
+
         }
 
         private void lblCrearSubunidad_Click(object sender, EventArgs e)
         {
+            categoriaAAgregar = NUEVA_SUB_UNIDAD;
             pnlCrearNuevaSubUnidad.Visible = true;
+            AgregarAsignaturasADropdown(cbSeleccionAsig);
 
-            if (Form1.Preguntas != null && Form1.Preguntas.Count > 0)
+            cbSeleccionAsig.Visible = true;
+            lblElijaAsig.Visible = true;
+
+            lblNuevaAsignatura.Visible = false;
+            txtNuevaAsig.Visible = false;
+
+            cbSeleccionUnidad.Visible = true;
+            lblElijaUnid.Visible = true;
+
+            lblNuevaUnidad.Visible = false;
+            txtNuevaUnidad.Visible = false;
+        }
+
+        private void cbSeleccionAsig_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Asignatura? asignaturaSeleccionada = ListaAsignaturas.Asignaturas?[cbSeleccionAsig.SelectedIndex];
+
+            if (asignaturaSeleccionada != null)
             {
-                foreach (Asignatura asignatura in Form1.Asignaturas)
+                cbSeleccionUnidad.Items.Clear();
+
+                foreach (var unidad in asignaturaSeleccionada.Unidades)
                 {
-                    cbAsignaturaNuevaSubUnidad.Items.Add(asignatura.Nombre);
+                    cbSeleccionUnidad.Items.Add(unidad.Nombre);
                 }
             }
         }
 
-        private void btnCancelarNuevaSubUnidad_Click(object sender, EventArgs e)
+        private void btnCrearNueva_Click(object sender, EventArgs e)
         {
+            Asignatura? asignatura = new Asignatura();
+
+            if (categoriaAAgregar == NUEVA_ASIGNATURA)
+            {
+                string nombreAsig = txtNuevaAsig.Text.Trim();
+                asignatura.Nombre = nombreAsig;
+            }
+
+            else
+            {
+                string nombreAsig = cbSeleccionAsig?.SelectedItem?.ToString() ?? "";
+                asignatura = ListaAsignaturas.Asignaturas.FirstOrDefault(asig => asig.Nombre == nombreAsig);
+            }
+
+            Unidad? unidad = new Unidad();
+
+            if (categoriaAAgregar == NUEVA_ASIGNATURA || categoriaAAgregar == NUEVA_UNIDAD)
+            {
+                unidad.Nombre = txtNuevaUnidad.Text.Trim();
+                asignatura?.Unidades.Add(unidad);
+            }
+
+            else
+            {
+                string nombreUnidad = cbSeleccionUnidad?.SelectedItem?.ToString() ?? "";
+                unidad = asignatura?.Unidades.FirstOrDefault(unid => unid.Nombre == nombreUnidad);
+            }
+
+
+            List<string> nombresSubUnidades = txtNuevaSubUnidad.Text.Trim().Split(",").ToList();
+
+            foreach (string nombreSubUnidad in nombresSubUnidades)
+            {
+                SubUnidad subunidad = new SubUnidad();
+                subunidad.Nombre = nombreSubUnidad.Trim();
+                unidad?.SubUnidades.Add(subunidad);
+            }
+
+            if (categoriaAAgregar == NUEVA_ASIGNATURA && asignatura != null && asignatura.Nombre != null)
+                ListaAsignaturas.AgregarAsignatura(asignatura);
+
+            else
+                ListaAsignaturas.GuardarEnArchivo();
+
+            VaciarPanelDeCategorias();
+            AgregarAsignaturasADropdown(cbAsignaturas);
             pnlCrearNuevaSubUnidad.Visible = false;
         }
 
-        private void btnCrearNuevaSubUnidad_Click(object sender, EventArgs e)
+        private void btnCancelarNueva_Click(object sender, EventArgs e)
         {
-            string? asignaturaTxt = cbAsignaturaNuevaSubUnidad?.SelectedItem?.ToString();
-            string? unidadTxt = cbUnidadesNuevaSubunidad?.SelectedItem?.ToString();
-
-            SubUnidad nuevaSubUnidad = new SubUnidad();
-            nuevaSubUnidad.Nombre = txtNuevaSubUnidad.Text;
-
-            foreach (Asignatura asig in Form1.Asignaturas)
-            {
-                foreach (Unidad unid in asig.Unidades)
-                {
-                    lblAsignatura.Text = asig.Nombre + " " + unid.Nombre;
-                    if (asig.Nombre == asignaturaTxt && unid.Nombre == unidadTxt)
-                        unid.SubUnidades.Add(nuevaSubUnidad);
-                }
-            }
-
             pnlCrearNuevaSubUnidad.Visible = false;
-            Form1.GuardarAsignaturasArchivo();
+
+            VaciarPanelDeCategorias();
         }
 
-        private void cbAsignaturaNuevaSubUnidad_SelectedIndexChanged(object sender, EventArgs e)
+        private void VaciarPanelDeCategorias()
         {
-            string? asignTxt = cbAsignaturaNuevaSubUnidad?.SelectedItem?.ToString();
-
-            Asignatura? asignatraElegida = 
-                Form1.Asignaturas
-                     .FirstOrDefault(asig => asig.Nombre == asignTxt);
-
-            foreach (Unidad unidad in asignatraElegida?.Unidades ?? [])
-            {
-                cbUnidadesNuevaSubunidad?.Items.Add(unidad.Nombre);
-            }
-        }
-        
-        private void cbUnidadesNuevaSubunidad_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            txtNuevaAsig.Text = "";
+            txtNuevaUnidad.Text = "";
+            txtNuevaSubUnidad.Text = "";
         }
 
         // METODOS GENERALES
@@ -252,8 +323,6 @@ namespace SistemaDeGestionDeExamenes
             return pregunta;
         }
 
-  
-
         private string IdPreguntaSeleccionada()
         {
             DataGridViewRow row = dgvPreguntas.SelectedRows[0]; // Accedemos a la primera fila seleccionada
@@ -263,16 +332,16 @@ namespace SistemaDeGestionDeExamenes
 
         private void LlenarFormularioConPreguntaSeleccionada(string preguntaId)
         {
-            preguntaAEditar = Form1.EncontrarPregunta(preguntaId);
+            preguntaAEditar = ListaPreguntas.EncontrarPregunta(preguntaId);
 
             int indexAsignatura =
-                Form1.Asignaturas?
+                ListaAsignaturas.Asignaturas?
                 .FindIndex(asig => asig.Nombre.Equals(preguntaAEditar?.Asignatura))
                 ?? 0;
 
             cbAsignaturas.SelectedIndex = indexAsignatura;
 
-            Asignatura? asignaturaSeleccionada = Form1.Asignaturas?[cbAsignaturas.SelectedIndex];
+            Asignatura? asignaturaSeleccionada = ListaAsignaturas.Asignaturas?[cbAsignaturas.SelectedIndex];
 
             int indexUnidad = asignaturaSeleccionada?
                 .Unidades
@@ -305,25 +374,6 @@ namespace SistemaDeGestionDeExamenes
 
             else if (preguntaAEditar?.OpcionCorrecta == 3)
                 rbOpc3.Checked = true;
-        }
-
-        private void AgregarAsignaturasADropdown()
-        {
-            try
-            {
-                if (Form1.Asignaturas != null && Form1.Asignaturas.Count > 0)
-                {
-                    foreach (var asignatura in Form1.Asignaturas)
-                    {
-                        cbAsignaturas.Items.Add(asignatura.Nombre); // llena dropdown de asignaturas
-                    }
-                }
-            }
-
-            catch (Exception ex)
-            {
-                MetodosGenericos.MostrarError(ex.Message);
-            }
         }
 
         private void VaciarFormulario()
@@ -359,9 +409,9 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
-                if (Form1.Asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0)
+                if (ListaAsignaturas.Asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0)
                 {
-                    Asignatura? asignaturaSeleccionada = Form1.Asignaturas?[cbAsignaturas.SelectedIndex];
+                    Asignatura? asignaturaSeleccionada = ListaAsignaturas.Asignaturas?[cbAsignaturas.SelectedIndex];
 
                     if (asignaturaSeleccionada != null)
                     {
@@ -374,7 +424,7 @@ namespace SistemaDeGestionDeExamenes
                         foreach (var unidad in asignaturaSeleccionada.Unidades)
                         {
                             cbUnidades.Items.Add(unidad.Nombre); // llena el dropdown de unidades
-                        }
+                        }   
                     }
                 }
             }
@@ -389,11 +439,11 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
-                if (Form1.Asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0 && cbUnidades.SelectedIndex >= 0)
+                if (ListaAsignaturas.Asignaturas.Count > 0 && cbAsignaturas.SelectedIndex >= 0 && cbUnidades.SelectedIndex >= 0)
                 {
                     Unidad? unidadSeleccionada = null;
 
-                    unidadSeleccionada = Form1.Asignaturas?[cbAsignaturas.SelectedIndex].
+                    unidadSeleccionada = ListaAsignaturas.Asignaturas?[cbAsignaturas.SelectedIndex].
                                          Unidades[cbUnidades.SelectedIndex];
 
                     if (unidadSeleccionada != null)
@@ -420,7 +470,7 @@ namespace SistemaDeGestionDeExamenes
             cbFiltroAsignatura.Items.Clear();
 
             filtroAsignaturas =
-                Form1.Asignaturas?.Select(a => a.Nombre).ToList()
+                ListaAsignaturas.Asignaturas?.Select(a => a.Nombre).ToList()
                 ?? new List<string>();
 
             cbFiltroAsignatura.Items.Add("Todas las Asignaturas");
@@ -445,7 +495,7 @@ namespace SistemaDeGestionDeExamenes
             {
                 cbFiltroUnidad?.Items.Add("Todas las Unidades");
 
-                foreach (var asignatura in Form1.Asignaturas)
+                foreach (var asignatura in ListaAsignaturas.Asignaturas)
                 {
                     foreach (var unidad in asignatura.Unidades)
                     {
@@ -457,7 +507,7 @@ namespace SistemaDeGestionDeExamenes
             if (cbFiltroAsignatura.SelectedIndex != 0)
             {
                 string asignaturaSelec = cbFiltroAsignatura?.SelectedItem?.ToString() + "";
-                Asignatura? asignatura = Form1.Asignaturas.FirstOrDefault(a => a?.Nombre == asignaturaSelec);
+                Asignatura? asignatura = ListaAsignaturas.Asignaturas.FirstOrDefault(a => a?.Nombre == asignaturaSelec);
 
                 filtroUnidades =
                     asignatura?.Unidades?.Select(u => u?.Nombre ?? "")?.ToList()
@@ -477,6 +527,26 @@ namespace SistemaDeGestionDeExamenes
                     cbFiltroUnidad.SelectedIndex = 0;
             }
         }
- 
+
+        private void AgregarAsignaturasADropdown(ComboBox cb)
+        {
+            try
+            {
+                if (ListaAsignaturas.Asignaturas != null && ListaAsignaturas.Asignaturas.Count > 0)
+                {
+                    cb.Items.Clear();
+
+                    foreach (var asignatura in ListaAsignaturas.Asignaturas)
+                    {
+                        cb.Items.Add(asignatura.Nombre); // llena dropdown de asignaturas
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MetodosGenericos.MostrarError(ex.Message);
+            }
+        }
     }
 }

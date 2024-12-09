@@ -1,4 +1,5 @@
 ﻿using iText.Layout.Element;
+using SistemaDeGestionDeExamenes.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace SistemaDeGestionDeExamenes
         {
             tvExamenes.Nodes.Clear(); // Limpiar el TreeView antes de llenarlo
 
-            foreach (var examen in Form1.Examenes)
+            foreach (var examen in ListaExamenes.Examenes)
             {
                 // Crear nodo principal para cada examen
                 TreeNode nodoExamen = new TreeNode($"{examen.Asignatura} - {examen.Id}");
@@ -34,7 +35,7 @@ namespace SistemaDeGestionDeExamenes
                 for (int i = 0; i < examen.PreguntasId.Count; i++)
                 {
                     var preguntaId = examen.PreguntasId[i].Id;
-                    var pregunta = Form1.Preguntas.FirstOrDefault(p => p.PreguntaId == preguntaId);
+                    var pregunta = ListaPreguntas.Preguntas.FirstOrDefault(p => p.PreguntaId == preguntaId);
 
                     if (pregunta != null)
                     {
@@ -65,7 +66,7 @@ namespace SistemaDeGestionDeExamenes
                 string examenInfo = tvExamenes.SelectedNode.Text;
                 string examenId = examenInfo.Split(" - ")[1].Trim(); // Extraer la parte después del guion
 
-                Examen? examen = Form1.Examenes.FirstOrDefault(ex => ex.Id == examenId);
+                Examen? examen = ListaExamenes.Examenes.FirstOrDefault(ex => ex.Id == examenId);
 
                 if (examen != null)
                 {
@@ -104,7 +105,7 @@ namespace SistemaDeGestionDeExamenes
             string examenInfo = tvExamenes.SelectedNode.Text;
             string examenId = examenInfo.Split(" - ")[1].Trim();
 
-            Form1.EliminarExamen(examenId);
+            ListaExamenes.EliminarExamen(examenId);
         }
     }
 }

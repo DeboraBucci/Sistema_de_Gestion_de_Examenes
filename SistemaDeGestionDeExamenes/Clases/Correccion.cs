@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaDeGestionDeExamenes
+namespace SistemaDeGestionDeExamenes.Clases
 {
     public class Correccion
     {
@@ -12,7 +12,7 @@ namespace SistemaDeGestionDeExamenes
         public string NombreAlumno { get; set; }
         public string ApellidoAlumno { get; set; }
         public string Nota { get; set; }
-       
+
         public List<int> Respuestas { get; set; } = new List<int>();
 
     }

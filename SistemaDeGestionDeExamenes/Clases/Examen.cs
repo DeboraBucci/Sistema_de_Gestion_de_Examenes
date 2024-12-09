@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SistemaDeGestionDeExamenes
+namespace SistemaDeGestionDeExamenes.Clases
 {
     public class Examen
     {
@@ -34,7 +34,7 @@ namespace SistemaDeGestionDeExamenes
 
         public PreguntaId(string id)
         {
-            Id = id; 
+            Id = id;
         }
     }
 }

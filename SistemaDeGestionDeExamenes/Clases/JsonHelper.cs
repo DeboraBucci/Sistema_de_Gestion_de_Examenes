@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace SistemaDeGestionDeExamenes
+namespace SistemaDeGestionDeExamenes.Clases
 {
     public class JsonHelper
     {

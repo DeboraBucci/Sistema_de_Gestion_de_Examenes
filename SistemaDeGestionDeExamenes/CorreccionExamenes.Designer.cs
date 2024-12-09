@@ -46,13 +46,13 @@
             label4 = new Label();
             lblNota = new Label();
             dgvRespuestas = new DataGridView();
-            Pregunta = new DataGridViewTextBoxColumn();
-            RespuestaCorrecta = new DataGridViewTextBoxColumn();
-            RespuestaAlumno = new DataGridViewTextBoxColumn();
-            EstadoRespuesta = new DataGridViewTextBoxColumn();
             lblRespuestasCorrectas = new Label();
             label7 = new Label();
             btnGuardarCorreccion = new Button();
+            PreguntaTxt = new DataGridViewTextBoxColumn();
+            RespuestaCorrecta = new DataGridViewTextBoxColumn();
+            RespuestaAlumno = new DataGridViewTextBoxColumn();
+            EstadoRespuesta = new DataGridViewTextBoxColumn();
             gbRespuestas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRespuestas).BeginInit();
             SuspendLayout();
@@ -222,35 +222,11 @@
             // 
             dgvRespuestas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvRespuestas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRespuestas.Columns.AddRange(new DataGridViewColumn[] { Pregunta, RespuestaCorrecta, RespuestaAlumno, EstadoRespuesta });
+            dgvRespuestas.Columns.AddRange(new DataGridViewColumn[] { PreguntaTxt, RespuestaCorrecta, RespuestaAlumno, EstadoRespuesta });
             dgvRespuestas.Location = new Point(503, 134);
             dgvRespuestas.Name = "dgvRespuestas";
             dgvRespuestas.Size = new Size(854, 457);
             dgvRespuestas.TabIndex = 19;
-            // 
-            // Pregunta
-            // 
-            Pregunta.FillWeight = 156.933929F;
-            Pregunta.HeaderText = "Pregunta";
-            Pregunta.Name = "Pregunta";
-            // 
-            // RespuestaCorrecta
-            // 
-            RespuestaCorrecta.FillWeight = 80.97133F;
-            RespuestaCorrecta.HeaderText = "Respuesta Correcta";
-            RespuestaCorrecta.Name = "RespuestaCorrecta";
-            // 
-            // RespuestaAlumno
-            // 
-            RespuestaAlumno.FillWeight = 81.2182846F;
-            RespuestaAlumno.HeaderText = "Respuesta del Alumno";
-            RespuestaAlumno.Name = "RespuestaAlumno";
-            // 
-            // EstadoRespuesta
-            // 
-            EstadoRespuesta.FillWeight = 80.8764954F;
-            EstadoRespuesta.HeaderText = "Estado de la Respuesta";
-            EstadoRespuesta.Name = "EstadoRespuesta";
             // 
             // lblRespuestasCorrectas
             // 
@@ -282,6 +258,30 @@
             btnGuardarCorreccion.UseVisualStyleBackColor = true;
             btnGuardarCorreccion.Visible = false;
             btnGuardarCorreccion.Click += btnGuardarCorreccion_Click;
+            // 
+            // PreguntaTxt
+            // 
+            PreguntaTxt.FillWeight = 156.933929F;
+            PreguntaTxt.HeaderText = "Pregunta";
+            PreguntaTxt.Name = "PreguntaTxt";
+            // 
+            // RespuestaCorrecta
+            // 
+            RespuestaCorrecta.FillWeight = 80.97133F;
+            RespuestaCorrecta.HeaderText = "Respuesta Correcta";
+            RespuestaCorrecta.Name = "RespuestaCorrecta";
+            // 
+            // RespuestaAlumno
+            // 
+            RespuestaAlumno.FillWeight = 81.2182846F;
+            RespuestaAlumno.HeaderText = "Respuesta del Alumno";
+            RespuestaAlumno.Name = "RespuestaAlumno";
+            // 
+            // EstadoRespuesta
+            // 
+            EstadoRespuesta.FillWeight = 80.8764954F;
+            EstadoRespuesta.HeaderText = "Estado de la Respuesta";
+            EstadoRespuesta.Name = "EstadoRespuesta";
             // 
             // CorreccionExamenes
             // 
@@ -336,10 +336,10 @@
         private DataGridView dgvRespuestas;
         private Label lblRespuestasCorrectas;
         private Label label7;
-        private DataGridViewTextBoxColumn Pregunta;
+        private Button btnGuardarCorreccion;
+        private DataGridViewTextBoxColumn PreguntaTxt;
         private DataGridViewTextBoxColumn RespuestaCorrecta;
         private DataGridViewTextBoxColumn RespuestaAlumno;
         private DataGridViewTextBoxColumn EstadoRespuesta;
-        private Button btnGuardarCorreccion;
     }
 }

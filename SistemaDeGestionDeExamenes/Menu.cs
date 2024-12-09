@@ -1,29 +1,14 @@
 
 using System.Collections.Generic;
+using SistemaDeGestionDeExamenes.Clases;
 
 namespace SistemaDeGestionDeExamenes
 {
-    public partial class Form1 : Form
+    public partial class Menu : Form
     {
-        public static string archivoExamen = "examen.json";
-        public static string archivoCorreciones = "correcciones.json";
-        public static string archivoPreguntas = "preguntas.json";
-        public static string archivoAsignaturas = "asignaturas.json";
-        public static string archivoCorrecciones = "correcciones.json";
-
-        public static List<Pregunta> Preguntas { get; private set; } = JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
-        public static List<Asignatura> Asignaturas { get; private set; } = JsonHelper.LeerDesdeArchivo<Asignatura>(archivoAsignaturas);
-        public static List<Examen> Examenes { get; private set; } = JsonHelper.LeerDesdeArchivo<Examen>(archivoExamen);
-
-        public static List<Correccion> Correcciones { get; private set; } = JsonHelper.LeerDesdeArchivo<Correccion>(archivoCorrecciones);
-
         public Form? currOpenedForm = null;
 
-        AdministradorPreguntas administradorPreguntas = new AdministradorPreguntas
-        {
-            StartPosition = FormStartPosition.Manual,
-            Location = new Point(0, 0),
-        };
+        AdministradorPreguntas administradorPreguntas = new AdministradorPreguntas();
 
         GeneradorExamenes generadorExamenes = new GeneradorExamenes
         {
@@ -49,7 +34,7 @@ namespace SistemaDeGestionDeExamenes
             Location = new Point(0, 0),
         };
 
-        public Form1()
+        public Menu()
         {
             InitializeComponent();
             this.IsMdiContainer = true;
@@ -82,6 +67,7 @@ namespace SistemaDeGestionDeExamenes
         {
             AbrirForm(correcciones);
         }
+        
         private void AbrirForm(Form form)
         {
             EsconderFormulario();
@@ -99,50 +85,6 @@ namespace SistemaDeGestionDeExamenes
                 currOpenedForm = null;
             }
         }
-
-        // FUNCIONES DE PREGUNTAS
-        public static List<Pregunta> BuscarPreguntas()
-        {
-            return JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
-        }
-
-        public static void AgregarPregunta(Pregunta pregunta)
-        {
-            Preguntas.Add(pregunta);
-            GuardarPreguntasArchivo();
-        }
-
-        public static void EliminarPregunta(string id)
-        {
-            Preguntas = Preguntas
-                .Where(pregunta => pregunta.PreguntaId != id)
-                .ToList();
-
-            GuardarPreguntasArchivo();
-        }
-
-        public static Pregunta? EncontrarPregunta(string id)
-        {
-            return Preguntas.Find(pregunta => pregunta.PreguntaId == id);
-        }
-
-        public static void GuardarPreguntasArchivo()
-        {
-            JsonHelper.GuardarEnArchivo(Preguntas, archivoPreguntas);
-        }
-
-        // FUNCIONES DE ASIGNATURAS
-        public static List<Asignatura> BuscarAsignaturas()
-        {
-            return JsonHelper.LeerDesdeArchivo<Asignatura>(archivoAsignaturas);
-        }
-
-        public static void GuardarAsignaturasArchivo()
-        {
-            JsonHelper.GuardarEnArchivo(Asignaturas, archivoAsignaturas);
-
-        }
-
 
         // CONFIGURAR DATA GRID VIEW
         public static void ConfigurarColumnasDataGridView(DataGridView dgv)
@@ -190,35 +132,6 @@ namespace SistemaDeGestionDeExamenes
                 dgv.Rows.Add(fila);
             }
         }
-
-        public static void AgregarExamen(Examen examen)
-        {
-            Examenes.Add(examen);
-
-            JsonHelper.GuardarEnArchivo(Examenes, archivoExamen);
-        }
-
-        public static List<Pregunta> ObtenerPreguntasDeExamen(Examen examen)
-        {
-            List<Pregunta> preguntasExamen = new List<Pregunta>();
-
-            if (examen != null)
-            {
-                preguntasExamen =
-                    Preguntas
-                    .FindAll(p =>
-                        examen.PreguntasId
-                        .Any(pId => pId.Id == p.PreguntaId));
-            }
-
-            return preguntasExamen;
-        }
-
-        public static void EliminarExamen(string examenId)
-        {
-            //Form1.Examenes = Form1.Examenes.Where(ex => ex.Id != examenId);
-        }
-
      
     }
 }

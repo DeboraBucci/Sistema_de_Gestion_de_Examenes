@@ -15,13 +15,13 @@ using iText.Layout.Borders;
 using System.Windows.Forms.VisualStyles;
 
 
-namespace SistemaDeGestionDeExamenes
+namespace SistemaDeGestionDeExamenes.Clases
 {
     public class ImprimirPdf
     {
         public void GenerarPdf(Examen examen)
         {
-            string outputPath = "examen_"+ examen.Asignatura + "_" + examen.Id + ".pdf";
+            string outputPath = "examen_" + examen.Asignatura + "_" + examen.Id + ".pdf";
             string projectDirectory = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin"));
             string logoPath = Path.Combine(projectDirectory, "Assets", "logo.jpg");
 
@@ -30,7 +30,7 @@ namespace SistemaDeGestionDeExamenes
                 PdfWriter writer = new PdfWriter(outputPath);
                 PdfDocument pdfDocument = new PdfDocument(writer);
 
-                iText.Layout.Document document = new iText.Layout.Document(pdfDocument);
+                Document document = new Document(pdfDocument);
 
                 Table headerTable = new Table(new float[] { 1, 4 })
                     .SetWidth(UnitValue.CreatePercentValue(100))
@@ -90,7 +90,7 @@ namespace SistemaDeGestionDeExamenes
                 // Generar preguntas
                 int numeroPregunta = 1;
 
-                List<Pregunta> listaPreguntas = Form1.ObtenerPreguntasDeExamen(examen);
+                List<Pregunta> listaPreguntas = ListaExamenes.ObtenerPreguntasDeExamen(examen);
 
                 foreach (Pregunta pregunta in listaPreguntas)
                 {
