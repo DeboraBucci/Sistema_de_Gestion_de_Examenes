@@ -22,5 +22,20 @@ namespace SistemaDeGestionDeExamenes.Clases
         {
             JsonHelper.GuardarEnArchivo(Asignaturas, archivoAsignaturas);
         }
+
+        public static Asignatura? BuscarAsignatura(string nombreAsig)
+        {
+            return Asignaturas.FirstOrDefault(asig => asig.Nombre == nombreAsig);
+        }
+
+        public static Unidad? BuscarUnidad(Asignatura asignatura, string nombreUnid)
+        {
+            return asignatura.Unidades.FirstOrDefault(unid => unid.Nombre == nombreUnid);
+        }
+
+        public static SubUnidad? BuscarSubUnidad(Unidad unidad, string nombreSubunid)
+        {
+            return unidad.SubUnidades.FirstOrDefault(subunid => subunid.Nombre == nombreSubunid);
+        }
     }
 }

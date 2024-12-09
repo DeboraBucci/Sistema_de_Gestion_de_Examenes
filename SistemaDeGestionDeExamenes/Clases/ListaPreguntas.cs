@@ -12,10 +12,13 @@ namespace SistemaDeGestionDeExamenes.Clases
         public static List<Pregunta> Preguntas { get; private set; } =
             JsonHelper.LeerDesdeArchivo<Pregunta>(archivoPreguntas);
 
-        public static void AgregarPregunta(Pregunta pregunta)
+        public static void AgregarPregunta(Pregunta? pregunta)
         {
-            Preguntas.Add(pregunta);
-            GuardarEnArchivo();
+            if (pregunta != null) 
+            {
+                Preguntas.Add(pregunta);
+                GuardarEnArchivo();
+            }
         }
 
         public static void EliminarPregunta(string id)

@@ -73,23 +73,27 @@ namespace SistemaDeGestionDeExamenes
         {
             if (preguntaAEditar != null)
             {
-                Pregunta pregunta = CrearPregunta();
+                Pregunta? pregunta = CrearPregunta();
 
-                preguntaAEditar.Asignatura = pregunta.Asignatura;
-                preguntaAEditar.Unidad = pregunta.Unidad;
-                preguntaAEditar.SubUnidad = pregunta.SubUnidad;
-                preguntaAEditar.TxtPregunta = pregunta.TxtPregunta;
-                preguntaAEditar.Opciones[0] = pregunta.Opciones[0];
-                preguntaAEditar.Opciones[1] = pregunta.Opciones[1];
-                preguntaAEditar.Opciones[2] = pregunta.Opciones[2];
-                preguntaAEditar.Opciones[3] = pregunta.Opciones[3];
-                preguntaAEditar.OpcionCorrecta = pregunta.OpcionCorrecta;
+                if (pregunta != null)
+                {
+                    preguntaAEditar.Asignatura = pregunta.Asignatura;
+                    preguntaAEditar.Unidad = pregunta.Unidad;
+                    preguntaAEditar.SubUnidad = pregunta.SubUnidad;
+                    preguntaAEditar.TxtPregunta = pregunta.TxtPregunta;
+                    preguntaAEditar.Opciones[0] = pregunta.Opciones[0];
+                    preguntaAEditar.Opciones[1] = pregunta.Opciones[1];
+                    preguntaAEditar.Opciones[2] = pregunta.Opciones[2];
+                    preguntaAEditar.Opciones[3] = pregunta.Opciones[3];
+                    preguntaAEditar.OpcionCorrecta = pregunta.OpcionCorrecta;
 
-                ListaPreguntas.GuardarEnArchivo();
-                Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
+                    ListaPreguntas.GuardarEnArchivo();
+                    Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
 
-                VisibilidadBotonesEditar(false);
-                VaciarFormulario();
+                    VisibilidadBotonesEditar(false);
+                    VaciarFormulario();
+                }
+                
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -284,42 +288,84 @@ namespace SistemaDeGestionDeExamenes
         }
 
         // METODOS GENERALES
-        private Pregunta CrearPregunta(string? preguntaId = null)
+        private Pregunta? CrearPregunta(string? preguntaId = null)
         {
-            string asignatura = cbAsignaturas?.SelectedItem?.ToString() + "";
-            string unidad = cbUnidades?.SelectedItem?.ToString() + "";
-            string subunidad = cbSubUnidades?.SelectedItem?.ToString() + "";
+            try
+            {
+                string nombreAsignatura = cbAsignaturas?.SelectedItem?.ToString() + "";
+                Asignatura? asignatura = ListaAsignaturas.BuscarAsignatura(nombreAsignatura);
 
-            string textPregunta = txtPregunta.Text.Trim();
-            string textOpc1 = txtOpc1.Text.Trim();
-            string textOpc2 = txtOpc2.Text.Trim();
-            string textOpc3 = txtOpc3.Text.Trim();
-            string textOpc4 = txtOpc4.Text.Trim();
+                if (asignatura == null)
+                    throw new Exception("Por favor, seleccione una asignatura correcta.");
 
-            int opcionCorrecta = 1;
+                string nombreUnidad = cbUnidades?.SelectedItem?.ToString() + "";
+                Unidad? unidad = ListaAsignaturas.BuscarUnidad(asignatura, nombreUnidad);
 
-            if (rbOpc1.Checked)
-                opcionCorrecta = 1;
+                if (unidad == null)
+                    throw new Exception("Por favor, seleccione una unidad correcta.");
 
-            else if (rbOpc2.Checked)
-                opcionCorrecta = 2;
+                string nombreSubUnidad = cbSubUnidades?.SelectedItem?.ToString() + "";
+                SubUnidad? subUnidad = ListaAsignaturas.BuscarSubUnidad(unidad, nombreSubUnidad);
 
-            else if (rbOpc3.Checked)
-                opcionCorrecta = 3;
+                if (subUnidad == null)
+                    throw new Exception("Por favor, seleccione una sub unidad correcta.");
 
-            else if (rbOpc4.Checked)
-                opcionCorrecta = 4;
+                string textPregunta = txtPregunta.Text.Trim();
 
-            Pregunta pregunta = new Pregunta(
-                asignatura,
-                unidad,
-                subunidad,
-                textPregunta,
-                [textOpc1, textOpc2, textOpc3, textOpc4],
-                opcionCorrecta
-                );
+                if (textPregunta.Count() <= 0)
+                    throw new Exception("Por favor, escriba una pregunta.");
 
-            return pregunta;
+                string textOpc1 = txtOpc1.Text.Trim();
+
+                if (textOpc1.Count() <= 0)
+                    throw new Exception("Por favor, escriba una respuesta para la opcion 1.");
+
+                string textOpc2 = txtOpc2.Text.Trim();
+
+                if (textOpc2.Count() <= 0)
+                    throw new Exception("Por favor, escriba una respuesta para la opcion 2.");
+
+                string textOpc3 = txtOpc3.Text.Trim();
+
+                if (textOpc3.Count() <= 0)
+                    throw new Exception("Por favor, escriba una respuesta para la opcion 3.");
+
+                string textOpc4 = txtOpc4.Text.Trim();
+
+                if (textOpc4.Count() <= 0)
+                    throw new Exception("Por favor, escriba una respuesta para la opcion 4.");
+
+                int opcionCorrecta = 1;
+
+                if (rbOpc1.Checked)
+                    opcionCorrecta = 1;
+
+                else if (rbOpc2.Checked)
+                    opcionCorrecta = 2;
+
+                else if (rbOpc3.Checked)
+                    opcionCorrecta = 3;
+
+                else if (rbOpc4.Checked)
+                    opcionCorrecta = 4;
+
+                Pregunta pregunta = new Pregunta(
+                    asignatura.Nombre,
+                    unidad.Nombre,
+                    subUnidad.Nombre,
+                    textPregunta,
+                    [textOpc1, textOpc2, textOpc3, textOpc4],
+                    opcionCorrecta
+                    );
+
+                return pregunta;
+            }
+
+            catch (Exception ex)
+            {
+                MetodosGenericos.MostrarError(ex.Message);
+                return null;
+            }
         }
 
         private string IdPreguntaSeleccionada()
