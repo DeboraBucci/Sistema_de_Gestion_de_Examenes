@@ -53,11 +53,12 @@ namespace SistemaDeGestionDeExamenes
                 lstUnidades.Items.Add(unidad.Nombre);
         }
 
-
         private void btnGenerarExamen_Click(object sender, EventArgs e)
         {
             int randomNum = 0;
             Random random = new Random();
+
+            List<string> subUnidadesExcluidas = new List<string>();
 
             List<Pregunta> preguntasSubunid;
 
@@ -82,11 +83,24 @@ namespace SistemaDeGestionDeExamenes
                                        && p.SubUnidad == subUnidad.Nombre
                                        ).ToList();
 
-                            int max = preguntasSubunid.Count();
-                            randomNum = random.Next(0, max);
+                            if(preguntasSubunid.Count() > 0)
+                            {
+                                int max = preguntasSubunid.Count();
+                                randomNum = random.Next(0, max);
 
-                            examen.AgregarPreguntaId(preguntasSubunid[randomNum].PreguntaId);
+                                examen.AgregarPreguntaId(preguntasSubunid[randomNum].PreguntaId);
+                            }
+
+                            else
+                            {
+                                subUnidadesExcluidas.Add(subUnidad.Nombre);
+                            }
                         }
+
+                        MetodosGenericos
+                                .MostrarError(
+                                $"De la unidad {unidad.Nombre}:\n\nLas unidades {string.Join(", ", subUnidadesExcluidas)} no contienen preguntas, asi que sera excluida del examen actual!"
+                                );
                     }
                 }
             }
