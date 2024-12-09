@@ -11,7 +11,7 @@ namespace SistemaDeGestionDeExamenes.Clases
         public string Asignatura { get; set; }
         public string Unidad { get; set; }
         public string SubUnidad { get; set; }
-        public string PreguntaId { get; set; }
+        public string PreguntaId { get; set; } = MetodosGenericos.CrearId();
         public string TxtPregunta { get; set; }
         public string[] Opciones { get; set; } = new string[4];
         public int OpcionCorrecta { get; set; }
@@ -22,7 +22,6 @@ namespace SistemaDeGestionDeExamenes.Clases
             string asignatura,
             string unidad,
             string subUnidad,
-            string preguntaId,
             string txtPregunta,
             string[] opciones,
             int opcionCorrecta
@@ -31,7 +30,6 @@ namespace SistemaDeGestionDeExamenes.Clases
             Asignatura = asignatura;
             Unidad = unidad;
             SubUnidad = subUnidad;
-            PreguntaId = preguntaId;
             TxtPregunta = txtPregunta;
             Opciones = opciones;
             OpcionCorrecta = opcionCorrecta;

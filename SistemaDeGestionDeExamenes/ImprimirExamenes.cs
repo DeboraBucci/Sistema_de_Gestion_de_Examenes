@@ -26,7 +26,7 @@ namespace SistemaDeGestionDeExamenes
         {
             tvExamenes.Nodes.Clear(); // Limpiar el TreeView antes de llenarlo
 
-            foreach (var examen in ListaExamenes.Examenes)
+            foreach (Examen examen in ListaExamenes.Examenes)
             {
                 // Crear nodo principal para cada examen
                 TreeNode nodoExamen = new TreeNode($"{examen.Asignatura} - {examen.Id}");
@@ -95,9 +95,9 @@ namespace SistemaDeGestionDeExamenes
 
             if (result == DialogResult.Yes)
             {
-                EliminarExamen(); 
+                EliminarExamen();
+                MessageBox.Show("Examen Eliminado!", "Exitoso", MessageBoxButtons.OK);
             }
-
         }
 
         private void EliminarExamen()

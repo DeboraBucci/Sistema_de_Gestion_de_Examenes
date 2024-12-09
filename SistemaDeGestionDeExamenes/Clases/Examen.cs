@@ -11,7 +11,7 @@ namespace SistemaDeGestionDeExamenes.Clases
 {
     public class Examen
     {
-        public string Id { get; private set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } = MetodosGenericos.CrearId();
         public string Fecha { get; set; }
         public string Asignatura { get; set; }
 

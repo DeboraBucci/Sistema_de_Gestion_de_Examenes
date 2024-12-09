@@ -59,7 +59,6 @@ namespace SistemaDeGestionDeExamenes
             Random random = new Random();
 
             List<string> subUnidadesExcluidas = new List<string>();
-
             List<Pregunta> preguntasSubunid;
 
             examen = new Examen();

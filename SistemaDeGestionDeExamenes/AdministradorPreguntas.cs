@@ -288,9 +288,6 @@ namespace SistemaDeGestionDeExamenes
         // METODOS GENERALES
         private Pregunta CrearPregunta(string? preguntaId = null)
         {
-            if (preguntaId == null)
-                preguntaId = Guid.NewGuid().ToString();
-
             string asignatura = cbAsignaturas?.SelectedItem?.ToString() + "";
             string unidad = cbUnidades?.SelectedItem?.ToString() + "";
             string subunidad = cbSubUnidades?.SelectedItem?.ToString() + "";
@@ -319,7 +316,6 @@ namespace SistemaDeGestionDeExamenes
                 asignatura,
                 unidad,
                 subunidad,
-                preguntaId,
                 textPregunta,
                 [textOpc1, textOpc2, textOpc3, textOpc4],
                 opcionCorrecta

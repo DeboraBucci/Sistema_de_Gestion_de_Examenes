@@ -16,5 +16,10 @@ namespace SistemaDeGestionDeExamenes.Clases
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         }
+
+        public static string CrearId()
+        {
+            return Guid.NewGuid().ToString();
+        }
     }
 }
