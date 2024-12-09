@@ -8,7 +8,7 @@ namespace SistemaDeGestionDeExamenes.Clases
 {
     public static class ListaExamenes
     {
-        private static string archivoExamen = "examen.json";
+        private static string archivoExamen = "examenes.json";
         public static List<Examen> Examenes { get;  private set; } = 
             JsonHelper.LeerDesdeArchivo<Examen>(archivoExamen);
 

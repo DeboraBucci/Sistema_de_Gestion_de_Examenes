@@ -34,6 +34,7 @@
             Asignatura = new DataGridViewTextBoxColumn();
             ExamenId = new DataGridViewTextBoxColumn();
             Nota = new DataGridViewTextBoxColumn();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCorrecciones).BeginInit();
             SuspendLayout();
             // 
@@ -42,9 +43,9 @@
             dgvCorrecciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCorrecciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCorrecciones.Columns.AddRange(new DataGridViewColumn[] { NombreAlumno, Apellido, Asignatura, ExamenId, Nota });
-            dgvCorrecciones.Location = new Point(83, 60);
+            dgvCorrecciones.Location = new Point(83, 108);
             dgvCorrecciones.Name = "dgvCorrecciones";
-            dgvCorrecciones.Size = new Size(1251, 596);
+            dgvCorrecciones.Size = new Size(1251, 548);
             dgvCorrecciones.TabIndex = 0;
             // 
             // NombreAlumno
@@ -72,11 +73,22 @@
             Nota.HeaderText = "Nota";
             Nota.Name = "Nota";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 16F);
+            label5.Location = new Point(83, 73);
+            label5.Name = "label5";
+            label5.Size = new Size(139, 30);
+            label5.TabIndex = 19;
+            label5.Text = "Correcciones";
+            // 
             // Correcciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1393, 702);
+            Controls.Add(label5);
             Controls.Add(dgvCorrecciones);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Correcciones";
@@ -84,6 +96,7 @@
             Load += Correcciones_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCorrecciones).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -94,5 +107,6 @@
         private DataGridViewTextBoxColumn Asignatura;
         private DataGridViewTextBoxColumn ExamenId;
         private DataGridViewTextBoxColumn Nota;
+        private Label label5;
     }
 }

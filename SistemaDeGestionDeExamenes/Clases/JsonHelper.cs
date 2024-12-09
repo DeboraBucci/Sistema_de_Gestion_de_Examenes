@@ -27,7 +27,7 @@ namespace SistemaDeGestionDeExamenes.Clases
 
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al leer el archivo JSON: {ex.Message}");
+                Console.WriteLine($"Error al leer el archivo JSON: {ex.Message}");
                 return new List<T>();
             }
         }

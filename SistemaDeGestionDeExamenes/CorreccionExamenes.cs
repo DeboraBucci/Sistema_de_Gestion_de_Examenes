@@ -21,7 +21,6 @@ namespace SistemaDeGestionDeExamenes
         Correccion correccion = new Correccion();
 
         double nota = 0;
-
         int i = 0;
         int respuestasCorrectas = 0;
 
@@ -32,6 +31,7 @@ namespace SistemaDeGestionDeExamenes
 
         private void CorreccionExamenes_Load(object sender, EventArgs e)
         {
+            VaciarInformacion();
             cbExamenesId.Items.Clear();
 
             foreach (Examen examen in ListaExamenes.Examenes)
@@ -44,15 +44,10 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
-                examenPreguntas.Clear();
-                examenRespuestas.Clear();
-                i = 0;
-                nota = 0;
-                respuestasCorrectas = 0;
+                VaciarInformacion();
 
                 string nombreAlumno = txtNombreAlumno.Text.Trim();
                 string apellidoAlumno = txtApellidoAlumno.Text.Trim();
-                string examenId = cbExamenesId?.SelectedItem?.ToString() ?? "";
 
                 if (nombreAlumno.Length <= 0)
                     throw new Exception("Por favor, ingrese un nombre.");
@@ -60,17 +55,20 @@ namespace SistemaDeGestionDeExamenes
                 if (apellidoAlumno.Length <= 0)
                     throw new Exception("Por favor, ingrese un apellido.");
 
+                // Buscar examen
+                string examenId = cbExamenesId?.SelectedItem?.ToString() ?? "";
                 Examen? examen = ListaExamenes.Examenes.FirstOrDefault(ex => ex.Id == examenId);
 
                 if (examen == null)
                     throw new Exception("Por favor ingrese una ID existente!");
 
+                // Llenar informacion en correcion
                 correccion.ExamenId = examen.Id;
                 correccion.NombreAlumno = nombreAlumno;
                 correccion.ApellidoAlumno = apellidoAlumno;
 
+                // Llenar respuestas
                 gbRespuestas.Visible = true;
-
                 foreach (PreguntaId pid in examen.PreguntasId)
                 {
                     Pregunta? pregunta = ListaPreguntas.Preguntas.FirstOrDefault(p => p.PreguntaId == pid.Id);
@@ -81,7 +79,7 @@ namespace SistemaDeGestionDeExamenes
                     }
                 }
 
-                RefrescarRespuestaActual();
+                MostrarPreguntaYRespuestaActual();
             }
 
             catch (Exception ex)
@@ -90,30 +88,21 @@ namespace SistemaDeGestionDeExamenes
             }
         }
 
-        private void RefrescarRespuestaActual()
-        {
-            lblNumPregunta.Text = (i + 1) + ")";
-            lblPreguntaTxt.Text = examenPreguntas[i].TxtPregunta;
-
-            if (Convert.ToInt32(cbRespuestaSeleccionada?.SelectedItem?.ToString()) == examenPreguntas[i].OpcionCorrecta)
-            {
-                respuestasCorrectas++;
-            }
-
-            i++;
-        }
-
         private void btnAgregarRespuesta_Click(object sender, EventArgs e)
         {
             try
             {
                 int rspSeleccionada = Convert.ToInt32(cbRespuestaSeleccionada.SelectedItem);
+
+                if (rspSeleccionada == examenPreguntas[i - 1].OpcionCorrecta)
+                    respuestasCorrectas++;
+
                 examenRespuestas.Add(rspSeleccionada);
                 correccion.Respuestas.Add(rspSeleccionada);
                 MostrarEnLista();
 
                 if (i < examenPreguntas.Count())
-                    RefrescarRespuestaActual();
+                    MostrarPreguntaYRespuestaActual();
 
                 else
                 {
@@ -135,7 +124,27 @@ namespace SistemaDeGestionDeExamenes
                 MetodosGenericos.MostrarError(ex.Message);
             }
         }
+       
+        private void btnGuardarCorreccion_Click(object sender, EventArgs e)
+        {
+            ListaCorrecciones.GuardarCorreccion(correccion);
 
+            txtApellidoAlumno.Text = "";
+            txtNombreAlumno.Text = "";
+
+            btnGuardarCorreccion.Visible = false;
+
+            dgvRespuestas.Rows.Clear();
+
+            MessageBox.Show("Correccion guardada exitosamente!", "GUARDADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void cbExamenesId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gbRespuestas.Visible = false;
+        }
+
+        // METODOS  
         private void MostrarEnLista()
         {
             dgvRespuestas.Rows.Clear(); // Limpia las filas existentes
@@ -155,23 +164,25 @@ namespace SistemaDeGestionDeExamenes
                 i++;
             }
         }
-        private void btnGuardarCorreccion_Click(object sender, EventArgs e)
+
+        private void MostrarPreguntaYRespuestaActual()
         {
-            ListaCorrecciones.GuardarCorreccion(correccion);
+            lblNumPregunta.Text = (i + 1) + ")";
+            lblPreguntaTxt.Text = examenPreguntas[i].TxtPregunta;
 
-            txtApellidoAlumno.Text = "";
-            txtNombreAlumno.Text = "";
-
-            btnGuardarCorreccion.Visible = false;
-
-            dgvRespuestas.Rows.Clear();
-
-            MessageBox.Show("Correccion guardada exitosamente!", "GUARDADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            i++;
         }
 
-        private void cbExamenesId_SelectedIndexChanged(object sender, EventArgs e)
+        private void VaciarInformacion ()
         {
-            gbRespuestas.Visible = false;
+            examenPreguntas.Clear();
+            examenRespuestas.Clear();
+
+            i = 0;
+            nota = 0;
+            respuestasCorrectas = 0;
+
+            correccion = new Correccion();
         }
     }
 }

@@ -26,11 +26,9 @@ namespace SistemaDeGestionDeExamenes
 
         private string? categoriaAAgregar;
 
-
         public AdministradorPreguntas()
         {
             InitializeComponent();
-
             InitUI();
         }
 
@@ -48,7 +46,6 @@ namespace SistemaDeGestionDeExamenes
         private void btnAgregarPreg_Click(object sender, EventArgs e)
         {
             ListaPreguntas.AgregarPregunta(CrearPregunta());
-
             Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
             VaciarFormulario();
         }
@@ -109,6 +106,8 @@ namespace SistemaDeGestionDeExamenes
 
                 ListaPreguntas.EliminarPregunta(preguntaId);
                 Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
+
+                cbFiltroAsignatura.SelectedIndex = 0;
             }
         }
 
@@ -274,7 +273,6 @@ namespace SistemaDeGestionDeExamenes
         private void btnCancelarNueva_Click(object sender, EventArgs e)
         {
             pnlCrearNuevaSubUnidad.Visible = false;
-
             VaciarPanelDeCategorias();
         }
 
@@ -327,7 +325,6 @@ namespace SistemaDeGestionDeExamenes
         private string IdPreguntaSeleccionada()
         {
             DataGridViewRow row = dgvPreguntas.SelectedRows[0]; // Accedemos a la primera fila seleccionada
-
             return row.Cells["PreguntaId"].Value.ToString() + "";
         }
 
