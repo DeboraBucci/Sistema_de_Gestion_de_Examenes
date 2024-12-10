@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SistemaDeGestionDeExamenes
 {
@@ -18,38 +19,8 @@ namespace SistemaDeGestionDeExamenes
         public ImprimirExamenes()
         {
             InitializeComponent();
-
             MostrarExamenesEnTreeView();
         }
-
-        public void MostrarExamenesEnTreeView()
-        {
-            tvExamenes.Nodes.Clear(); // Limpiar el TreeView antes de llenarlo
-
-            foreach (Examen examen in ListaExamenes.Examenes)
-            {
-                // Crear nodo principal para cada examen
-                TreeNode nodoExamen = new TreeNode($"{examen.Asignatura} - {examen.Id}");
-
-                // Añadir subnodos para las preguntas de cada examen
-                for (int i = 0; i < examen.PreguntasId.Count; i++)
-                {
-                    var preguntaId = examen.PreguntasId[i].Id;
-                    var pregunta = ListaPreguntas.Preguntas.FirstOrDefault(p => p.PreguntaId == preguntaId);
-
-                    if (pregunta != null)
-                    {
-                        TreeNode nodoPregunta = new TreeNode($"Pregunta {i + 1}: {pregunta.TxtPregunta}");
-                        nodoExamen.Nodes.Add(nodoPregunta); // Añadir la pregunta como subnodo
-                    }
-                }
-
-                tvExamenes.Nodes.Add(nodoExamen); // Añadir el examen al TreeView
-            }
-
-            tvExamenes.ExpandAll();
-        }
-
 
         private void btnImprimirExamen_Click(object sender, EventArgs e)
         {
@@ -87,16 +58,25 @@ namespace SistemaDeGestionDeExamenes
 
         private void btnEliminarExamen_Click(object sender, EventArgs e)
         {
-            DialogResult result = 
+            if (tvExamenes.SelectedNode != null && tvExamenes.SelectedNode.Nodes.Count > 0)
+            {
+                DialogResult result =
                 MessageBox.Show("¿Estás seguro de que deseas eliminar este examen?",
                                 "Confirmar eliminación",
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning);
 
-            if (result == DialogResult.Yes)
+                if (result == DialogResult.Yes)
+                {
+                    EliminarExamen();
+                    MessageBox.Show("Examen Eliminado!", "Exitoso", MessageBoxButtons.OK);
+                    MostrarExamenesEnTreeView();
+                }
+            }
+
+            else
             {
-                EliminarExamen();
-                MessageBox.Show("Examen Eliminado!", "Exitoso", MessageBoxButtons.OK);
+                MetodosGenericos.MostrarError("Por favor, seleccione un examen, no una pregunta, para eliminar.");
             }
         }
 
@@ -107,5 +87,34 @@ namespace SistemaDeGestionDeExamenes
 
             ListaExamenes.EliminarExamen(examenId);
         }
+
+        public void MostrarExamenesEnTreeView()
+        {
+            tvExamenes.Nodes.Clear(); // Limpiar el TreeView antes de llenarlo
+
+            foreach (Examen examen in ListaExamenes.Examenes)
+            {
+                // Crear nodo principal para cada examen
+                TreeNode nodoExamen = new TreeNode($"{examen.Asignatura} - {examen.Id}");
+
+                // Añadir subnodos para las preguntas de cada examen
+                for (int i = 0; i < examen.PreguntasId.Count; i++)
+                {
+                    var preguntaId = examen.PreguntasId[i].Id;
+                    var pregunta = ListaPreguntas.Preguntas.FirstOrDefault(p => p.PreguntaId == preguntaId);
+
+                    if (pregunta != null)
+                    {
+                        TreeNode nodoPregunta = new TreeNode($"Pregunta {i + 1}: {pregunta.TxtPregunta}");
+                        nodoExamen.Nodes.Add(nodoPregunta); // Añadir la pregunta como subnodo
+                    }
+                }
+
+                tvExamenes.Nodes.Add(nodoExamen); // Añadir el examen al TreeView
+            }
+
+            tvExamenes.ExpandAll();
+        }
+
     }
 }

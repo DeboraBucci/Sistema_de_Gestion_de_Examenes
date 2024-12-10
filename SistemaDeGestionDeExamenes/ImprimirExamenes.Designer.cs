@@ -82,6 +82,7 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ImprimirExamenes";
+            StartPosition = FormStartPosition.Manual;
             Text = "ImprimirExamenes";
             ResumeLayout(false);
             PerformLayout();

@@ -10,23 +10,11 @@ namespace SistemaDeGestionDeExamenes
 
         AdministradorPreguntas administradorPreguntas = new AdministradorPreguntas();
 
-        GeneradorExamenes generadorExamenes = new GeneradorExamenes
-        {
-            StartPosition = FormStartPosition.Manual,
-            Location = new Point(0, 0),
-        };
+        GeneradorExamenes generadorExamenes = new GeneradorExamenes();
 
-        ImprimirExamenes imprimirExamenes = new ImprimirExamenes
-        {
-            StartPosition = FormStartPosition.Manual,
-            Location = new Point(0, 0),
-        };
+        ImprimirExamenes imprimirExamenes = new ImprimirExamenes();
 
-        CorreccionExamenes correccionExamenes = new CorreccionExamenes
-        {
-            StartPosition = FormStartPosition.Manual,
-            Location = new Point(0, 0),
-        };
+        CorreccionExamenes correccionExamenes = new CorreccionExamenes();
 
         Correcciones correcciones = new Correcciones
         {

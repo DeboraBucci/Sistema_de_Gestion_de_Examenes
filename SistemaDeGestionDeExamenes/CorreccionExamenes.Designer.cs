@@ -46,13 +46,13 @@
             label4 = new Label();
             lblNota = new Label();
             dgvRespuestas = new DataGridView();
-            lblRespuestasCorrectas = new Label();
-            label7 = new Label();
-            btnGuardarCorreccion = new Button();
             PreguntaTxt = new DataGridViewTextBoxColumn();
             RespuestaCorrecta = new DataGridViewTextBoxColumn();
             RespuestaAlumno = new DataGridViewTextBoxColumn();
             EstadoRespuesta = new DataGridViewTextBoxColumn();
+            lblRespuestasCorrectas = new Label();
+            label7 = new Label();
+            btnGuardarCorreccion = new Button();
             gbRespuestas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRespuestas).BeginInit();
             SuspendLayout();
@@ -228,6 +228,30 @@
             dgvRespuestas.Size = new Size(854, 457);
             dgvRespuestas.TabIndex = 19;
             // 
+            // PreguntaTxt
+            // 
+            PreguntaTxt.FillWeight = 156.933929F;
+            PreguntaTxt.HeaderText = "Pregunta";
+            PreguntaTxt.Name = "PreguntaTxt";
+            // 
+            // RespuestaCorrecta
+            // 
+            RespuestaCorrecta.FillWeight = 80.97133F;
+            RespuestaCorrecta.HeaderText = "Respuesta Correcta";
+            RespuestaCorrecta.Name = "RespuestaCorrecta";
+            // 
+            // RespuestaAlumno
+            // 
+            RespuestaAlumno.FillWeight = 81.2182846F;
+            RespuestaAlumno.HeaderText = "Respuesta del Alumno";
+            RespuestaAlumno.Name = "RespuestaAlumno";
+            // 
+            // EstadoRespuesta
+            // 
+            EstadoRespuesta.FillWeight = 80.8764954F;
+            EstadoRespuesta.HeaderText = "Estado de la Respuesta";
+            EstadoRespuesta.Name = "EstadoRespuesta";
+            // 
             // lblRespuestasCorrectas
             // 
             lblRespuestasCorrectas.AutoSize = true;
@@ -259,30 +283,6 @@
             btnGuardarCorreccion.Visible = false;
             btnGuardarCorreccion.Click += btnGuardarCorreccion_Click;
             // 
-            // PreguntaTxt
-            // 
-            PreguntaTxt.FillWeight = 156.933929F;
-            PreguntaTxt.HeaderText = "Pregunta";
-            PreguntaTxt.Name = "PreguntaTxt";
-            // 
-            // RespuestaCorrecta
-            // 
-            RespuestaCorrecta.FillWeight = 80.97133F;
-            RespuestaCorrecta.HeaderText = "Respuesta Correcta";
-            RespuestaCorrecta.Name = "RespuestaCorrecta";
-            // 
-            // RespuestaAlumno
-            // 
-            RespuestaAlumno.FillWeight = 81.2182846F;
-            RespuestaAlumno.HeaderText = "Respuesta del Alumno";
-            RespuestaAlumno.Name = "RespuestaAlumno";
-            // 
-            // EstadoRespuesta
-            // 
-            EstadoRespuesta.FillWeight = 80.8764954F;
-            EstadoRespuesta.HeaderText = "Estado de la Respuesta";
-            EstadoRespuesta.Name = "EstadoRespuesta";
-            // 
             // CorreccionExamenes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -305,6 +305,7 @@
             Controls.Add(cbExamenesId);
             FormBorderStyle = FormBorderStyle.None;
             Name = "CorreccionExamenes";
+            StartPosition = FormStartPosition.Manual;
             Text = "CorreccionExamenes";
             Load += CorreccionExamenes_Load;
             gbRespuestas.ResumeLayout(false);

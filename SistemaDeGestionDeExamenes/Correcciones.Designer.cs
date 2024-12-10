@@ -92,6 +92,7 @@
             Controls.Add(dgvCorrecciones);
             FormBorderStyle = FormBorderStyle.None;
             Name = "Correcciones";
+            StartPosition = FormStartPosition.Manual;
             Text = "Correcciones";
             Load += Correcciones_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCorrecciones).EndInit();

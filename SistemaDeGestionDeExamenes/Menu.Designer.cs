@@ -90,14 +90,15 @@
             menuCorrecciones.Text = "Correcciones";
             menuCorrecciones.Click += menuCorrecciones_Click;
             // 
-            // Form1
+            // Menu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1409, 741);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Name = "Form1";
+            Name = "Menu";
+            StartPosition = FormStartPosition.Manual;
             Text = "Sistema de Gestion de Examenes";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

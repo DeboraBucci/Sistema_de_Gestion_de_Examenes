@@ -23,6 +23,31 @@ namespace SistemaDeGestionDeExamenes
             InitializeComponent();
 
             Menu.ConfigurarColumnasDataGridView(dgvPreguntas);
+        }
+
+        private void GeneradorExamenes_Load(object sender, EventArgs e)
+        {
+            RecargarDatos();
+        }
+
+        private void GeneradorExamenes_Shown(object sender, EventArgs e)
+        {
+            RecargarDatos();
+        }
+
+        private void GeneradorExamenes_VisibleChanged(object sender, EventArgs e)
+        {
+            RecargarDatos();
+        }
+
+        private void RecargarDatos()
+        {
+            lblSubUnidadesSinPreguntasTitulo.Visible = false;
+            lblSubUnidadesSinPreguntas.Text = "";
+            dgvPreguntas.Rows.Clear();
+            lstUnidades.Items.Clear();
+
+            cbAsignaturas.Items.Clear();
             dgvPreguntas.Columns["Asignatura"].Visible = false;
 
             try
@@ -40,7 +65,6 @@ namespace SistemaDeGestionDeExamenes
             {
                 MetodosGenericos.MostrarError(ex.Message);
             }
-
         }
 
         private void cbAsignaturas_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,6 +98,8 @@ namespace SistemaDeGestionDeExamenes
                 {
                     if (unidadesStr.Contains(unidad.Nombre))
                     {
+                        subUnidadesExcluidas.Clear();
+
                         foreach (SubUnidad subUnidad in unidad.SubUnidades)
                         {
                             preguntasSubunid = ListaPreguntas.Preguntas.Where(p =>
@@ -82,7 +108,7 @@ namespace SistemaDeGestionDeExamenes
                                        && p.SubUnidad == subUnidad.Nombre
                                        ).ToList();
 
-                            if(preguntasSubunid.Count() > 0)
+                            if (preguntasSubunid.Count() > 0)
                             {
                                 int max = preguntasSubunid.Count();
                                 randomNum = random.Next(0, max);
@@ -96,22 +122,29 @@ namespace SistemaDeGestionDeExamenes
                             }
                         }
 
-                        MetodosGenericos
+                        if (subUnidadesExcluidas.Count() > 0)
+                        {
+                            MetodosGenericos
                                 .MostrarError(
-                                $"De la unidad {unidad.Nombre}:\n\nLas unidades {string.Join(", ", subUnidadesExcluidas)} no contienen preguntas, asi que sera excluida del examen actual!"
+                                $"De la unidad {unidad.Nombre}:\n\nLas sub unidades {string.Join(", ", subUnidadesExcluidas)} no contienen preguntas, asi que sera excluida del examen actual!"
                                 );
+
+                            lblSubUnidadesSinPreguntas.Text += $"{string.Join(", ", subUnidadesExcluidas)}\n";
+                            lblSubUnidadesSinPreguntasTitulo.Visible = true;
+                        }
                     }
                 }
             }
 
-            ListaExamenes.AgregarExamen(examen);
-            Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
-
-        }
-
-        private void GeneradorExamenes_Load(object sender, EventArgs e)
-        {
-
+            if (examen.PreguntasId.Count >= 4)
+            {
+                ListaExamenes.AgregarExamen(examen);
+                Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
+            }
+             else
+            {
+                MetodosGenericos.MostrarError("No hay suficientes preguntas sobre los temas elegidos (al menos 4), por favor, agrega mas!");
+            }
         }
     }
 }

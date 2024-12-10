@@ -37,6 +37,8 @@
             label2 = new Label();
             label3 = new Label();
             lblAsignExamen = new Label();
+            lblSubUnidadesSinPreguntasTitulo = new Label();
+            lblSubUnidadesSinPreguntas = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).BeginInit();
             SuspendLayout();
             // 
@@ -127,12 +129,33 @@
             lblAsignExamen.TabIndex = 59;
             lblAsignExamen.Text = "-";
             // 
+            // lblSubUnidadesSinPreguntasTitulo
+            // 
+            lblSubUnidadesSinPreguntasTitulo.AutoSize = true;
+            lblSubUnidadesSinPreguntasTitulo.Font = new Font("Segoe UI", 12F);
+            lblSubUnidadesSinPreguntasTitulo.Location = new Point(24, 463);
+            lblSubUnidadesSinPreguntasTitulo.Name = "lblSubUnidadesSinPreguntasTitulo";
+            lblSubUnidadesSinPreguntasTitulo.Size = new Size(207, 21);
+            lblSubUnidadesSinPreguntasTitulo.TabIndex = 60;
+            lblSubUnidadesSinPreguntasTitulo.Text = "Sub Unidades sin Preguntas:";
+            lblSubUnidadesSinPreguntasTitulo.Visible = false;
+            // 
+            // lblSubUnidadesSinPreguntas
+            // 
+            lblSubUnidadesSinPreguntas.AutoSize = true;
+            lblSubUnidadesSinPreguntas.Location = new Point(34, 505);
+            lblSubUnidadesSinPreguntas.Name = "lblSubUnidadesSinPreguntas";
+            lblSubUnidadesSinPreguntas.Size = new Size(0, 15);
+            lblSubUnidadesSinPreguntas.TabIndex = 61;
+            // 
             // GeneradorExamenes
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1409, 741);
+            Controls.Add(lblSubUnidadesSinPreguntas);
+            Controls.Add(lblSubUnidadesSinPreguntasTitulo);
             Controls.Add(lblAsignExamen);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -144,8 +167,10 @@
             Controls.Add(lblAsignatura);
             FormBorderStyle = FormBorderStyle.None;
             Name = "GeneradorExamenes";
-            StartPosition = FormStartPosition.CenterParent;
+            StartPosition = FormStartPosition.Manual;
             Text = "GeneradorExamenes";
+            Load += GeneradorExamenes_Load;
+            VisibleChanged += GeneradorExamenes_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -162,5 +187,7 @@
         private Label label2;
         private Label label3;
         private Label lblAsignExamen;
+        private Label lblSubUnidadesSinPreguntasTitulo;
+        private Label lblSubUnidadesSinPreguntas;
     }
 }
