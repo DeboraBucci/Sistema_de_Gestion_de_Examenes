@@ -81,7 +81,17 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
-                int rspSeleccionada = Convert.ToInt32(cbRespuestaSeleccionada.SelectedItem);
+                string rspSeleccionadaStr = cbRespuestaSeleccionada?.SelectedItem?.ToString() ?? "";
+
+                //if (rspSeleccionadaStr == "Sin Responder")
+                   // rspSeleccionadaStr = "0";
+
+                //int rspSeleccionada = Convert.ToInt32(rspSeleccionadaStr);
+
+                if (!int.TryParse(rspSeleccionadaStr, out int rspSeleccionada))
+                {
+                    rspSeleccionadaStr = "0";
+                }
 
                 if (rspSeleccionada == examenPreguntas[i - 1].OpcionCorrecta)
                     respuestasCorrectas++;
@@ -136,7 +146,7 @@ namespace SistemaDeGestionDeExamenes
         // METODOS  
         private void MostrarEnLista()
         {
-            dgvRespuestas.Rows.Clear(); // Limpia las filas existentes
+            dgvRespuestas.Rows.Clear();
 
             int i = 0;
             foreach (var respuesta in examenRespuestas)
@@ -146,7 +156,7 @@ namespace SistemaDeGestionDeExamenes
                 fila[0] = examenPreguntas[i].TxtPregunta;
                 fila[1] = examenPreguntas[i].OpcionCorrecta.ToString();
                 fila[2] = respuesta.ToString();
-                fila[3] = examenPreguntas[i].OpcionCorrecta == respuesta ? "Correcta" : "Incorrecta";
+                fila[3] = examenPreguntas[i].OpcionCorrecta == respuesta ? "Correcta" : respuesta == 0 ? "Sin Responder" : "Incorrecta";
 
                 dgvRespuestas.Rows.Add(fila);
 

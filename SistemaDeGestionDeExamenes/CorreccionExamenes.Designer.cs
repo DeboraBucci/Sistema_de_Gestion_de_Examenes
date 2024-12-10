@@ -147,7 +147,7 @@
             // cbRespuestaSeleccionada
             // 
             cbRespuestaSeleccionada.FormattingEnabled = true;
-            cbRespuestaSeleccionada.Items.AddRange(new object[] { "Sin responder", "1", "2", "3", "4" });
+            cbRespuestaSeleccionada.Items.AddRange(new object[] { "Sin Responder", "1", "2", "3", "4" });
             cbRespuestaSeleccionada.Location = new Point(245, 84);
             cbRespuestaSeleccionada.Name = "cbRespuestaSeleccionada";
             cbRespuestaSeleccionada.Size = new Size(152, 23);
