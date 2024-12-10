@@ -1,14 +1,5 @@
-﻿using iText.Layout.Element;
-using SistemaDeGestionDeExamenes.Clases;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using SistemaDeGestionDeExamenes.Clases;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SistemaDeGestionDeExamenes
 {
@@ -79,71 +70,79 @@ namespace SistemaDeGestionDeExamenes
 
         private void btnGenerarExamen_Click(object sender, EventArgs e)
         {
-            int randomNum = 0;
-            Random random = new Random();
-
-            List<string> subUnidadesExcluidas = new List<string>();
-            List<Pregunta> preguntasSubunid;
-
-            examen = new Examen();
-            examen.Asignatura = asignaturaElegida?.Nombre ?? "";
-            lblAsignExamen.Text = asignaturaElegida?.Nombre ?? "";
-
-            // Crea array con nombres de las unidades seleccionadas
-            string[] unidadesStr = lstUnidades.SelectedItems.Cast<string>().ToArray();
-
-            if (asignaturaElegida != null)
+            try
             {
-                foreach (Unidad unidad in asignaturaElegida.Unidades)
+                int randomNum = 0;
+                Random random = new Random();
+
+                List<string> subUnidadesExcluidas = new List<string>();
+                List<Pregunta> preguntasSubunid;
+
+                examen = new Examen();
+                examen.Asignatura = asignaturaElegida?.Nombre ?? "";
+                lblAsignExamen.Text = asignaturaElegida?.Nombre ?? "";
+
+                // Crea array con nombres de las unidades seleccionadas
+                string[] unidadesStr = lstUnidades.SelectedItems.Cast<string>().ToArray();
+
+                if (asignaturaElegida != null)
                 {
-                    if (unidadesStr.Contains(unidad.Nombre))
+                    foreach (Unidad unidad in asignaturaElegida.Unidades)
                     {
-                        subUnidadesExcluidas.Clear();
-
-                        foreach (SubUnidad subUnidad in unidad.SubUnidades)
+                        if (unidadesStr.Contains(unidad.Nombre))
                         {
-                            preguntasSubunid = ListaPreguntas.Preguntas.Where(p =>
-                                       p.Asignatura == asignaturaElegida.Nombre
-                                       && p.Unidad == unidad.Nombre
-                                       && p.SubUnidad == subUnidad.Nombre
-                                       ).ToList();
+                            subUnidadesExcluidas.Clear();
 
-                            if (preguntasSubunid.Count() > 0)
+                            foreach (SubUnidad subUnidad in unidad.SubUnidades)
                             {
-                                int max = preguntasSubunid.Count();
-                                randomNum = random.Next(0, max);
+                                preguntasSubunid = ListaPreguntas.Preguntas.Where(p =>
+                                           p.Asignatura == asignaturaElegida.Nombre
+                                           && p.Unidad == unidad.Nombre
+                                           && p.SubUnidad == subUnidad.Nombre
+                                           ).ToList();
 
-                                examen.AgregarPreguntaId(preguntasSubunid[randomNum].PreguntaId);
+                                if (preguntasSubunid.Count() > 0)
+                                {
+                                    int max = preguntasSubunid.Count();
+                                    randomNum = random.Next(0, max);
+
+                                    examen.AgregarPreguntaId(preguntasSubunid[randomNum].PreguntaId);
+                                }
+
+                                else
+                                {
+                                    subUnidadesExcluidas.Add(subUnidad.Nombre);
+                                }
                             }
 
-                            else
+                            if (subUnidadesExcluidas.Count() > 0)
                             {
-                                subUnidadesExcluidas.Add(subUnidad.Nombre);
+                                MetodosGenericos
+                                    .MostrarError(
+                                    $"De la unidad {unidad.Nombre}:\n\nLas sub unidades {string.Join(", ", subUnidadesExcluidas)} no contienen preguntas, asi que sera excluida del examen actual!"
+                                    );
+
+                                lblSubUnidadesSinPreguntas.Text += $"{string.Join(", ", subUnidadesExcluidas)}\n";
+                                lblSubUnidadesSinPreguntasTitulo.Visible = true;
                             }
-                        }
-
-                        if (subUnidadesExcluidas.Count() > 0)
-                        {
-                            MetodosGenericos
-                                .MostrarError(
-                                $"De la unidad {unidad.Nombre}:\n\nLas sub unidades {string.Join(", ", subUnidadesExcluidas)} no contienen preguntas, asi que sera excluida del examen actual!"
-                                );
-
-                            lblSubUnidadesSinPreguntas.Text += $"{string.Join(", ", subUnidadesExcluidas)}\n";
-                            lblSubUnidadesSinPreguntasTitulo.Visible = true;
                         }
                     }
                 }
+
+                if (examen.PreguntasId.Count >= 4)
+                {
+                    ListaExamenes.AgregarExamen(examen);
+                    Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
+                }
+                else
+                {
+                    throw new Exception("No se ha generado el examen:\nNo hay suficientes preguntas sobre los temas elegidos (al menos 4), por favor, agrega mas!");
+                }
             }
 
-            if (examen.PreguntasId.Count >= 4)
+            catch (Exception ex)
             {
-                ListaExamenes.AgregarExamen(examen);
-                Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
-            }
-             else
-            {
-                MetodosGenericos.MostrarError("No hay suficientes preguntas sobre los temas elegidos (al menos 4), por favor, agrega mas!");
+                MetodosGenericos.MostrarError(ex.Message);
             }
         }
     }
