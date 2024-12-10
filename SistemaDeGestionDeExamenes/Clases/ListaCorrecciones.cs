@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SistemaDeGestionDeExamenes.Clases
+﻿namespace SistemaDeGestionDeExamenes.Clases
 {
     public static class ListaCorrecciones
     {
@@ -22,6 +16,16 @@ namespace SistemaDeGestionDeExamenes.Clases
         public static void GuardarEnArchivo()
         {
             JsonHelper.GuardarEnArchivo(Correcciones, archivoCorrecciones);
+        }
+
+        public static void EliminarCorreccion(string id)
+        {
+            Correcciones =
+                Correcciones
+                .Where(corr => corr.CorreccionId != id)
+                .ToList();
+
+            GuardarEnArchivo();
         }
     }
 }

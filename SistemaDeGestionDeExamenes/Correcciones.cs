@@ -14,6 +14,18 @@ namespace SistemaDeGestionDeExamenes
             LlenarListaCorrecciones();
         }
 
+        private void btnEliminarCorreccion_Click(object sender, EventArgs e)
+        {
+            string correccionId = dgvCorrecciones.SelectedRows[0]?.Cells["CorreccionId"].Value.ToString() ?? "";
+
+            ListaCorrecciones.EliminarCorreccion(correccionId);
+            LlenarListaCorrecciones();
+        }
+
+        private void btnRefrescarCorrecciones_Click(object sender, EventArgs e)
+        {
+            LlenarListaCorrecciones();
+        }
 
         private void LlenarListaCorrecciones()
         {
@@ -21,7 +33,7 @@ namespace SistemaDeGestionDeExamenes
 
             foreach (Correccion correccion in ListaCorrecciones.Correcciones)
             {
-                string[] fila = new string[5];
+                string[] fila = new string[6];
 
                 fila[0] = correccion?.NombreAlumno?.ToString() ?? "";
                 fila[1] = correccion?.ApellidoAlumno?.ToString() ?? "";
@@ -32,6 +44,7 @@ namespace SistemaDeGestionDeExamenes
 
                 fila[3] = correccion?.ExamenId?.ToString() ?? "";
                 fila[4] = correccion?.Nota ?? "";
+                fila[5] = correccion?.CorreccionId ?? "";
 
                 dgvCorrecciones.Rows.Add(fila);
             }

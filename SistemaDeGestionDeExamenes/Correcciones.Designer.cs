@@ -29,12 +29,15 @@
         private void InitializeComponent()
         {
             dgvCorrecciones = new DataGridView();
+            label5 = new Label();
+            btnRefrescarCorrecciones = new Button();
+            btnEliminarCorreccion = new Button();
             NombreAlumno = new DataGridViewTextBoxColumn();
             Apellido = new DataGridViewTextBoxColumn();
             Asignatura = new DataGridViewTextBoxColumn();
             ExamenId = new DataGridViewTextBoxColumn();
             Nota = new DataGridViewTextBoxColumn();
-            label5 = new Label();
+            CorreccionId = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvCorrecciones).BeginInit();
             SuspendLayout();
             // 
@@ -42,36 +45,12 @@
             // 
             dgvCorrecciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCorrecciones.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCorrecciones.Columns.AddRange(new DataGridViewColumn[] { NombreAlumno, Apellido, Asignatura, ExamenId, Nota });
+            dgvCorrecciones.Columns.AddRange(new DataGridViewColumn[] { NombreAlumno, Apellido, Asignatura, ExamenId, Nota, CorreccionId });
             dgvCorrecciones.Location = new Point(83, 108);
             dgvCorrecciones.Name = "dgvCorrecciones";
+            dgvCorrecciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCorrecciones.Size = new Size(1251, 548);
             dgvCorrecciones.TabIndex = 0;
-            // 
-            // NombreAlumno
-            // 
-            NombreAlumno.HeaderText = "Nombre del Alumno";
-            NombreAlumno.Name = "NombreAlumno";
-            // 
-            // Apellido
-            // 
-            Apellido.HeaderText = "Apellido";
-            Apellido.Name = "Apellido";
-            // 
-            // Asignatura
-            // 
-            Asignatura.HeaderText = "Asignatura";
-            Asignatura.Name = "Asignatura";
-            // 
-            // ExamenId
-            // 
-            ExamenId.HeaderText = "Examen ID";
-            ExamenId.Name = "ExamenId";
-            // 
-            // Nota
-            // 
-            Nota.HeaderText = "Nota";
-            Nota.Name = "Nota";
             // 
             // label5
             // 
@@ -83,11 +62,71 @@
             label5.TabIndex = 19;
             label5.Text = "Correcciones";
             // 
+            // btnRefrescarCorrecciones
+            // 
+            btnRefrescarCorrecciones.Location = new Point(1180, 73);
+            btnRefrescarCorrecciones.Name = "btnRefrescarCorrecciones";
+            btnRefrescarCorrecciones.Size = new Size(154, 29);
+            btnRefrescarCorrecciones.TabIndex = 20;
+            btnRefrescarCorrecciones.Text = "Refrescar Correcciones";
+            btnRefrescarCorrecciones.UseVisualStyleBackColor = true;
+            btnRefrescarCorrecciones.Click += btnRefrescarCorrecciones_Click;
+            // 
+            // btnEliminarCorreccion
+            // 
+            btnEliminarCorreccion.Location = new Point(1020, 73);
+            btnEliminarCorreccion.Name = "btnEliminarCorreccion";
+            btnEliminarCorreccion.Size = new Size(154, 29);
+            btnEliminarCorreccion.TabIndex = 21;
+            btnEliminarCorreccion.Text = "Eliminar Correccion";
+            btnEliminarCorreccion.UseVisualStyleBackColor = true;
+            btnEliminarCorreccion.Click += btnEliminarCorreccion_Click;
+            // 
+            // NombreAlumno
+            // 
+            NombreAlumno.FillWeight = 105.96447F;
+            NombreAlumno.HeaderText = "Nombre del Alumno";
+            NombreAlumno.Name = "NombreAlumno";
+            // 
+            // Apellido
+            // 
+            Apellido.FillWeight = 105.96447F;
+            Apellido.HeaderText = "Apellido";
+            Apellido.Name = "Apellido";
+            // 
+            // Asignatura
+            // 
+            Asignatura.FillWeight = 105.96447F;
+            Asignatura.HeaderText = "Asignatura";
+            Asignatura.Name = "Asignatura";
+            // 
+            // ExamenId
+            // 
+            ExamenId.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ExamenId.FillWeight = 105.96447F;
+            ExamenId.HeaderText = "Examen ID";
+            ExamenId.Name = "ExamenId";
+            // 
+            // Nota
+            // 
+            Nota.FillWeight = 76.1421356F;
+            Nota.HeaderText = "Nota";
+            Nota.Name = "Nota";
+            // 
+            // CorreccionId
+            // 
+            CorreccionId.HeaderText = "Correccion ID";
+            CorreccionId.Name = "CorreccionId";
+            CorreccionId.Resizable = DataGridViewTriState.True;
+            CorreccionId.Visible = false;
+            // 
             // Correcciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1393, 702);
+            Controls.Add(btnEliminarCorreccion);
+            Controls.Add(btnRefrescarCorrecciones);
             Controls.Add(label5);
             Controls.Add(dgvCorrecciones);
             FormBorderStyle = FormBorderStyle.None;
@@ -103,11 +142,14 @@
         #endregion
 
         private DataGridView dgvCorrecciones;
+        private Label label5;
+        private Button btnRefrescarCorrecciones;
+        private Button btnEliminarCorreccion;
         private DataGridViewTextBoxColumn NombreAlumno;
         private DataGridViewTextBoxColumn Apellido;
         private DataGridViewTextBoxColumn Asignatura;
         private DataGridViewTextBoxColumn ExamenId;
         private DataGridViewTextBoxColumn Nota;
-        private Label label5;
+        private DataGridViewTextBoxColumn CorreccionId;
     }
 }
