@@ -83,11 +83,6 @@ namespace SistemaDeGestionDeExamenes
             {
                 string rspSeleccionadaStr = cbRespuestaSeleccionada?.SelectedItem?.ToString() ?? "";
 
-                //if (rspSeleccionadaStr == "Sin Responder")
-                   // rspSeleccionadaStr = "0";
-
-                //int rspSeleccionada = Convert.ToInt32(rspSeleccionadaStr);
-
                 if (!int.TryParse(rspSeleccionadaStr, out int rspSeleccionada))
                 {
                     rspSeleccionadaStr = "0";
