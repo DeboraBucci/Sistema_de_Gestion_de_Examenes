@@ -143,7 +143,6 @@
             lblRespuesta.Size = new Size(200, 15);
             lblRespuesta.TabIndex = 12;
             lblRespuesta.Text = "Numero de la Respuesta del Alumno";
-            lblRespuesta.Click += this.lblRespuesta_Click;
             // 
             // cbRespuestaSeleccionada
             // 
@@ -153,7 +152,6 @@
             cbRespuestaSeleccionada.Name = "cbRespuestaSeleccionada";
             cbRespuestaSeleccionada.Size = new Size(152, 23);
             cbRespuestaSeleccionada.TabIndex = 13;
-            cbRespuestaSeleccionada.SelectedIndexChanged += cbRespuestaSeleccionada_SelectedIndexChanged;
             // 
             // gbRespuestas
             // 

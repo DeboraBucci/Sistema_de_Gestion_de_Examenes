@@ -178,10 +178,5 @@ namespace SistemaDeGestionDeExamenes
 
             correccion = new Correccion();
         }
-
-        private void cbRespuestaSeleccionada_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
