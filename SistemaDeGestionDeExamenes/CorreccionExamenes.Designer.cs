@@ -120,7 +120,7 @@
             // lblPregunta
             // 
             lblPregunta.AutoSize = true;
-            lblPregunta.Location = new Point(44, 50);
+            lblPregunta.Location = new Point(44, 36);
             lblPregunta.Name = "lblPregunta";
             lblPregunta.Size = new Size(58, 15);
             lblPregunta.TabIndex = 10;
@@ -129,7 +129,7 @@
             // lblPreguntaTxt
             // 
             lblPreguntaTxt.AutoSize = true;
-            lblPreguntaTxt.Location = new Point(117, 50);
+            lblPreguntaTxt.Location = new Point(26, 67);
             lblPreguntaTxt.Name = "lblPreguntaTxt";
             lblPreguntaTxt.Size = new Size(12, 15);
             lblPreguntaTxt.TabIndex = 11;
@@ -138,20 +138,22 @@
             // lblRespuesta
             // 
             lblRespuesta.AutoSize = true;
-            lblRespuesta.Location = new Point(23, 87);
+            lblRespuesta.Location = new Point(26, 102);
             lblRespuesta.Name = "lblRespuesta";
             lblRespuesta.Size = new Size(200, 15);
             lblRespuesta.TabIndex = 12;
             lblRespuesta.Text = "Numero de la Respuesta del Alumno";
+            lblRespuesta.Click += this.lblRespuesta_Click;
             // 
             // cbRespuestaSeleccionada
             // 
             cbRespuestaSeleccionada.FormattingEnabled = true;
             cbRespuestaSeleccionada.Items.AddRange(new object[] { "Sin Responder", "1", "2", "3", "4" });
-            cbRespuestaSeleccionada.Location = new Point(245, 84);
+            cbRespuestaSeleccionada.Location = new Point(248, 99);
             cbRespuestaSeleccionada.Name = "cbRespuestaSeleccionada";
             cbRespuestaSeleccionada.Size = new Size(152, 23);
             cbRespuestaSeleccionada.TabIndex = 13;
+            cbRespuestaSeleccionada.SelectedIndexChanged += cbRespuestaSeleccionada_SelectedIndexChanged;
             // 
             // gbRespuestas
             // 
@@ -161,9 +163,9 @@
             gbRespuestas.Controls.Add(cbRespuestaSeleccionada);
             gbRespuestas.Controls.Add(lblPregunta);
             gbRespuestas.Controls.Add(lblPreguntaTxt);
-            gbRespuestas.Location = new Point(42, 330);
+            gbRespuestas.Location = new Point(42, 314);
             gbRespuestas.Name = "gbRespuestas";
-            gbRespuestas.Size = new Size(421, 192);
+            gbRespuestas.Size = new Size(421, 208);
             gbRespuestas.TabIndex = 14;
             gbRespuestas.TabStop = false;
             gbRespuestas.Text = "Respuestas";
@@ -172,7 +174,7 @@
             // lblNumPregunta
             // 
             lblNumPregunta.AutoSize = true;
-            lblNumPregunta.Location = new Point(26, 50);
+            lblNumPregunta.Location = new Point(26, 36);
             lblNumPregunta.Name = "lblNumPregunta";
             lblNumPregunta.Size = new Size(12, 15);
             lblNumPregunta.TabIndex = 16;
@@ -180,7 +182,7 @@
             // 
             // btnAgregarRespuesta
             // 
-            btnAgregarRespuesta.Location = new Point(23, 136);
+            btnAgregarRespuesta.Location = new Point(26, 151);
             btnAgregarRespuesta.Name = "btnAgregarRespuesta";
             btnAgregarRespuesta.Size = new Size(374, 38);
             btnAgregarRespuesta.TabIndex = 15;

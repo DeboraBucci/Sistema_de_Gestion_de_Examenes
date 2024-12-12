@@ -102,15 +102,15 @@ namespace SistemaDeGestionDeExamenes
                 {
                     gbRespuestas.Visible = false;
 
-                    nota = (100 * respuestasCorrectas) / (examenPreguntas.Count());
+                    nota = (100.0 * respuestasCorrectas) / examenPreguntas.Count();
 
                     lblNota.Text = nota.ToString("F2");
-                    lblRespuestasCorrectas.Text = respuestasCorrectas + " / " + examenRespuestas.Count();
-
-                    correccion.Nota = nota.ToString();
+                    correccion.Nota = nota.ToString("F2");
 
                     btnGuardarCorreccion.Visible = true;
                 }
+
+                lblRespuestasCorrectas.Text = respuestasCorrectas + " / " + examenPreguntas.Count();
             }
 
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace SistemaDeGestionDeExamenes
                 MetodosGenericos.MostrarError(ex.Message);
             }
         }
-       
+
         private void btnGuardarCorreccion_Click(object sender, EventArgs e)
         {
             ListaCorrecciones.GuardarCorreccion(correccion);
@@ -167,7 +167,7 @@ namespace SistemaDeGestionDeExamenes
             i++;
         }
 
-        private void VaciarInformacion ()
+        private void VaciarInformacion()
         {
             examenPreguntas.Clear();
             examenRespuestas.Clear();
@@ -177,6 +177,11 @@ namespace SistemaDeGestionDeExamenes
             respuestasCorrectas = 0;
 
             correccion = new Correccion();
+        }
+
+        private void cbRespuestaSeleccionada_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
