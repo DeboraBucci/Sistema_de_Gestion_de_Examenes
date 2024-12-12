@@ -224,7 +224,7 @@
             // 
             dgvPreguntas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPreguntas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPreguntas.Location = new Point(472, 90);
+            dgvPreguntas.Location = new Point(452, 101);
             dgvPreguntas.Name = "dgvPreguntas";
             dgvPreguntas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPreguntas.Size = new Size(929, 569);
