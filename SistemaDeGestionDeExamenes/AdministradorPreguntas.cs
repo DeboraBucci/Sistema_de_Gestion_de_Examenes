@@ -85,7 +85,6 @@ namespace SistemaDeGestionDeExamenes
                     VisibilidadBotonesEditar(false);
                     VaciarFormulario();
                 }
-                
             }
         }
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -149,12 +148,17 @@ namespace SistemaDeGestionDeExamenes
             categoriaAAgregar = NUEVA_ASIGNATURA;
             pnlCrearNuevaSubUnidad.Visible = true;
 
+            lblNuevaAsignatura.Visible = true;
+            txtNuevaAsig.Visible = true;
+
+            lblNuevaUnidad.Visible = true;
+            txtNuevaUnidad.Visible = true;
+
             cbSeleccionAsig.Visible = false;
             lblElijaAsig.Visible = false;
 
             cbSeleccionUnidad.Visible = false;
             lblElijaUnid.Visible = false;
-         
         }
 
         private void lblCrearUnidad_Click(object sender, EventArgs e)
@@ -174,7 +178,6 @@ namespace SistemaDeGestionDeExamenes
 
             lblNuevaUnidad.Visible = true;
             txtNuevaUnidad.Visible = true;
-
         }
 
         private void lblCrearSubunidad_Click(object sender, EventArgs e)
