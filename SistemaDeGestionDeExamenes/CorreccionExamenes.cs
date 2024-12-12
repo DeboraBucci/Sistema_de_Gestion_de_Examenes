@@ -91,6 +91,7 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
+                lblNota.Text = "";
                 string rspSeleccionadaStr = cbRespuestaSeleccionada?.SelectedItem?.ToString() ?? "";
 
                 if (!int.TryParse(rspSeleccionadaStr, out int rspSeleccionada))
