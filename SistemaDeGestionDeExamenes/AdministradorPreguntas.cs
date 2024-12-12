@@ -73,6 +73,8 @@ namespace SistemaDeGestionDeExamenes
         {
             if (preguntaAEditar != null)
             {
+                cbFiltroAsignatura.SelectedIndex = 0;
+
                 Pregunta? pregunta = CrearPregunta();
 
                 if (pregunta != null)
@@ -224,58 +226,77 @@ namespace SistemaDeGestionDeExamenes
 
         private void btnCrearNueva_Click(object sender, EventArgs e)
         {
-            // CREA NUEVA ASIGNATURA
-            Asignatura? asignatura = new Asignatura();
-
-            if (categoriaAAgregar == NUEVA_ASIGNATURA)
+            try
             {
-                string nombreAsig = txtNuevaAsig.Text.Trim();
-                asignatura.Nombre = nombreAsig;
+
+                // CREA NUEVA ASIGNATURA
+                Asignatura? asignatura = new Asignatura();
+
+                if (categoriaAAgregar == NUEVA_ASIGNATURA)
+                {
+                    if (txtNuevaAsig.Text.Trim().Count() < 1)
+                        throw new Exception("Debe escribir el nombre de la nueva asignatura.");
+
+                    string nombreAsig = txtNuevaAsig.Text.Trim();
+                    asignatura.Nombre = nombreAsig;
+                }
+
+                // BUSCA ASIGNATURA EXISTENTE
+                else
+                {
+                    string nombreAsig = cbSeleccionAsig?.SelectedItem?.ToString() ?? "";
+                    asignatura = ListaAsignaturas.Asignaturas.FirstOrDefault(asig => asig.Nombre == nombreAsig);
+                }
+
+                // CREA NUEVA UNIDAD
+                Unidad? unidad = new Unidad();
+
+                if (categoriaAAgregar == NUEVA_ASIGNATURA || categoriaAAgregar == NUEVA_UNIDAD)
+                {
+                    if (txtNuevaUnidad.Text.Trim().Count() < 1)
+                        throw new Exception("Debe escribir el nombre de la nueva unidad.");
+
+                    unidad.Nombre = txtNuevaUnidad.Text.Trim();
+                    asignatura?.Unidades.Add(unidad);
+                }
+
+                // BUSCA UNIDAD EXISTENTE
+                else
+                {
+                    string nombreUnidad = cbSeleccionUnidad?.SelectedItem?.ToString() ?? "";
+                    unidad = asignatura?.Unidades.FirstOrDefault(unid => unid.Nombre == nombreUnidad);
+                }
+
+                // CREA NUEVAS SUBUNIDADES
+
+                if (txtNuevasSubUnidades.Text.Trim().Count() < 1)
+                    throw new Exception("Debe escribir el nombre de la/s nueva/s sub unidad/es.");
+
+                List<string> nombresSubUnidades = txtNuevasSubUnidades.Text.Trim().Split(",").ToList();
+
+                foreach (string nombreSubUnidad in nombresSubUnidades)
+                {
+                    SubUnidad subunidad = new SubUnidad();
+                    subunidad.Nombre = nombreSubUnidad.Trim();
+                    unidad?.SubUnidades.Add(subunidad);
+                }
+
+                if (categoriaAAgregar == NUEVA_ASIGNATURA && asignatura != null && asignatura.Nombre != null)
+                    ListaAsignaturas.AgregarAsignatura(asignatura);
+
+                else
+                    ListaAsignaturas.GuardarEnArchivo();
+
+                VaciarPanelDeCategorias();
+                AgregarAsignaturasADropdown(cbAsignaturas);
+                InicializarFiltroAsignaturas();
+                pnlCrearNuevaSubUnidad.Visible = false;
             }
 
-            // BUSCA ASIGNATURA EXISTENTE
-            else
+            catch (Exception ex)
             {
-                string nombreAsig = cbSeleccionAsig?.SelectedItem?.ToString() ?? "";
-                asignatura = ListaAsignaturas.Asignaturas.FirstOrDefault(asig => asig.Nombre == nombreAsig);
+                MetodosGenericos.MostrarError(ex.Message);
             }
-
-            // CREA NUEVA UNIDAD
-            Unidad? unidad = new Unidad();
-
-            if (categoriaAAgregar == NUEVA_ASIGNATURA || categoriaAAgregar == NUEVA_UNIDAD)
-            {
-                unidad.Nombre = txtNuevaUnidad.Text.Trim();
-                asignatura?.Unidades.Add(unidad);
-            }
-
-            // BUSCA UNIDAD EXISTENTE
-            else
-            {
-                string nombreUnidad = cbSeleccionUnidad?.SelectedItem?.ToString() ?? "";
-                unidad = asignatura?.Unidades.FirstOrDefault(unid => unid.Nombre == nombreUnidad);
-            }
-
-            // CREA NUEVAS SUBUNIDADES
-            List<string> nombresSubUnidades = txtNuevasSubUnidades.Text.Trim().Split(",").ToList();
-
-            foreach (string nombreSubUnidad in nombresSubUnidades)
-            {
-                SubUnidad subunidad = new SubUnidad();
-                subunidad.Nombre = nombreSubUnidad.Trim();
-                unidad?.SubUnidades.Add(subunidad);
-            }
-
-            if (categoriaAAgregar == NUEVA_ASIGNATURA && asignatura != null && asignatura.Nombre != null)
-                ListaAsignaturas.AgregarAsignatura(asignatura);
-
-            else
-                ListaAsignaturas.GuardarEnArchivo();
-
-            VaciarPanelDeCategorias();
-            AgregarAsignaturasADropdown(cbAsignaturas);
-            InicializarFiltroAsignaturas();
-            pnlCrearNuevaSubUnidad.Visible = false;
         }
 
         private void btnCancelarNueva_Click(object sender, EventArgs e)
@@ -296,24 +317,28 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
+                // ENCUENTRA ASIGNATURA
                 string nombreAsignatura = cbAsignaturas?.SelectedItem?.ToString() + "";
                 Asignatura? asignatura = ListaAsignaturas.BuscarAsignatura(nombreAsignatura);
 
                 if (asignatura == null)
                     throw new Exception("Por favor, seleccione una asignatura correcta.");
 
+                // ENCUENTRA UNIDAD
                 string nombreUnidad = cbUnidades?.SelectedItem?.ToString() + "";
                 Unidad? unidad = ListaAsignaturas.BuscarUnidad(asignatura, nombreUnidad);
 
                 if (unidad == null)
                     throw new Exception("Por favor, seleccione una unidad correcta.");
 
+                // ENCUENTRA SUB UNIDAD
                 string nombreSubUnidad = cbSubUnidades?.SelectedItem?.ToString() + "";
                 SubUnidad? subUnidad = ListaAsignaturas.BuscarSubUnidad(unidad, nombreSubUnidad);
 
                 if (subUnidad == null)
                     throw new Exception("Por favor, seleccione una sub unidad correcta.");
 
+                // VERIFICA Y LLENA TEXTO PREGUNTA Y OPCIONES
                 string textPregunta = txtPregunta.Text.Trim();
 
                 if (textPregunta.Count() <= 0)
@@ -339,6 +364,7 @@ namespace SistemaDeGestionDeExamenes
                 if (textOpc4.Count() <= 0)
                     throw new Exception("Por favor, escriba una respuesta para la opcion 4.");
 
+                // CHECKEA OPCION CORRECTA
                 int opcionCorrecta = 1;
 
                 if (rbOpc1.Checked)
@@ -353,6 +379,7 @@ namespace SistemaDeGestionDeExamenes
                 else if (rbOpc4.Checked)
                     opcionCorrecta = 4;
 
+                // CREA PREGUNTA
                 Pregunta pregunta = new Pregunta(
                     asignatura.Nombre,
                     unidad.Nombre,
@@ -362,6 +389,8 @@ namespace SistemaDeGestionDeExamenes
                     opcionCorrecta
                     );
 
+
+                // DEVUELVE PREGUNTA
                 return pregunta;
             }
 
