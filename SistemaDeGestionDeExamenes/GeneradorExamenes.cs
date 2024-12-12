@@ -21,11 +21,6 @@ namespace SistemaDeGestionDeExamenes
             RecargarDatos();
         }
 
-        private void GeneradorExamenes_Shown(object sender, EventArgs e)
-        {
-            RecargarDatos();
-        }
-
         private void GeneradorExamenes_VisibleChanged(object sender, EventArgs e)
         {
             RecargarDatos();

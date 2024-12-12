@@ -94,7 +94,7 @@ namespace SistemaDeGestionDeExamenes
                 for (int i = 0; i < examen.PreguntasId.Count; i++)
                 {
                     var preguntaId = examen.PreguntasId[i].Id;
-                    var pregunta = ListaPreguntas.Preguntas.FirstOrDefault(p => p.PreguntaId == preguntaId);
+                    var pregunta = ListaPreguntas.EncontrarPregunta(preguntaId);
 
                     if (pregunta != null)
                     {
