@@ -91,6 +91,7 @@ namespace SistemaDeGestionDeExamenes
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             VaciarFormulario();
+            VisibilidadBotonesEditar(false);
         }
 
         // ELIMINAR PREGUNTAS
