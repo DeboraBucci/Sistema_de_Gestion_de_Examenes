@@ -15,11 +15,7 @@ namespace SistemaDeGestionDeExamenes
 
         CorreccionExamenes correccionExamenes = new CorreccionExamenes();
 
-        Correcciones correcciones = new Correcciones
-        {
-            StartPosition = FormStartPosition.Manual,
-            Location = new Point(0, 0),
-        };
+        Correcciones correcciones = new Correcciones();
 
         public Menu()
         {
@@ -119,6 +115,5 @@ namespace SistemaDeGestionDeExamenes
                 dgv.Rows.Add(fila);
             }
         }
-     
     }
 }
