@@ -72,6 +72,8 @@ namespace SistemaDeGestionDeExamenes
         {
             try
             {
+                lblSubUnidadesSinPreguntas.Text = "";
+
                 int randomNum = 0;
                 Random random = new Random();
 
