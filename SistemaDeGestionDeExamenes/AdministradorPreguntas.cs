@@ -37,9 +37,13 @@ namespace SistemaDeGestionDeExamenes
         // AGREGAR PREGUNTAS
         private void btnAgregarPreg_Click(object sender, EventArgs e)
         {
-            ListaPreguntas.AgregarPregunta(CrearPregunta());
-            Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
-            VaciarFormulario();
+            Pregunta? pregunta = CrearPregunta();
+            if (pregunta != null) 
+            {
+                ListaPreguntas.AgregarPregunta(pregunta);
+                Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
+                VaciarFormulario();
+            }
         }
         private void cbAsignaturas_SelectedIndexChanged(object sender, EventArgs e)
         {
