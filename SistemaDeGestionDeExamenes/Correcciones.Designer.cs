@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             dgvCorrecciones = new DataGridView();
-            label5 = new Label();
-            btnRefrescarCorrecciones = new Button();
-            btnEliminarCorreccion = new Button();
             NombreAlumno = new DataGridViewTextBoxColumn();
             Apellido = new DataGridViewTextBoxColumn();
             Asignatura = new DataGridViewTextBoxColumn();
             ExamenId = new DataGridViewTextBoxColumn();
             Nota = new DataGridViewTextBoxColumn();
             CorreccionId = new DataGridViewTextBoxColumn();
+            label5 = new Label();
+            btnEliminarCorreccion = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCorrecciones).BeginInit();
             SuspendLayout();
             // 
@@ -51,36 +50,6 @@
             dgvCorrecciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCorrecciones.Size = new Size(1251, 548);
             dgvCorrecciones.TabIndex = 0;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 16F);
-            label5.Location = new Point(83, 73);
-            label5.Name = "label5";
-            label5.Size = new Size(139, 30);
-            label5.TabIndex = 19;
-            label5.Text = "Correcciones";
-            // 
-            // btnRefrescarCorrecciones
-            // 
-            btnRefrescarCorrecciones.Location = new Point(1180, 73);
-            btnRefrescarCorrecciones.Name = "btnRefrescarCorrecciones";
-            btnRefrescarCorrecciones.Size = new Size(154, 29);
-            btnRefrescarCorrecciones.TabIndex = 20;
-            btnRefrescarCorrecciones.Text = "Refrescar Correcciones";
-            btnRefrescarCorrecciones.UseVisualStyleBackColor = true;
-            btnRefrescarCorrecciones.Click += btnRefrescarCorrecciones_Click;
-            // 
-            // btnEliminarCorreccion
-            // 
-            btnEliminarCorreccion.Location = new Point(1020, 73);
-            btnEliminarCorreccion.Name = "btnEliminarCorreccion";
-            btnEliminarCorreccion.Size = new Size(154, 29);
-            btnEliminarCorreccion.TabIndex = 21;
-            btnEliminarCorreccion.Text = "Eliminar Correccion";
-            btnEliminarCorreccion.UseVisualStyleBackColor = true;
-            btnEliminarCorreccion.Click += btnEliminarCorreccion_Click;
             // 
             // NombreAlumno
             // 
@@ -120,13 +89,32 @@
             CorreccionId.Resizable = DataGridViewTriState.True;
             CorreccionId.Visible = false;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 16F);
+            label5.Location = new Point(83, 73);
+            label5.Name = "label5";
+            label5.Size = new Size(139, 30);
+            label5.TabIndex = 19;
+            label5.Text = "Correcciones";
+            // 
+            // btnEliminarCorreccion
+            // 
+            btnEliminarCorreccion.Location = new Point(1180, 73);
+            btnEliminarCorreccion.Name = "btnEliminarCorreccion";
+            btnEliminarCorreccion.Size = new Size(154, 29);
+            btnEliminarCorreccion.TabIndex = 21;
+            btnEliminarCorreccion.Text = "Eliminar Correccion";
+            btnEliminarCorreccion.UseVisualStyleBackColor = true;
+            btnEliminarCorreccion.Click += btnEliminarCorreccion_Click;
+            // 
             // Correcciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1393, 702);
             Controls.Add(btnEliminarCorreccion);
-            Controls.Add(btnRefrescarCorrecciones);
             Controls.Add(label5);
             Controls.Add(dgvCorrecciones);
             FormBorderStyle = FormBorderStyle.None;
@@ -134,6 +122,7 @@
             StartPosition = FormStartPosition.Manual;
             Text = "Correcciones";
             Load += Correcciones_Load;
+            VisibleChanged += Correcciones_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)dgvCorrecciones).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -143,7 +132,6 @@
 
         private DataGridView dgvCorrecciones;
         private Label label5;
-        private Button btnRefrescarCorrecciones;
         private Button btnEliminarCorreccion;
         private DataGridViewTextBoxColumn NombreAlumno;
         private DataGridViewTextBoxColumn Apellido;

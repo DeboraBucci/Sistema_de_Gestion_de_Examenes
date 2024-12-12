@@ -10,6 +10,11 @@ namespace SistemaDeGestionDeExamenes
             MostrarExamenesEnTreeView();
         }
 
+        private void ImprimirExamenes_VisibleChanged(object sender, EventArgs e)
+        {
+            MostrarExamenesEnTreeView();
+        }
+
         private void btnImprimirExamen_Click(object sender, EventArgs e)
         {
             if (tvExamenes.SelectedNode == null)
@@ -103,6 +108,5 @@ namespace SistemaDeGestionDeExamenes
 
             tvExamenes.ExpandAll();
         }
-
     }
 }

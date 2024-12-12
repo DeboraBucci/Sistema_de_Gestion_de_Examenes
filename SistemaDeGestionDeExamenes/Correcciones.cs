@@ -14,16 +14,17 @@ namespace SistemaDeGestionDeExamenes
             LlenarListaCorrecciones();
         }
 
+
+        private void Correcciones_VisibleChanged(object sender, EventArgs e)
+        {
+            LlenarListaCorrecciones();
+        }
+
         private void btnEliminarCorreccion_Click(object sender, EventArgs e)
         {
             string correccionId = dgvCorrecciones.SelectedRows[0]?.Cells["CorreccionId"].Value.ToString() ?? "";
 
             ListaCorrecciones.EliminarCorreccion(correccionId);
-            LlenarListaCorrecciones();
-        }
-
-        private void btnRefrescarCorrecciones_Click(object sender, EventArgs e)
-        {
             LlenarListaCorrecciones();
         }
 
@@ -49,5 +50,6 @@ namespace SistemaDeGestionDeExamenes
                 dgvCorrecciones.Rows.Add(fila);
             }
         }
+
     }
 }

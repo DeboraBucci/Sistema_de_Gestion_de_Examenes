@@ -23,6 +23,10 @@ namespace SistemaDeGestionDeExamenes
             InitializeComponent();
             InitUI();
         }
+        private void AdministradorPreguntas_VisibleChanged(object sender, EventArgs e)
+        {
+            InitUI();
+        }
 
         private void InitUI()
         {
@@ -38,7 +42,7 @@ namespace SistemaDeGestionDeExamenes
         private void btnAgregarPreg_Click(object sender, EventArgs e)
         {
             Pregunta? pregunta = CrearPregunta();
-            if (pregunta != null) 
+            if (pregunta != null)
             {
                 ListaPreguntas.AgregarPregunta(pregunta);
                 Menu.MostrarPreguntasDGV(ListaPreguntas.Preguntas, dgvPreguntas);
@@ -468,7 +472,7 @@ namespace SistemaDeGestionDeExamenes
                         foreach (var unidad in asignaturaSeleccionada.Unidades)
                         {
                             cbUnidades.Items.Add(unidad.Nombre); // llena el dropdown de unidades
-                        }   
+                        }
                     }
                 }
             }

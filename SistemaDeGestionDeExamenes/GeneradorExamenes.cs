@@ -136,6 +136,11 @@ namespace SistemaDeGestionDeExamenes
                     ListaExamenes.AgregarExamen(examen);
                     Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
                 } 
+
+                else
+                {
+                    throw new Exception("Examen sin preguntas, intente nuevamente!");
+                }
             }
 
             catch (Exception ex)

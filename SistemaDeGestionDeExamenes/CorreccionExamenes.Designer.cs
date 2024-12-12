@@ -308,6 +308,7 @@
             StartPosition = FormStartPosition.Manual;
             Text = "CorreccionExamenes";
             Load += CorreccionExamenes_Load;
+            VisibleChanged += CorreccionExamenes_VisibleChanged;
             gbRespuestas.ResumeLayout(false);
             gbRespuestas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRespuestas).EndInit();

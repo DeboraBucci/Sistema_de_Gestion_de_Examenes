@@ -594,6 +594,7 @@
             Name = "AdministradorPreguntas";
             StartPosition = FormStartPosition.Manual;
             Text = "AdministradorPreguntas";
+            VisibleChanged += AdministradorPreguntas_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)dgvPreguntas).EndInit();
             gbOpcionCorrecta.ResumeLayout(false);
             gbOpcionCorrecta.PerformLayout();

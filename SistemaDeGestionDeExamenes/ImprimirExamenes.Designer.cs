@@ -84,6 +84,7 @@
             Name = "ImprimirExamenes";
             StartPosition = FormStartPosition.Manual;
             Text = "ImprimirExamenes";
+            VisibleChanged += ImprimirExamenes_VisibleChanged;
             ResumeLayout(false);
             PerformLayout();
         }

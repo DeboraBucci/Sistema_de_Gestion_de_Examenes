@@ -20,6 +20,16 @@ namespace SistemaDeGestionDeExamenes
 
         private void CorreccionExamenes_Load(object sender, EventArgs e)
         {
+            RefrescarInformacion();
+        }
+
+        private void CorreccionExamenes_VisibleChanged(object sender, EventArgs e)
+        {
+            RefrescarInformacion();
+        }
+
+        private void RefrescarInformacion()
+        {
             VaciarInformacion();
             cbExamenesId.Items.Clear();
 
