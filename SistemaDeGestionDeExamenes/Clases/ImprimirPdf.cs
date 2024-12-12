@@ -13,6 +13,7 @@ using iText.IO.Image;
 using iText.Kernel.Font;
 using iText.Layout.Borders;
 using System.Windows.Forms.VisualStyles;
+using System.Diagnostics;
 
 
 namespace SistemaDeGestionDeExamenes.Clases
@@ -111,6 +112,12 @@ namespace SistemaDeGestionDeExamenes.Clases
 
                     numeroPregunta++;
                 }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = outputPath,
+                    UseShellExecute = true // Usar el visor predeterminado del sistema
+                });
 
                 // Cerrar el documento
                 document.Close();

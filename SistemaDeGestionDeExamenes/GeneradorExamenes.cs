@@ -131,8 +131,11 @@ namespace SistemaDeGestionDeExamenes
                     }
                 }
 
-                ListaExamenes.AgregarExamen(examen);
-                Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
+                if (examen.PreguntasId.Count() > 0)
+                {
+                    ListaExamenes.AgregarExamen(examen);
+                    Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
+                } 
             }
 
             catch (Exception ex)

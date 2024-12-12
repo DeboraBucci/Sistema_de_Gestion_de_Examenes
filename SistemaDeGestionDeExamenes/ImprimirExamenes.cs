@@ -46,7 +46,7 @@ namespace SistemaDeGestionDeExamenes
 
         private void btnEliminarExamen_Click(object sender, EventArgs e)
         {
-            if (tvExamenes.SelectedNode != null && tvExamenes.SelectedNode.Nodes.Count > 0)
+            if (tvExamenes.SelectedNode != null && tvExamenes.Parent != null)
             {
                 DialogResult result =
                 MessageBox.Show("¿Estás seguro de que deseas eliminar este examen?",
