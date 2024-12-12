@@ -131,15 +131,8 @@ namespace SistemaDeGestionDeExamenes
                     }
                 }
 
-                if (examen.PreguntasId.Count >= 4)
-                {
-                    ListaExamenes.AgregarExamen(examen);
-                    Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
-                }
-                else
-                {
-                    throw new Exception("No se ha generado el examen:\nNo hay suficientes preguntas sobre los temas elegidos (al menos 4), por favor, agrega mas!");
-                }
+                ListaExamenes.AgregarExamen(examen);
+                Menu.MostrarPreguntasDGV(ListaExamenes.ObtenerPreguntasDeExamen(examen), dgvPreguntas);
             }
 
             catch (Exception ex)
